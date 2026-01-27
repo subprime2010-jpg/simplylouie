@@ -1,0 +1,115 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+    background: #f7f7f7;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* CONTAINER */
+.container {
+    width: 90%;
+    max-width: 700px;
+    margin: 30px auto;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* NAVIGATION */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-logo {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #222;
+}
+
+.nav-right a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #222;
+    font-size: 16px;
+}
+
+.nav-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* MOBILE MENU */
+@media (max-width: 700px) {
+    .nav-right {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    .nav-right a {
+        margin: 10px 0;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+}
+
+/* BLOCKS */
+.block {
+    background: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+/* BUTTONS */
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 10px 0;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn-accent {
+    background: #007bff;
+    color: #fff;
+}
+
+.telegram-btn {
+    background: #229ED9;
+    color: #fff;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #555;
+    font-size: 14px;
+}
