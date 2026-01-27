@@ -91,6 +91,13 @@
 - K. Post-Launch Monitoring Rules
 - L. Marketing Positioning
 - M. Launch Announcement
+- N. Error & Edge-Case UI
+- O. Localization Rules
+- P. QA Test Matrix
+- Q. Launch-Day Stability Protocol
+- R. Long-Term Evolution Roadmap
+- S. Full System Specification (Consolidated)
+- T. Engineering Implementation Plan
 
 ---
 
@@ -2920,3 +2927,1478 @@ Just a quiet companion for your day.
 
 **CTA Button:**
 Start
+
+---
+
+## Error & Edge-Case UI
+
+**Purpose:**
+Provide calm, minimal fallback UI for missing assets, offline mode, failed loads, or unexpected states — without alarming the user or breaking emotional safety.
+
+---
+
+### 1. Missing Asset (Idle Frame)
+
+**UI:**
+- Show fallback silhouette
+- No animation
+- No message
+
+**Rules:**
+- Never mention "missing asset"
+- Never show error text
+- Continue normal behavior silently
+
+---
+
+### 2. Missing Animation (Celebration or Reveal)
+
+**UI:**
+- Skip animation
+- Show still frame of current stage
+- Deliver message normally
+
+**Rules:**
+- No popups
+- No warnings
+- No fallback text
+
+---
+
+### 3. Offline Mode
+
+**UI:**
+- Companion behaves normally
+- No sync indicator
+- No "offline" message
+
+**Rules:**
+- Queue state silently
+- Never mention connectivity
+- Never reference network status
+
+---
+
+### 4. Failed State Load
+
+**UI:**
+- Load fallback PuppyState (Stage 1)
+- No message about reset
+- No indication of error
+
+**Rules:**
+- Attempt silent restore from backup
+- If restore fails, continue with fallback
+
+---
+
+### 5. Failed State Save
+
+**UI:**
+- Continue session normally
+- Queue save silently
+
+**Rules:**
+- Never notify user
+- Never block interaction
+
+---
+
+### 6. Corrupted PuppyState
+
+**UI:**
+- Load last known good state
+- If none exists, load fallback Stage 1
+
+**Rules:**
+- No message
+- No "reset" language
+- No user-facing indication
+
+---
+
+### 7. Animation Overload (Low-End Device)
+
+**UI:**
+- Disable animations for session
+- Use still frames only
+
+**Rules:**
+- No message
+- No toggle prompt
+- No performance warnings
+
+---
+
+### 8. Message Engine Failure
+
+**UI:**
+- Suppress message
+- Show idle frame only
+
+**Rules:**
+- Never show placeholder text
+- Never show "error" or "retry"
+
+---
+
+### 9. Growth Reveal Failure
+
+**UI:**
+- Instantly switch to new stage still frame
+- Deliver message normally
+
+**Rules:**
+- No reveal animation
+- No fallback text
+
+---
+
+### 10. Profile Card Load Failure
+
+**UI:**
+- Show minimal card:
+  - Puppy still frame
+  - PP count
+  - Stage number
+
+**Rules:**
+- Hide personalization options
+- Hide accent color
+- Hide tone
+- No error text
+
+---
+
+### 11. Hard Failure (Unexpected Exception)
+
+**UI:**
+- Show still frame of current stage
+- Suppress all animations
+- Suppress all messages
+
+**Rules:**
+- No crash dialog
+- No error message
+- No disruption to user flow
+
+---
+
+### 12. Core Edge-Case Principle
+
+All errors must fail:
+- Silently
+- Calmly
+- Invisibly
+- Without emotional impact
+- Without breaking trust
+
+The companion must never reveal internal problems to the user.
+
+---
+
+## Localization Rules
+
+**Purpose:**
+Ensure the companion's language is globally safe, culturally neutral, and universally understandable across all markets.
+
+---
+
+### 1. Universal English Only
+
+The companion must always speak:
+- Simple English
+- Short sentences
+- Globally understandable vocabulary
+
+No regional dialects.
+No country-specific phrasing.
+
+---
+
+### 2. No Slang
+
+The companion must never use:
+- Slang
+- Internet slang
+- Texting shorthand
+- Memes
+- Idioms
+- Jokes requiring cultural context
+
+**Examples of banned terms:**
+- "vibes"
+- "lol"
+- "you got this"
+- "crushing it"
+- "on fire"
+- "boss mode"
+
+---
+
+### 3. No Cultural References
+
+The companion must never reference:
+- Holidays
+- Seasons
+- Weather
+- Sports
+- Celebrities
+- Local customs
+- National events
+
+All messages must be timeless and placeless.
+
+---
+
+### 4. No Emotional Assumptions
+
+The companion must never assume:
+- Mood
+- Stress level
+- Motivation
+- Personal circumstances
+- Family situation
+- Financial situation
+
+Messages must remain neutral and universal.
+
+---
+
+### 5. No Context-Dependent Language
+
+The companion must avoid:
+- Metaphors
+- Analogies
+- Humor
+- Poetic language
+- Figurative expressions
+
+All language must be literal and clear.
+
+---
+
+### 6. Sentence Structure Rules
+
+All messages must follow:
+- 8–12 words
+- One sentence
+- No commas
+- No exclamation marks
+- No emojis
+- No rhetorical questions
+
+Tone must remain calm and steady.
+
+---
+
+### 7. Vocabulary Limits
+
+**Allowed vocabulary:**
+- Simple verbs (start, try, continue, breathe, rest)
+- Simple nouns (step, moment, day, task)
+- Simple adjectives (small, steady, gentle, calm)
+
+**Avoid:**
+- Complex words
+- Emotional intensity
+- Motivational language
+
+---
+
+### 8. Global Readability
+
+Messages must be readable at:
+- 4th–6th grade English level
+- Low literacy environments
+- Non-native English speakers
+
+---
+
+### 9. No Localization by Region
+
+The companion must not:
+- Change tone by country
+- Change vocabulary by region
+- Reference local culture
+
+One global voice.
+
+---
+
+### 10. Core Localization Principle
+
+The companion must sound:
+- Calm
+- Adult
+- Universal
+- Steady
+- Safe
+
+The language must work everywhere without modification.
+
+---
+
+## QA Test Matrix
+
+**Purpose:**
+Provide a complete test grid covering assets, logic, UI, performance, safety, privacy, and failure modes across all device classes.
+
+---
+
+### 1. Asset Validation
+
+- [ ] Stage 1 idle frames load
+- [ ] Stage 2 idle frames load
+- [ ] Stage 3 idle frames load
+- [ ] Stage 4 idle frames load
+- [ ] Celebration animations load
+- [ ] Growth Reveal overlays load
+- [ ] Profile Card icons load
+- [ ] Fallback silhouette loads
+- [ ] All assets within size limits
+- [ ] All assets in correct folders
+
+---
+
+### 2. Animation Tests
+
+- [ ] Idle animation plays (2–3 frames)
+- [ ] Idle interval correct (6–12 seconds)
+- [ ] Celebration animation plays once
+- [ ] Growth Reveal plays correctly
+- [ ] Reduced-motion disables all animations
+- [ ] No animation loops continuously
+- [ ] No animation exceeds time budget
+
+---
+
+### 3. Message Engine Tests
+
+- [ ] Daily presence message triggers once
+- [ ] Encouragement messages trigger correctly
+- [ ] Cooldown enforced (10 seconds)
+- [ ] No duplicate messages
+- [ ] No pressure language
+- [ ] No guilt language
+- [ ] No references to user absence
+- [ ] All messages 8–12 words
+- [ ] All messages one sentence
+- [ ] No commas, emojis, or exclamation marks
+
+---
+
+### 4. Stage Progression Tests
+
+- [ ] PP increments correctly
+- [ ] Stage 1 → 2 at 20 PP
+- [ ] Stage 2 → 3 at 60 PP
+- [ ] Stage 3 → 4 at 150 PP
+- [ ] Growth Reveal triggers on stage change
+- [ ] Stage persists across sessions
+- [ ] Stage persists across devices
+
+---
+
+### 5. Profile Card Tests
+
+- [ ] Card opens on tap
+- [ ] PP displayed correctly
+- [ ] Stage displayed correctly
+- [ ] Accent color applies
+- [ ] Tone selection applies
+- [ ] Reduced-motion toggle works
+- [ ] Name field saves
+- [ ] Reset Companion works
+- [ ] Privacy notice displays
+
+---
+
+### 6. State Layer Tests
+
+- [ ] PuppyState saves locally
+- [ ] PuppyState loads correctly
+- [ ] Cloud sync works
+- [ ] Offline queue works
+- [ ] Corrupted state recovers
+- [ ] No personal data stored
+- [ ] No analytics stored
+
+---
+
+### 7. Event Layer Tests
+
+- [ ] All event types fire
+- [ ] Debounce (500ms) works
+- [ ] Duplicate events suppressed
+- [ ] No retroactive messages
+- [ ] No retroactive animations
+
+---
+
+### 8. Performance Tests
+
+- [ ] CPU usage within limits
+- [ ] Memory footprint < 12 MB
+- [ ] No layout thrashing
+- [ ] No jank on low-end devices
+- [ ] No battery drain
+- [ ] No background timers
+- [ ] No heavy UI effects
+
+---
+
+### 9. Failure Mode Tests
+
+- [ ] Missing idle frame → fallback silhouette
+- [ ] Missing animation → still frame
+- [ ] Offline mode → normal behavior
+- [ ] Failed save → silent queue
+- [ ] Failed load → fallback state
+- [ ] Growth Reveal failure → instant stage switch
+- [ ] Message engine failure → silent suppression
+- [ ] Hard failure → still frame + silence
+
+---
+
+### 10. Privacy Tests
+
+- [ ] No personal data collected
+- [ ] No personal data transmitted
+- [ ] No third-party SDKs
+- [ ] No analytics events
+- [ ] No engagement tracking
+- [ ] No behavioral profiling
+
+---
+
+### 11. Localization Tests
+
+- [ ] No slang
+- [ ] No idioms
+- [ ] No cultural references
+- [ ] No holiday references
+- [ ] No weather references
+- [ ] All messages globally neutral
+- [ ] All messages readable at low literacy
+
+---
+
+### 12. Device Class Tests
+
+- [ ] Low-end Android (2–3GB RAM)
+- [ ] Mid-range Android
+- [ ] High-end Android
+- [ ] Small screens
+- [ ] Large screens
+- [ ] Poor network conditions
+- [ ] Offline mode
+
+---
+
+### 13. Regression Tests
+
+- [ ] Stage progression stable
+- [ ] Message engine stable
+- [ ] Animation engine stable
+- [ ] Profile Card stable
+- [ ] State sync stable
+- [ ] No drift in tone or language
+
+---
+
+### 14. Core QA Principle
+
+The companion must pass every test before launch.
+If any test fails, the companion must not ship.
+
+---
+
+## Launch-Day Stability Protocol
+
+**Purpose:**
+Protect system stability, emotional safety, and performance during the first 72 hours after launch — without collecting personal data or engagement metrics.
+
+---
+
+### 1. Launch Window
+
+**Duration:**
+- First 72 hours after release
+
+**Focus:**
+- Stability
+- Performance
+- Error suppression
+- Silent recovery
+
+No user-facing changes.
+
+---
+
+### 2. Allowed Monitoring (System Only)
+
+Monitor ONLY:
+- Crash rates
+- Asset load failures
+- Animation failures
+- State save/load failures
+- Sync failures
+- Fallback triggers
+- CPU spikes
+- Memory spikes
+
+**No user behavior tracking.**
+
+---
+
+### 3. Prohibited Monitoring
+
+Do NOT monitor:
+- User sessions
+- User taps
+- Message reads
+- Time in app
+- Retention
+- Engagement
+- User routines
+- Emotional patterns
+
+**No analytics of any kind.**
+
+---
+
+### 4. Automatic Safeguards
+
+If system detects instability:
+- Disable animations globally
+- Reduce asset load
+- Simplify UI
+- Suppress non-essential messages
+- Increase cooldowns silently
+
+No user notifications.
+
+---
+
+### 5. Message Engine Protection
+
+If message engine misfires:
+- Suppress message
+- Skip event
+- Never show fallback text
+- Never show error text
+
+Companion must remain calm and quiet.
+
+---
+
+### 6. State Layer Protection
+
+If state corruption detected:
+- Revert to last known good state
+- Queue sync silently
+- Never notify user
+
+If save fails:
+- Retry in background
+- Never block interaction
+
+---
+
+### 7. Sync Layer Protection
+
+If sync server overloaded:
+- Queue all sync events
+- Retry with exponential backoff
+- Never show "syncing" or "offline"
+
+User experience remains unchanged.
+
+---
+
+### 8. Asset Layer Protection
+
+If asset load fails:
+- Use fallback silhouette
+- Skip animation
+- Continue normal behavior
+
+No visual disruption.
+
+---
+
+### 9. Performance Protection
+
+If device under heavy load:
+- Disable animations for session
+- Reduce UI effects
+- Suppress celebration events
+
+Companion must remain smooth on all devices.
+
+---
+
+### 10. Hotfix Rules
+
+During first 72 hours:
+- Only stability fixes allowed
+- No new features
+- No new messages
+- No tone changes
+- No animation changes
+
+**Stability > everything.**
+
+---
+
+### 11. Rollback Rules
+
+If critical failure detected:
+- Rollback to previous stable build
+- Preserve PuppyState
+- Preserve settings
+- Preserve assets
+
+Rollback must be silent.
+
+---
+
+### 12. Core Launch-Day Principle
+
+The companion must remain:
+- Stable
+- Calm
+- Predictable
+- Emotionally safe
+- Invisible in its corrections
+
+The user should feel nothing except a smooth, steady companion.
+
+---
+
+## Long-Term Evolution Roadmap
+
+**Purpose:**
+Define the only allowed long-term expansions of the companion, ensuring growth without drift, complexity, or emotional risk.
+
+---
+
+### 1. Immutable Core
+
+The following elements must NEVER change:
+- Four stages only
+- No feeding, cleaning, or care loops
+- No streaks or reminders
+- No pressure language
+- No monetization of the puppy
+- No cosmetic purchases
+- No emotional manipulation
+- No analytics or engagement tracking
+
+**The puppy's identity is fixed.**
+
+---
+
+### 2. Allowed Future Additions (Strictly Optional)
+
+Future additions must be:
+- Calm
+- Simple
+- Optional
+- Non-gamified
+- Emotionally safe
+
+**Allowed categories:**
+- New idle animations (same style, same rules)
+- New celebration animations (same length, same tone)
+- New message sets (same tone, same constraints)
+- New accent colors
+- New profile card backgrounds (subtle, minimal)
+
+No new mechanics.
+No new systems.
+
+---
+
+### 3. Seasonal Variants (Highly Restricted)
+
+Seasonal changes must:
+- Be optional
+- Be subtle
+- Never reference holidays
+- Never reference culture
+- Never reference weather
+
+**Example:**
+- A softer lighting variant
+- A slightly warmer color palette
+
+No costumes.
+No themes.
+No holiday events.
+
+---
+
+### 4. Stage Expansion Rules
+
+**New stages are NOT allowed.**
+
+The four-stage arc is:
+- Simple
+- Universal
+- Emotionally grounded
+- Globally safe
+
+Adding stages risks:
+- Gamification
+- Pressure
+- Complexity
+
+**The arc is final.**
+
+---
+
+### 5. Message Library Expansion
+
+New messages must:
+- Follow all language rules
+- Follow all safety rules
+- Follow all tone rules
+- Be reviewed as a full set
+- Never exceed 12 words
+- Never use slang, idioms, or hype
+
+Messages must remain timeless.
+
+---
+
+### 6. Personalization Expansion
+
+**Allowed:**
+- New accent colors
+- New tones (if calm and adult)
+- Optional name display improvements
+
+**Not allowed:**
+- Puppy outfits
+- Puppy skins
+- Puppy accessories
+- Puppy themes
+
+No cosmetic monetization.
+
+---
+
+### 7. UI Evolution
+
+**Allowed:**
+- Smoother animations
+- Cleaner layout
+- Improved accessibility
+- Lighter performance footprint
+
+**Not allowed:**
+- Complex menus
+- Multi-screen flows
+- Gamified dashboards
+- Social features
+
+The companion must stay simple.
+
+---
+
+### 8. Emotional Evolution
+
+**Allowed:**
+- Slightly warmer phrasing
+- Slightly more variety
+- Slightly more nuance
+
+**Not allowed:**
+- Emotional dependency
+- Emotional assumptions
+- Therapy language
+- Motivational hype
+
+The puppy stays steady and quiet.
+
+---
+
+### 9. Integration Expansion
+
+**Allowed:**
+- Deeper integration with SimplyLouie tools
+- More event types (if safe)
+- More subtle reactions to progress
+
+**Not allowed:**
+- Cross-feature tracking
+- Cross-feature pressure
+- Cross-feature monetization
+
+The puppy observes only small steps.
+
+---
+
+### 10. Core Evolution Principle
+
+The companion may grow in:
+- Polish
+- Warmth
+- Subtlety
+- Smoothness
+
+But it must NEVER grow in:
+- Complexity
+- Pressure
+- Gamification
+- Monetization
+- Emotional intensity
+
+The puppy must remain a calm, steady presence — forever.
+
+---
+
+## Full System Specification (Consolidated)
+
+**Purpose:**
+Define the complete, end-to-end specification for the Puppy Companion, merging Steps 1–42 into one authoritative document. This governs design, behavior, performance, safety, privacy, and long-term evolution.
+
+---
+
+### 1. Core Identity
+
+The Puppy Companion is:
+- Calm
+- Adult
+- Steady
+- Universal
+- Emotionally safe
+
+It grows as the user grows.
+It never pressures, judges, or demands.
+
+Four stages only.
+No care loops.
+No streaks.
+No reminders.
+No gamification.
+
+---
+
+### 2. Visual System
+
+**Assets:**
+- Stage 1–4 idle PNGs (2–3 frames)
+- Celebration animations (max 6 frames)
+- Growth Reveal overlays (glow, dim, flash)
+- Profile Card icons
+- Fallback silhouette
+
+**Rules:**
+- PNG-24 with transparency
+- Soft lighting
+- No neon
+- No cartoon exaggeration
+- No costumes, skins, or accessories
+
+---
+
+### 3. Animation System
+
+**Idle:**
+- 2–3 frames
+- 6–12 second interval
+- No loops
+
+**Celebration:**
+- 1 second max
+- 6 frames max
+- Plays once
+
+**Growth Reveal:**
+- 2 seconds max
+- 3 overlays max
+
+**Reduced Motion:**
+- Disables all animations
+- Still frames only
+
+---
+
+### 4. Message System
+
+**Message rules:**
+- 8–12 words
+- One sentence
+- No commas
+- No emojis
+- No exclamation marks
+- No slang
+- No idioms
+- No cultural references
+- No holiday references
+- No weather references
+- No emotional assumptions
+
+**Tone options:**
+- Quiet & Steady (default)
+- Warm & Gentle
+- Short & Simple
+
+**Message types:**
+- Daily presence
+- Encouragement
+- Milestone
+- Stage change
+
+**Cooldown:** 10 seconds
+
+**Debounce:** 500ms
+
+---
+
+### 5. Stage System
+
+**PP thresholds:**
+- Stage 1 → 2 at 20 PP
+- Stage 2 → 3 at 60 PP
+- Stage 3 → 4 at 150 PP
+
+**Rules:**
+- Growth Reveal triggers on stage change
+- No regression
+- No extra stages ever
+
+---
+
+### 6. Event System
+
+**Events:**
+- Small step
+- Milestone
+- Stage change
+- Daily open
+- Personalization change
+
+**Rules:**
+- No retroactive messages
+- No retroactive animations
+- Duplicate suppression
+- Silent failure handling
+
+---
+
+### 7. Profile Card
+
+**Displays:**
+- Puppy still frame
+- PP
+- Stage
+- Accent color
+- Tone
+- Reduced motion
+- Optional name
+
+**Actions:**
+- Change tone
+- Change accent
+- Toggle reduced motion
+- Set name
+- Reset companion
+
+**Reset:**
+- Resets stage only
+- Keeps PP and settings
+
+---
+
+### 8. State System
+
+**PuppyState JSON:**
+- pp
+- stage
+- tone
+- accent
+- reducedMotion
+- name (optional)
+- timestamps
+- milestones
+
+**Rules:**
+- Local save
+- Cloud sync
+- Offline queue
+- Corrupted state recovery
+- No personal data
+
+---
+
+### 9. Performance Budget
+
+**Memory:** < 12 MB total
+
+**CPU:**
+- Idle < 1%
+- Animation spike < 5% for < 1 second
+
+**Assets:**
+- Idle PNG < 80 KB
+- Celebration < 250 KB
+- Reveal overlays < 150 KB total
+- Icons < 20 KB
+
+**No:**
+- Background timers
+- Heavy shadows
+- Blur effects
+- Layout thrashing
+
+---
+
+### 10. Privacy Rules
+
+**Never collect:**
+- Names
+- Contacts
+- Messages
+- Photos
+- Files
+- Location
+- Microphone
+- Camera
+- Emotional data
+- Engagement data
+- Behavioral analytics
+
+**Allowed telemetry:**
+- System errors
+- Asset failures
+- Sync failures
+- Performance metrics
+
+No third-party sharing.
+No ads.
+No monetization of the puppy.
+
+---
+
+### 11. Error & Edge-Case Handling
+
+All failures must:
+- Fail silently
+- Show still frames
+- Suppress messages
+- Never show error text
+- Never mention connectivity
+- Never mention missing assets
+
+**Fallbacks:**
+- Silhouette for missing assets
+- Still frame for missing animations
+- Last known good state for corruption
+
+---
+
+### 12. Launch Checklist
+
+- All assets validated
+- All messages validated
+- All animations validated
+- All failure modes tested
+- All device classes tested
+- All privacy rules validated
+- All performance budgets validated
+
+**If any box fails → do not ship.**
+
+---
+
+### 13. Launch-Day Stability Protocol
+
+**First 72 hours:**
+- Monitor system health only
+- No analytics
+- No user tracking
+- Silent safeguards
+- Rollback if needed
+- No new features
+
+---
+
+### 14. Long-Term Evolution Rules
+
+**Allowed:**
+- New idle animations
+- New celebration animations
+- New message sets
+- New accent colors
+- Subtle visual polish
+
+**Not allowed:**
+- New stages
+- New mechanics
+- Cosmetics
+- Monetization
+- Emotional intensity
+- Cultural references
+
+---
+
+### 15. Shutdown & Sunset Protocol
+
+If retired:
+- No emotional language
+- No goodbye
+- No loss framing
+- Silent sunset preferred
+- Preserve PP and settings
+- Remove all assets and logic
+- No references to old system
+
+---
+
+### 16. Core Principle
+
+The Puppy Companion must remain:
+- Calm
+- Steady
+- Universal
+- Emotionally safe
+- Simple
+- Timeless
+
+**Forever.**
+
+---
+
+## Engineering Implementation Plan
+
+**Purpose:**
+Provide a complete, deterministic, engineering-ready build plan for implementing the Puppy Companion across all platforms.
+
+---
+
+### 1. Project Structure
+
+```
+/puppy
+  /assets
+    /stage1
+    /stage2
+    /stage3
+    /stage4
+    /celebration
+    /reveal
+    /icons
+    fallback.png
+  /components
+    Avatar.tsx
+    ProfileCard.tsx
+    MessageEngine.ts
+    AnimationEngine.ts
+  /state
+    PuppyState.ts
+    StateManager.ts
+    SyncManager.ts
+  /events
+    EventBus.ts
+    EventTypes.ts
+  /logic
+    StageLogic.ts
+    MessageLogic.ts
+    AnimationLogic.ts
+  /safety
+    PrivacyGuard.ts
+    DriftGuard.ts
+  /tests
+    qa-matrix.spec.ts
+```
+
+---
+
+### 2. Asset Integration
+
+**Idle frames:**
+- Load 2–3 PNGs per stage
+- Preload on app start
+- Fallback silhouette if missing
+
+**Celebration animations:**
+- Load frame sequence
+- Max 6 frames
+- 1 second max
+
+**Reveal overlays:**
+- glow.png
+- dim.png
+- flash.png
+
+**Icons:**
+- tone
+- accent
+- reduced motion
+- reset
+- privacy
+
+---
+
+### 3. Avatar Component
+
+**Avatar.tsx:**
+- Fixed bottom-right anchor
+- Idle animation loop
+- Tap → open ProfileCard
+- Reduced-motion → still frame only
+- Fallback silhouette on asset failure
+
+**Idle loop:**
+- Random interval 6–12 seconds
+- 1 frame change only
+- No continuous looping
+
+---
+
+### 4. Profile Card Component
+
+**ProfileCard.tsx:**
+- Displays PP, stage, accent, tone, name
+- Controls for tone, accent, reduced motion, name
+- Reset companion button
+- Privacy notice link
+
+**Rules:**
+- No advanced settings
+- No monetization
+- No analytics
+
+---
+
+### 5. PuppyState Structure
+
+**PuppyState.ts:**
+```typescript
+{
+  pp: number,
+  stage: number,
+  tone: string,
+  accent: string,
+  reducedMotion: boolean,
+  name?: string,
+  lastMessageTime: number,
+  lastAnimationTime: number,
+  milestones: string[],
+  timestamps: {
+    created: number,
+    updated: number
+  }
+}
+```
+
+---
+
+### 6. State Manager
+
+**StateManager.ts:**
+- Load from local storage
+- Save to local storage
+- Merge with cloud state
+- Queue offline sync
+- Recover from corruption
+
+**Rules:**
+- Never store personal data
+- Never store message history
+- Never store analytics
+
+---
+
+### 7. Sync Manager
+
+**SyncManager.ts:**
+- Sync PuppyState only
+- Encrypt payload
+- Exponential backoff
+- 1 sync per session
+- 1 sync per stage change
+- 1 sync per personalization change
+
+**No:**
+- Heartbeats
+- Background pings
+- Engagement tracking
+
+---
+
+### 8. Event System
+
+**EventBus.ts:**
+- Publish/subscribe model
+- Debounce 500ms
+- Duplicate suppression
+- No retroactive events
+
+**EventTypes.ts:**
+- SMALL_STEP
+- MILESTONE
+- STAGE_CHANGE
+- DAILY_OPEN
+- PERSONALIZATION_CHANGE
+
+---
+
+### 9. Stage Logic
+
+**StageLogic.ts:**
+- Thresholds: 20 / 60 / 150
+- Stage increments only
+- No regression
+- Triggers Growth Reveal
+- Updates PuppyState
+
+---
+
+### 10. Message Engine
+
+**MessageEngine.ts:**
+- Selects message type
+- Enforces cooldown (10s)
+- Enforces language rules
+- Enforces tone rules
+- Suppresses on failure
+
+**Message rules:**
+- 8–12 words
+- One sentence
+- No commas
+- No emojis
+- No exclamation marks
+- No slang
+- No cultural references
+
+---
+
+### 11. Animation Engine
+
+**AnimationEngine.ts:**
+- Idle frame selection
+- Celebration playback
+- Reveal playback
+- Reduced-motion override
+- Fallback to still frames
+
+**Failure handling:**
+- Skip animation
+- Never show error
+- Never notify user
+
+---
+
+### 12. Performance Guard
+
+**Performance constraints:**
+- Memory < 12 MB
+- CPU < 1% idle
+- Animation spike < 5% for < 1s
+
+**If exceeded:**
+- Disable animations
+- Reduce asset load
+- Suppress celebration events
+
+---
+
+### 13. Privacy Guard
+
+**PrivacyGuard.ts:**
+- Blocks personal data writes
+- Blocks personal data sync
+- Blocks unauthorized telemetry
+- Blocks third-party calls
+
+**Allowed telemetry:**
+- Crash logs
+- Asset failures
+- Sync failures
+- Performance metrics
+
+---
+
+### 14. Drift Guard
+
+**DriftGuard.ts:**
+- Validates message library
+- Validates tone sets
+- Validates animation lengths
+- Validates stage thresholds
+- Validates asset folder structure
+
+**If drift detected:**
+- Suppress message
+- Suppress animation
+- Fallback to still frame
+
+---
+
+### 15. Error Handling
+
+All errors must:
+- Fail silently
+- Show still frame
+- Suppress message
+- Never show error text
+- Never mention connectivity
+
+**Fallback order:**
+1. Still frame
+2. Fallback silhouette
+3. Last known good state
+4. Empty PuppyState
+
+---
+
+### 16. QA Integration
+
+**qa-matrix.spec.ts:**
+- Runs full test matrix
+- Validates assets
+- Validates messages
+- Validates animations
+- Validates failure modes
+- Validates privacy rules
+- Validates performance
+
+**Build must not ship if any test fails.**
+
+---
+
+### 17. Deployment Rules
+
+**Before release:**
+- Run QA matrix
+- Run drift guard
+- Run privacy guard
+- Run performance tests
+- Validate all assets
+- Validate all messages
+
+**After release:**
+- Follow 72-hour stability protocol
+- Monitor system health only
+- No analytics
+- No user tracking
+
+---
+
+### 18. Core Engineering Principle
+
+The Puppy Companion must be:
+- Deterministic
+- Stable
+- Silent in failure
+- Emotionally safe
+- Globally universal
+- Impossible to drift
+
+**This implementation plan is final and authoritative.**
