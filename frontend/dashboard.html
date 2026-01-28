@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your SimplyLouie Dashboard">
+    <meta name="theme-color" content="#5c4638">
+
+    <title>Dashboard - SimplyLouie</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <style>
+        .dashboard {
+            min-height: 100vh;
+            background: var(--color-tan-light);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 260px;
+            background: white;
+            border-right: 1px solid var(--color-tan);
+            display: none;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        @media (min-width: 1024px) {
+            .sidebar {
+                display: flex;
+            }
+        }
+
+        .sidebar__header {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--color-tan);
+        }
+
+        .sidebar__logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--color-brown-dark);
+        }
+
+        .sidebar__nav {
+            flex: 1;
+            padding: var(--space-lg);
+            overflow-y: auto;
+        }
+
+        .sidebar__nav-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .sidebar__nav-title {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .sidebar__nav-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            color: var(--text-secondary);
+            transition: var(--transition-fast);
+            margin-bottom: var(--space-xs);
+        }
+
+        .sidebar__nav-link:hover {
+            background: var(--color-tan-light);
+            color: var(--text-primary);
+        }
+
+        .sidebar__nav-link.active {
+            background: var(--color-tan);
+            color: var(--color-brown-dark);
+            font-weight: 500;
+        }
+
+        .sidebar__nav-icon {
+            font-size: var(--text-lg);
+        }
+
+        .sidebar__footer {
+            padding: var(--space-lg);
+            border-top: 1px solid var(--color-tan);
+        }
+
+        .sidebar__user {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .sidebar__user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--color-tan);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--color-brown-dark);
+        }
+
+        .sidebar__user-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .sidebar__user-name {
+            font-weight: 500;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sidebar__user-plan {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+        }
+
+        /* Main Content */
+        .main {
+            padding: var(--space-lg);
+        }
+
+        @media (min-width: 1024px) {
+            .main {
+                margin-left: 260px;
+                padding: var(--space-2xl);
+            }
+        }
+
+        .main__header {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
+        }
+
+        @media (min-width: 768px) {
+            .main__header {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .main__title {
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--color-brown-dark);
+        }
+
+        .main__subtitle {
+            font-size: var(--text-base);
+            color: var(--text-secondary);
+        }
+
+        /* Mobile Header */
+        .mobile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md) var(--space-lg);
+            background: white;
+            border-bottom: 1px solid var(--color-tan);
+            margin: calc(-1 * var(--space-lg));
+            margin-bottom: var(--space-lg);
+        }
+
+        @media (min-width: 1024px) {
+            .mobile-header {
+                display: none;
+            }
+        }
+
+        .mobile-header__logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--color-brown-dark);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        @media (min-width: 640px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
+        }
+
+        @media (min-width: 768px) {
+            .quick-actions {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .quick-action {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+
+        .quick-action:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .quick-action__icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .quick-action__label {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-xl);
+        }
+
+        @media (min-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Feed */
+        .feed {
+            background: white;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        .feed__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--color-tan);
+        }
+
+        .feed__title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .feed__body {
+            padding: var(--space-lg);
+        }
+
+        .feed__compose {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--color-tan);
+        }
+
+        .feed__compose-input {
+            flex: 1;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-tan-light);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: var(--text-base);
+            resize: none;
+        }
+
+        .feed__compose-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--color-brown-light);
+        }
+
+        .post {
+            padding: var(--space-lg) 0;
+            border-bottom: 1px solid var(--color-tan);
+        }
+
+        .post:last-child {
+            border-bottom: none;
+        }
+
+        .post__header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .post__avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--color-tan);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--color-brown-dark);
+        }
+
+        .post__author {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .post__time {
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .post__content {
+            color: var(--text-secondary);
+            line-height: var(--leading-relaxed);
+            margin-bottom: var(--space-md);
+        }
+
+        .post__actions {
+            display: flex;
+            gap: var(--space-lg);
+        }
+
+        .post__action {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .post__action:hover {
+            color: var(--color-brown);
+        }
+
+        /* Activity Panel */
+        .activity {
+            background: white;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        .activity__header {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--color-tan);
+        }
+
+        .activity__title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .activity__body {
+            padding: var(--space-lg);
+        }
+
+        .activity__item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--color-tan);
+        }
+
+        .activity__item:last-child {
+            border-bottom: none;
+        }
+
+        .activity__icon {
+            width: 32px;
+            height: 32px;
+            background: var(--color-tan-light);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .activity__content {
+            flex: 1;
+        }
+
+        .activity__text {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+
+        .activity__time {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
+        .sidebar.mobile-active {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="menuOverlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar__header">
+                <a href="index.html" class="sidebar__logo">
+                    <span>🐕</span>
+                    <span>SimplyLouie</span>
+                </a>
+            </div>
+
+            <nav class="sidebar__nav">
+                <div class="sidebar__nav-section">
+                    <p class="sidebar__nav-title">Main</p>
+                    <a href="dashboard.html" class="sidebar__nav-link active">
+                        <span class="sidebar__nav-icon">🏠</span>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="sidebar__nav-link">
+                        <span class="sidebar__nav-icon">💬</span>
+                        <span>Community</span>
+                    </a>
+                    <a href="#" class="sidebar__nav-link">
+                        <span class="sidebar__nav-icon">🤖</span>
+                        <span>AI Assistant</span>
+                    </a>
+                </div>
+
+                <div class="sidebar__nav-section">
+                    <p class="sidebar__nav-title">Tools</p>
+                    <a href="#" class="sidebar__nav-link">
+                        <span class="sidebar__nav-icon">📊</span>
+                        <span>Budget Tracker</span>
+                    </a>
+                    <a href="#" class="sidebar__nav-link">
+                        <span class="sidebar__nav-icon">📝</span>
+                        <span>Notes</span>
+                    </a>
+                    <a href="#" class="sidebar__nav-link">
+                        <span class="sidebar__nav-icon">📅</span>
+                        <span>Calendar</span>
+                    </a>
+                </div>
+
+                <div class="sidebar__nav-section">
+                    <p class="sidebar__nav-title">More</p>
+                    <a href="#" class="sidebar__nav-link">
+                        <span class="sidebar__nav-icon">🛍️</span>
+                        <span>Merch Store</span>
+                    </a>
+                    <a href="#" class="sidebar__nav-link">
+                        <span class="sidebar__nav-icon">❤️</span>
+                        <span>Charity Vote</span>
+                    </a>
+                    <a href="#" class="sidebar__nav-link">
+                        <span class="sidebar__nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar__footer">
+                <div class="sidebar__user">
+                    <div class="sidebar__user-avatar" data-user-initial>M</div>
+                    <div class="sidebar__user-info">
+                        <p class="sidebar__user-name" data-user-name>Member</p>
+                        <p class="sidebar__user-plan">Movement Plan</p>
+                    </div>
+                    <button onclick="handleLogout()" class="btn btn--ghost btn--sm" title="Log out">
+                        🚪
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <a href="index.html" class="mobile-header__logo">
+                    <span>🐕</span>
+                    <span>SimplyLouie</span>
+                </a>
+                <button class="btn btn--ghost" onclick="toggleMobileMenu()">
+                    ☰
+                </button>
+            </div>
+
+            <!-- Page Header -->
+            <div class="main__header">
+                <div>
+                    <h1 class="main__title">Welcome back! 👋</h1>
+                    <p class="main__subtitle">Here's what's happening in your world today.</p>
+                </div>
+                <a href="#" class="btn btn--primary">
+                    🤖 Ask Louie
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p class="stat-card__label">Days as Member</p>
+                    <p class="stat-card__value">14</p>
+                    <p class="stat-card__change stat-card__change--up">+14 since joining</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-card__label">Community Posts</p>
+                    <p class="stat-card__value">3</p>
+                    <p class="stat-card__change stat-card__change--up">+2 this week</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-card__label">AI Conversations</p>
+                    <p class="stat-card__value">12</p>
+                    <p class="stat-card__change">Unlimited remaining</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-card__label">Next Charity Vote</p>
+                    <p class="stat-card__value">5</p>
+                    <p class="stat-card__change">days left</p>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="quick-action">
+                    <div class="quick-action__icon">💬</div>
+                    <p class="quick-action__label">New Post</p>
+                </div>
+                <div class="quick-action">
+                    <div class="quick-action__icon">🤖</div>
+                    <p class="quick-action__label">Chat with AI</p>
+                </div>
+                <div class="quick-action">
+                    <div class="quick-action__icon">📊</div>
+                    <p class="quick-action__label">Track Budget</p>
+                </div>
+                <div class="quick-action">
+                    <div class="quick-action__icon">🛍️</div>
+                    <p class="quick-action__label">Visit Shop</p>
+                </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Community Feed -->
+                <div class="feed">
+                    <div class="feed__header">
+                        <h2 class="feed__title">Community Feed</h2>
+                        <a href="#" class="btn btn--ghost btn--sm">View All</a>
+                    </div>
+                    <div class="feed__body">
+                        <!-- Compose -->
+                        <div class="feed__compose">
+                            <textarea class="feed__compose-input" rows="2" placeholder="Share something with the community..."></textarea>
+                            <button class="btn btn--primary">Post</button>
+                        </div>
+
+                        <!-- Posts -->
+                        <div class="post">
+                            <div class="post__header">
+                                <div class="post__avatar">S</div>
+                                <div>
+                                    <p class="post__author">Sarah M.</p>
+                                    <p class="post__time">2 hours ago</p>
+                                </div>
+                            </div>
+                            <p class="post__content">
+                                Just cancelled my $15/month note-taking app and moved everything to SimplyLouie.
+                                Same features, fraction of the price. This is what the movement is about! 🐕
+                            </p>
+                            <div class="post__actions">
+                                <span class="post__action">❤️ 24</span>
+                                <span class="post__action">💬 8</span>
+                                <span class="post__action">🔗 Share</span>
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <div class="post__header">
+                                <div class="post__avatar">M</div>
+                                <div>
+                                    <p class="post__author">Mike T.</p>
+                                    <p class="post__time">5 hours ago</p>
+                                </div>
+                            </div>
+                            <p class="post__content">
+                                The AI assistant just helped me write a cover letter in 2 minutes.
+                                Would have taken me an hour. Thank you, Louie! 🙌
+                            </p>
+                            <div class="post__actions">
+                                <span class="post__action">❤️ 18</span>
+                                <span class="post__action">💬 5</span>
+                                <span class="post__action">🔗 Share</span>
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <div class="post__header">
+                                <div class="post__avatar">J</div>
+                                <div>
+                                    <p class="post__author">Jenny L.</p>
+                                    <p class="post__time">Yesterday</p>
+                                </div>
+                            </div>
+                            <p class="post__content">
+                                New member here! Just signed up and already feeling at home.
+                                Love the warm, welcoming vibe. People over profits is real here. ❤️
+                            </p>
+                            <div class="post__actions">
+                                <span class="post__action">❤️ 42</span>
+                                <span class="post__action">💬 12</span>
+                                <span class="post__action">🔗 Share</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Panel -->
+                <div class="activity">
+                    <div class="activity__header">
+                        <h2 class="activity__title">Recent Activity</h2>
+                    </div>
+                    <div class="activity__body">
+                        <div class="activity__item">
+                            <div class="activity__icon">🎉</div>
+                            <div class="activity__content">
+                                <p class="activity__text">You joined SimplyLouie!</p>
+                                <p class="activity__time">14 days ago</p>
+                            </div>
+                        </div>
+                        <div class="activity__item">
+                            <div class="activity__icon">💬</div>
+                            <div class="activity__content">
+                                <p class="activity__text">Posted in Community</p>
+                                <p class="activity__time">3 days ago</p>
+                            </div>
+                        </div>
+                        <div class="activity__item">
+                            <div class="activity__icon">🤖</div>
+                            <div class="activity__content">
+                                <p class="activity__text">Used AI Assistant</p>
+                                <p class="activity__time">Yesterday</p>
+                            </div>
+                        </div>
+                        <div class="activity__item">
+                            <div class="activity__icon">❤️</div>
+                            <div class="activity__content">
+                                <p class="activity__text">Voted in Charity Poll</p>
+                                <p class="activity__time">5 days ago</p>
+                            </div>
+                        </div>
+                        <div class="activity__item">
+                            <div class="activity__icon">📊</div>
+                            <div class="activity__content">
+                                <p class="activity__text">Updated Budget</p>
+                                <p class="activity__time">1 week ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('menuOverlay');
+
+            sidebar.classList.toggle('mobile-active');
+            overlay.classList.toggle('active');
+        }
+
+        // Close menu when clicking overlay
+        document.getElementById('menuOverlay').addEventListener('click', toggleMobileMenu);
+
+        // Load user data
+        async function loadUserData() {
+            try {
+                const user = SimplyLouieAPI.getUser();
+                if (user) {
+                    // Update user name
+                    document.querySelectorAll('[data-user-name]').forEach(el => {
+                        el.textContent = user.name || 'Member';
+                    });
+
+                    // Update avatar initial
+                    document.querySelectorAll('[data-user-initial]').forEach(el => {
+                        el.textContent = (user.name || 'M').charAt(0).toUpperCase();
+                    });
+                }
+            } catch (error) {
+                console.log('Using demo user data');
+            }
+        }
+
+        loadUserData();
+    </script>
+</body>
+</html>

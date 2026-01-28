@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SimplyLouie - Everything you need for $2/month. Join the movement that puts people over profits.">
+    <meta name="theme-color" content="#5c4638">
+
+    <title>SimplyLouie - $2 for Everything</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__inner">
+            <a href="/" class="header__logo">
+                <span class="header__logo-icon">🐕</span>
+                <span>SimplyLouie</span>
+            </a>
+
+            <nav class="header__nav">
+                <a href="#story" class="header__nav-link">Our Story</a>
+                <a href="#features" class="header__nav-link">Features</a>
+                <a href="#pricing" class="header__nav-link">Pricing</a>
+            </nav>
+
+            <div class="header__actions">
+                <a href="login.html" class="btn btn--ghost btn--sm" data-guest>Log In</a>
+                <a href="onboarding.html" class="btn btn--primary btn--sm" data-guest>Join for $2</a>
+                <a href="dashboard.html" class="btn btn--primary btn--sm" data-auth style="display:none;">Dashboard</a>
+                <button class="header__menu-btn" aria-label="Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <nav class="mobile-menu">
+        <a href="#story" class="mobile-menu__link">Our Story</a>
+        <a href="#features" class="mobile-menu__link">Features</a>
+        <a href="#pricing" class="mobile-menu__link">Pricing</a>
+        <a href="login.html" class="mobile-menu__link" data-guest>Log In</a>
+        <a href="onboarding.html" class="btn btn--primary btn--full mt-lg" data-guest>Join for $2/month</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero__badge">
+                <span>✨</span>
+                <span>The $2 Movement</span>
+            </span>
+
+            <h1 class="hero__title">
+                Everything You Need.<br>
+                Nothing You Don't.
+            </h1>
+
+            <div class="hero__price">
+                <span class="hero__price-amount">$2</span>
+                <span class="hero__price-period">/month</span>
+            </div>
+
+            <p class="hero__subtitle">
+                One price. Full access. Real community. Join thousands who believe
+                tech should serve people, not profits.
+            </p>
+
+            <div class="hero__cta">
+                <a href="onboarding.html" class="btn btn--gold btn--lg">
+                    Start Your Journey
+                </a>
+                <a href="#story" class="btn btn--secondary btn--lg">
+                    Meet Louie
+                </a>
+            </div>
+
+            <div class="hero__trust">
+                <div class="hero__trust-item">
+                    <span>✓</span>
+                    <span>Cancel anytime</span>
+                </div>
+                <div class="hero__trust-item">
+                    <span>✓</span>
+                    <span>No hidden fees</span>
+                </div>
+                <div class="hero__trust-item">
+                    <span>✓</span>
+                    <span>Movement-aligned</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="story">
+        <div class="story__inner" data-animate>
+            <div class="story__icon">🐕</div>
+
+            <h2 class="story__title">Meet Louie</h2>
+
+            <div class="story__text">
+                <p>
+                    <strong>Louie was a Saint Bernard who taught his owner one simple truth:</strong>
+                    the best things in life aren't complicated—they're loyal, warm, and always there when you need them.
+                </p>
+                <p>
+                    <strong>When the tech world lost its way</strong>—chasing profits over people, complexity over clarity—we
+                    remembered what Louie taught us. Technology should feel like coming home.
+                </p>
+                <p>
+                    <strong>So we built SimplyLouie:</strong> everything you need, nothing you don't, for a price that
+                    respects your wallet and your time. $2/month. That's it. That's the movement.
+                </p>
+            </div>
+
+            <p class="story__signature">
+                — People over profits. Change from the bottom up.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="features__header" data-animate>
+                <h2 class="features__title">Everything for $2</h2>
+                <p class="features__subtitle">
+                    No tiers. No upsells. No tricks. Just tools that work.
+                </p>
+            </div>
+
+            <div class="features__grid">
+                <div class="feature-card" data-animate>
+                    <div class="feature-card__icon">💬</div>
+                    <h3 class="feature-card__title">Community</h3>
+                    <p class="feature-card__text">
+                        Connect with like-minded people who believe in the movement.
+                        Share ideas, support each other, grow together.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-card__icon">🤖</div>
+                    <h3 class="feature-card__title">AI Assistant</h3>
+                    <p class="feature-card__text">
+                        Your personal helper for everyday tasks. Writing, planning,
+                        problem-solving—Louie's got your back.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-card__icon">📊</div>
+                    <h3 class="feature-card__title">Simple Tools</h3>
+                    <p class="feature-card__text">
+                        Budgeting, tracking, organizing—streamlined tools that
+                        actually help instead of overwhelming.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-card__icon">🎁</div>
+                    <h3 class="feature-card__title">Member Perks</h3>
+                    <p class="feature-card__text">
+                        Exclusive discounts, early access to new features, and
+                        a voice in what we build next.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-card__icon">❤️</div>
+                    <h3 class="feature-card__title">Charity Voting</h3>
+                    <p class="feature-card__text">
+                        10% of all revenue goes to charity. You vote on where
+                        it goes. Your money, your impact.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-animate>
+                    <div class="feature-card__icon">🛍️</div>
+                    <h3 class="feature-card__title">Merch Store</h3>
+                    <p class="feature-card__text">
+                        Rep the movement. Comfortable, quality gear that
+                        spreads the word—people over profits.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="pricing__inner" data-animate>
+            <span class="pricing__badge">Simple Pricing</span>
+
+            <h2 class="pricing__title">One Price. Everything Included.</h2>
+
+            <p class="pricing__subtitle">
+                No premium tiers. No feature gates. No surprises.
+            </p>
+
+            <div class="pricing__card">
+                <div class="pricing__amount">
+                    <span class="pricing__amount-value">$2</span>
+                    <span class="pricing__amount-period">/month</span>
+                </div>
+
+                <div class="pricing__includes">
+                    <p class="pricing__includes-title">Everything included:</p>
+                    <ul class="pricing__includes-list">
+                        <li class="pricing__includes-item">
+                            <span class="pricing__includes-icon">✓</span>
+                            <span>Full community access</span>
+                        </li>
+                        <li class="pricing__includes-item">
+                            <span class="pricing__includes-icon">✓</span>
+                            <span>AI assistant (unlimited)</span>
+                        </li>
+                        <li class="pricing__includes-item">
+                            <span class="pricing__includes-icon">✓</span>
+                            <span>All tools and features</span>
+                        </li>
+                        <li class="pricing__includes-item">
+                            <span class="pricing__includes-icon">✓</span>
+                            <span>Member perks & discounts</span>
+                        </li>
+                        <li class="pricing__includes-item">
+                            <span class="pricing__includes-icon">✓</span>
+                            <span>Charity voting rights</span>
+                        </li>
+                        <li class="pricing__includes-item">
+                            <span class="pricing__includes-icon">✓</span>
+                            <span>Cancel anytime</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <a href="onboarding.html" class="btn btn--gold btn--full btn--lg">
+                    Join the Movement
+                </a>
+
+                <p class="pricing__guarantee">
+                    30-day money-back guarantee. No questions asked.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section bg-tan-light">
+        <div class="container text-center" data-animate>
+            <h2 class="text-3xl font-semibold mb-md" style="color: var(--color-brown-dark);">
+                Ready to Join?
+            </h2>
+            <p class="text-lg text-secondary mb-xl" style="max-width: 500px; margin-left: auto; margin-right: auto;">
+                Thousands of people have already joined the movement.
+                Your $2 supports something bigger than software.
+            </p>
+            <a href="onboarding.html" class="btn btn--primary btn--lg">
+                Start for $2/month
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <span>🐕</span>
+                        <span>SimplyLouie</span>
+                    </div>
+                    <p class="footer__tagline">
+                        Everything you need for $2/month. People over profits.
+                        Change from the bottom up.
+                    </p>
+                </div>
+
+                <div class="footer__links">
+                    <h4 class="footer__links-title">Product</h4>
+                    <ul class="footer__links-list">
+                        <li><a href="#features" class="footer__links-item">Features</a></li>
+                        <li><a href="#pricing" class="footer__links-item">Pricing</a></li>
+                        <li><a href="#" class="footer__links-item">Roadmap</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__links">
+                    <h4 class="footer__links-title">Company</h4>
+                    <ul class="footer__links-list">
+                        <li><a href="#story" class="footer__links-item">Our Story</a></li>
+                        <li><a href="#" class="footer__links-item">Privacy</a></li>
+                        <li><a href="#" class="footer__links-item">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2026 SimplyLouie. All rights reserved.
+                </p>
+                <p class="footer__movement">
+                    People over profits. Change from the bottom up.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

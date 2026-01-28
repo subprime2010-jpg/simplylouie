@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to SimplyLouie - You're officially part of the movement!">
+    <meta name="theme-color" content="#5c4638">
+
+    <title>Welcome to the Movement - SimplyLouie</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <style>
+        .thankyou {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-2xl) var(--space-lg);
+            background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-tan-light) 100%);
+            text-align: center;
+        }
+
+        .thankyou__content {
+            max-width: 600px;
+        }
+
+        .thankyou__icon {
+            font-size: 6rem;
+            margin-bottom: var(--space-xl);
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .thankyou__title {
+            font-size: var(--text-4xl);
+            font-weight: 700;
+            color: var(--color-brown-dark);
+            margin-bottom: var(--space-md);
+        }
+
+        @media (min-width: 768px) {
+            .thankyou__title {
+                font-size: var(--text-5xl);
+            }
+        }
+
+        .thankyou__subtitle {
+            font-size: var(--text-xl);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2xl);
+            line-height: var(--leading-relaxed);
+        }
+
+        .thankyou__card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: var(--space-2xl);
+            text-align: left;
+        }
+
+        .thankyou__card-title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--color-brown-dark);
+            margin-bottom: var(--space-lg);
+            text-align: center;
+        }
+
+        .thankyou__steps {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .thankyou__step {
+            display: flex;
+            gap: var(--space-lg);
+            align-items: flex-start;
+        }
+
+        .thankyou__step-number {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-gold);
+            color: var(--color-chocolate);
+            font-weight: 700;
+            border-radius: var(--radius-full);
+        }
+
+        .thankyou__step-content h4 {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .thankyou__step-content p {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+
+        .thankyou__cta {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        @media (min-width: 480px) {
+            .thankyou__cta {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .thankyou__quote {
+            max-width: 400px;
+            margin: var(--space-2xl) auto 0;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--color-tan);
+        }
+
+        .thankyou__quote-text {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: var(--text-lg);
+            color: var(--color-brown);
+            margin-bottom: var(--space-md);
+        }
+
+        .thankyou__quote-author {
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="thankyou">
+        <div class="thankyou__content">
+            <div class="thankyou__icon">🐕</div>
+
+            <h1 class="thankyou__title">Welcome to the Movement!</h1>
+
+            <p class="thankyou__subtitle">
+                You're officially part of something bigger.
+                Thank you for believing in people over profits.
+            </p>
+
+            <div class="thankyou__card">
+                <h2 class="thankyou__card-title">What happens next?</h2>
+
+                <div class="thankyou__steps">
+                    <div class="thankyou__step">
+                        <div class="thankyou__step-number">1</div>
+                        <div class="thankyou__step-content">
+                            <h4>Check your email</h4>
+                            <p>We just sent you a welcome email with your login details and some tips to get started.</p>
+                        </div>
+                    </div>
+
+                    <div class="thankyou__step">
+                        <div class="thankyou__step-number">2</div>
+                        <div class="thankyou__step-content">
+                            <h4>Explore your dashboard</h4>
+                            <p>Discover all the tools and features available to you. Everything is unlocked—no upsells.</p>
+                        </div>
+                    </div>
+
+                    <div class="thankyou__step">
+                        <div class="thankyou__step-number">3</div>
+                        <div class="thankyou__step-content">
+                            <h4>Join the community</h4>
+                            <p>Introduce yourself! Our community is friendly, supportive, and excited to meet you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="thankyou__cta">
+                <a href="dashboard.html" class="btn btn--gold btn--lg">
+                    Go to Dashboard
+                </a>
+                <a href="index.html" class="btn btn--secondary btn--lg">
+                    Back to Home
+                </a>
+            </div>
+
+            <div class="thankyou__quote">
+                <p class="thankyou__quote-text">
+                    "The best things in life aren't complicated—they're loyal, warm, and always there when you need them."
+                </p>
+                <p class="thankyou__quote-author">— The Louie Philosophy</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Confetti animation
+        function createConfetti() {
+            const colors = ['#c9a55c', '#dfc88a', '#8b7355', '#5c4638', '#6b8e5e'];
+
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `confettiFall ${2 + Math.random() * 3}s linear forwards`;
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(confetti);
+
+                // Remove after animation
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Run confetti on load
+        createConfetti();
+    </script>
+</body>
+</html>

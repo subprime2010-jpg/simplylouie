@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your SimplyLouie membership - $2/month">
+    <meta name="theme-color" content="#5c4638">
+
+    <title>Checkout - SimplyLouie</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <style>
+        .checkout {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-tan-light) 100%);
+        }
+
+        .checkout__header {
+            padding: var(--space-lg);
+            text-align: center;
+            border-bottom: 1px solid var(--color-tan);
+            background: white;
+        }
+
+        .checkout__logo {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--color-brown-dark);
+        }
+
+        .checkout__main {
+            padding: var(--space-2xl) var(--space-lg);
+        }
+
+        .checkout__container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-xl);
+        }
+
+        @media (min-width: 768px) {
+            .checkout__container {
+                grid-template-columns: 1fr 380px;
+            }
+        }
+
+        .checkout__form-section {
+            order: 2;
+        }
+
+        @media (min-width: 768px) {
+            .checkout__form-section {
+                order: 1;
+            }
+        }
+
+        .checkout__summary-section {
+            order: 1;
+        }
+
+        @media (min-width: 768px) {
+            .checkout__summary-section {
+                order: 2;
+            }
+        }
+
+        .checkout__card {
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .checkout__card-header {
+            padding: var(--space-lg) var(--space-xl);
+            border-bottom: 1px solid var(--color-tan);
+        }
+
+        .checkout__card-title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--color-brown-dark);
+        }
+
+        .checkout__card-body {
+            padding: var(--space-xl);
+        }
+
+        /* Summary Card */
+        .summary__product {
+            display: flex;
+            gap: var(--space-lg);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--color-tan);
+            margin-bottom: var(--space-lg);
+        }
+
+        .summary__product-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-tan-light);
+            border-radius: var(--radius-lg);
+            font-size: 2rem;
+        }
+
+        .summary__product-info {
+            flex: 1;
+        }
+
+        .summary__product-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .summary__product-desc {
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .summary__line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+
+        .summary__line--total {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--color-tan);
+            margin-top: var(--space-md);
+        }
+
+        .summary__features {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--color-tan);
+        }
+
+        .summary__features-title {
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .summary__feature {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .summary__feature-icon {
+            color: var(--color-success);
+        }
+
+        /* Payment Form */
+        .payment__methods {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .payment__method {
+            flex: 1;
+            padding: var(--space-md);
+            border: 2px solid var(--color-tan);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .payment__method:hover {
+            border-color: var(--color-brown-light);
+        }
+
+        .payment__method.active {
+            border-color: var(--color-brown);
+            background: var(--color-tan-light);
+        }
+
+        .payment__method-icon {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-xs);
+        }
+
+        .payment__method-label {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+        }
+
+        .card-element {
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid var(--color-tan);
+            border-radius: var(--radius-lg);
+            background: var(--color-cream);
+            min-height: 44px;
+        }
+
+        .card-element--focused {
+            border-color: var(--color-brown);
+        }
+
+        .card-placeholder {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .secure-badge svg {
+            color: var(--color-success);
+        }
+
+        .checkout__footer {
+            text-align: center;
+            padding: var(--space-xl) var(--space-lg);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .checkout__footer a {
+            color: var(--color-brown);
+        }
+
+        /* Guarantee */
+        .guarantee {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            background: rgba(107, 142, 94, 0.1);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-xl);
+        }
+
+        .guarantee__icon {
+            font-size: var(--text-2xl);
+            color: var(--color-success);
+        }
+
+        .guarantee__text {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            line-height: var(--leading-relaxed);
+        }
+
+        .guarantee__text strong {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout">
+        <!-- Header -->
+        <header class="checkout__header">
+            <a href="index.html" class="checkout__logo">
+                <span>🐕</span>
+                <span>SimplyLouie</span>
+            </a>
+        </header>
+
+        <!-- Main Content -->
+        <main class="checkout__main">
+            <div class="checkout__container">
+                <!-- Payment Form -->
+                <div class="checkout__form-section">
+                    <div class="checkout__card">
+                        <div class="checkout__card-header">
+                            <h2 class="checkout__card-title">Payment Details</h2>
+                        </div>
+                        <div class="checkout__card-body">
+                            <!-- Payment Methods -->
+                            <div class="payment__methods">
+                                <div class="payment__method active" data-method="card">
+                                    <div class="payment__method-icon">💳</div>
+                                    <div class="payment__method-label">Card</div>
+                                </div>
+                                <div class="payment__method" data-method="paypal">
+                                    <div class="payment__method-icon">🅿️</div>
+                                    <div class="payment__method-label">PayPal</div>
+                                </div>
+                            </div>
+
+                            <!-- Card Form -->
+                            <form id="paymentForm">
+                                <div class="form-group">
+                                    <label class="form-label" for="cardName">Name on Card</label>
+                                    <input type="text" id="cardName" name="cardName" class="form-input" placeholder="John Doe" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Card Information</label>
+                                    <!-- Stripe Elements Placeholder -->
+                                    <div class="card-element" id="card-element">
+                                        <div class="card-placeholder">
+                                            <span>💳</span>
+                                            <span>Card number</span>
+                                            <span style="margin-left: auto;">MM/YY</span>
+                                            <span>CVC</span>
+                                        </div>
+                                    </div>
+                                    <span class="form-help">Demo mode: Any card info will work</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="billingCountry">Billing Country</label>
+                                    <select id="billingCountry" name="billingCountry" class="form-input form-select">
+                                        <option value="US">United States</option>
+                                        <option value="CA">Canada</option>
+                                        <option value="UK">United Kingdom</option>
+                                        <option value="AU">Australia</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="billingZip">ZIP / Postal Code</label>
+                                    <input type="text" id="billingZip" name="billingZip" class="form-input" placeholder="12345">
+                                </div>
+
+                                <button type="submit" class="btn btn--gold btn--full btn--lg" id="submitBtn">
+                                    Subscribe for $2/month
+                                </button>
+
+                                <div class="secure-badge">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                    <span>Secured by Stripe. We never see your card details.</span>
+                                </div>
+                            </form>
+
+                            <div class="guarantee">
+                                <div class="guarantee__icon">✓</div>
+                                <div class="guarantee__text">
+                                    <strong>30-Day Money-Back Guarantee</strong><br>
+                                    Not happy? Get a full refund within 30 days—no questions asked.
+                                    Cancel anytime from your dashboard.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="checkout__summary-section">
+                    <div class="checkout__card">
+                        <div class="checkout__card-header">
+                            <h2 class="checkout__card-title">Order Summary</h2>
+                        </div>
+                        <div class="checkout__card-body">
+                            <div class="summary__product">
+                                <div class="summary__product-icon">🐕</div>
+                                <div class="summary__product-info">
+                                    <div class="summary__product-name">SimplyLouie Membership</div>
+                                    <div class="summary__product-desc">Full access • Billed monthly</div>
+                                </div>
+                            </div>
+
+                            <div class="summary__line">
+                                <span>Membership</span>
+                                <span>$2.00</span>
+                            </div>
+                            <div class="summary__line">
+                                <span>Tax</span>
+                                <span>$0.00</span>
+                            </div>
+                            <div class="summary__line summary__line--total">
+                                <span>Total today</span>
+                                <span>$2.00</span>
+                            </div>
+
+                            <div class="summary__features">
+                                <div class="summary__features-title">What's included:</div>
+                                <div class="summary__feature">
+                                    <span class="summary__feature-icon">✓</span>
+                                    <span>Full community access</span>
+                                </div>
+                                <div class="summary__feature">
+                                    <span class="summary__feature-icon">✓</span>
+                                    <span>AI assistant (unlimited)</span>
+                                </div>
+                                <div class="summary__feature">
+                                    <span class="summary__feature-icon">✓</span>
+                                    <span>All tools and features</span>
+                                </div>
+                                <div class="summary__feature">
+                                    <span class="summary__feature-icon">✓</span>
+                                    <span>Member perks & discounts</span>
+                                </div>
+                                <div class="summary__feature">
+                                    <span class="summary__feature-icon">✓</span>
+                                    <span>Charity voting rights</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="text-align: center; font-size: var(--text-sm); color: var(--text-muted); margin-top: var(--space-lg);">
+                        By subscribing, you agree to our
+                        <a href="#" style="color: var(--color-brown);">Terms</a> and
+                        <a href="#" style="color: var(--color-brown);">Privacy Policy</a>
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="checkout__footer">
+            <p>Questions? <a href="mailto:hello@simplylouie.com">hello@simplylouie.com</a></p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Payment method selection
+        document.querySelectorAll('.payment__method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment__method').forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Form submission
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.textContent;
+            btn.disabled = true;
+            btn.classList.add('btn--loading');
+            btn.textContent = 'Processing...';
+
+            try {
+                // Simulate payment processing
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // In production, this would call Stripe
+                // const response = await SimplyLouieAPI.createCheckoutSession();
+
+                // Redirect to thank you page
+                window.location.href = 'thankyou.html';
+            } catch (error) {
+                showToast('Payment failed. Please try again.', 'error');
+                btn.disabled = false;
+                btn.classList.remove('btn--loading');
+                btn.textContent = originalText;
+            }
+        });
+    </script>
+</body>
+</html>
