@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings – SimplyLouie</title>
+  <meta name="description" content="Manage your SimplyLouie account settings, theme, billing, and security." />
+
+  <style>
+    /* ============================================
+       SIMPLYLOUIE SETTINGS PAGE
+       Warm, organized, movement-aligned
+    ============================================ */
+
+    :root {
+      /* Light Theme */
+      --tan-light: #f5ebe0;
+      --tan: #d9b899;
+      --tan-dark: #c4a57b;
+      --brown-light: #8b7355;
+      --brown: #5a3e2b;
+      --brown-dark: #3d2a1d;
+      --cream: #faf8f5;
+      --white: #ffffff;
+      --charcoal: #2b2b2b;
+      --charcoal-light: #666666;
+      --accent: #ff7a3d;
+      --accent-hover: #e86a2d;
+      --success: #4a9c6d;
+      --success-light: #e8f5e9;
+      --error: #d64545;
+
+      --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(90, 62, 43, 0.08);
+      --shadow-md: 0 4px 16px rgba(90, 62, 43, 0.12);
+      --transition: 0.25s ease;
+    }
+
+    /* Dark Theme */
+    :root.dark {
+      --tan-light: #2a2520;
+      --tan: #4a3f35;
+      --tan-dark: #6a5a4a;
+      --brown-light: #a8947d;
+      --brown: #e8d5c0;
+      --brown-dark: #f5ebe0;
+      --cream: #1a1816;
+      --white: #252220;
+      --charcoal: #f5f5f5;
+      --charcoal-light: #b0b0b0;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--cream);
+      min-height: 100vh;
+      color: var(--charcoal);
+      line-height: 1.6;
+      transition: background-color var(--transition), color var(--transition);
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.4s ease forwards;
+    }
+
+    .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+    .animate-delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+    /* --- HEADER --- */
+    .header {
+      background: var(--white);
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background-color var(--transition);
+    }
+
+    .header__inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .header__logo {
+      width: 36px;
+      height: 36px;
+      background: var(--tan);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .header__title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .header__back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--brown);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .header__back:hover {
+      color: var(--accent);
+    }
+
+    /* --- MAIN --- */
+    .main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* --- PAGE TITLE --- */
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      color: var(--brown-light);
+      margin-bottom: 2rem;
+    }
+
+    /* --- SECTION --- */
+    .section {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: background-color var(--transition), box-shadow var(--transition);
+    }
+
+    .section__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--tan-light);
+    }
+
+    .section__icon {
+      width: 36px;
+      height: 36px;
+      background: var(--tan-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .section__title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    /* --- FORM ELEMENTS --- */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 500px) {
+      .form-row--2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 0.35rem;
+      font-size: 0.875rem;
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--tan-light);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      color: var(--charcoal);
+      background: var(--cream);
+      transition: var(--transition);
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255, 122, 61, 0.1);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--brown-light);
+      opacity: 0.7;
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-hint {
+      font-size: 0.75rem;
+      color: var(--brown-light);
+      margin-top: 0.35rem;
+    }
+
+    /* --- AVATAR --- */
+    .avatar-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      background: var(--tan);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      flex-shrink: 0;
+    }
+
+    .avatar-info {
+      flex: 1;
+    }
+
+    .avatar-name {
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .avatar-email {
+      font-size: 0.875rem;
+      color: var(--brown-light);
+    }
+
+    /* --- TOGGLE SWITCH --- */
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .toggle-label {
+      flex: 1;
+    }
+
+    .toggle-title {
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 0.25rem;
+    }
+
+    .toggle-desc {
+      font-size: 0.875rem;
+      color: var(--brown-light);
+    }
+
+    .toggle {
+      position: relative;
+      width: 56px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: var(--tan);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 4px;
+      bottom: 4px;
+      background: var(--white);
+      border-radius: 50%;
+      transition: var(--transition);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: var(--accent);
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(24px);
+    }
+
+    .toggle input:focus-visible + .toggle-slider {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* --- PLAN CARD --- */
+    .plan-card {
+      background: var(--tan-light);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .plan-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .plan-name {
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .plan-badge {
+      background: var(--success);
+      color: var(--white);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .plan-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .plan-price span {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--brown-light);
+    }
+
+    .plan-renewal {
+      font-size: 0.875rem;
+      color: var(--brown-light);
+    }
+
+    /* --- BUTTONS --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn--primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn--primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn--secondary {
+      background: var(--tan-light);
+      color: var(--brown);
+    }
+
+    .btn--secondary:hover {
+      background: var(--tan);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--brown-light);
+      border: 1px solid var(--tan);
+    }
+
+    .btn--ghost:hover {
+      background: var(--tan-light);
+      color: var(--brown);
+    }
+
+    .btn--block {
+      width: 100%;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* --- MOVEMENT MESSAGE --- */
+    .movement-message {
+      background: linear-gradient(135deg, var(--tan-light), var(--cream));
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .movement-message__icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .movement-message__text {
+      font-size: 1.125rem;
+      color: var(--brown);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .movement-message__highlight {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 0.5rem;
+    }
+
+    /* --- TOAST --- */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--success);
+      color: var(--white);
+      padding: 0.875rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--brown-light);
+      font-size: 0.875rem;
+    }
+
+    /* --- ACCESSIBILITY --- */
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="/app.html" class="header__brand">
+        <div class="header__logo" aria-hidden="true">&#128054;</div>
+        <span class="header__title">SimplyLouie</span>
+      </a>
+      <a href="/app.html" class="header__back">
+        <span aria-hidden="true">&larr;</span>
+        Dashboard
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+    <!-- Page Title -->
+    <h1 class="page-title animate-in">Settings</h1>
+    <p class="page-subtitle animate-in">Manage your account, preferences, and membership.</p>
+
+    <!-- ACCOUNT SECTION -->
+    <section class="section animate-in animate-delay-1">
+      <header class="section__header">
+        <div class="section__icon" aria-hidden="true">&#128100;</div>
+        <h2 class="section__title">Account Information</h2>
+      </header>
+
+      <!-- Avatar -->
+      <div class="avatar-group">
+        <div class="avatar" id="avatar-display" aria-hidden="true">&#128054;</div>
+        <div class="avatar-info">
+          <div class="avatar-name" id="display-name">Movement Member</div>
+          <div class="avatar-email" id="display-email">member@example.com</div>
+        </div>
+      </div>
+
+      <form id="account-form" onsubmit="Settings.saveAccount(event)">
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="Your name" value="Movement Member" />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" value="member@example.com" />
+          </div>
+        </div>
+
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" id="country" name="country" class="form-input" placeholder="Your country" value="Kenya" />
+          </div>
+          <div class="form-group">
+            <label for="avatar-url" class="form-label">Avatar URL (optional)</label>
+            <input type="url" id="avatar-url" name="avatarUrl" class="form-input" placeholder="https://..." />
+            <p class="form-hint">Enter an image URL for your profile picture.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bio" class="form-label">Bio</label>
+          <textarea id="bio" name="bio" class="form-textarea" placeholder="Tell the community about yourself...">Part of the $2 movement. People over profits.</textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary">
+          <span aria-hidden="true">&#10003;</span>
+          Save Changes
+        </button>
+      </form>
+    </section>
+
+    <!-- THEME SECTION -->
+    <section class="section animate-in animate-delay-2">
+      <header class="section__header">
+        <div class="section__icon" aria-hidden="true">&#127769;</div>
+        <h2 class="section__title">Theme</h2>
+      </header>
+
+      <div class="toggle-group">
+        <div class="toggle-label">
+          <div class="toggle-title">Dark Mode</div>
+          <div class="toggle-desc">Choose what feels comfortable for your eyes.</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="theme-toggle" onchange="Settings.toggleTheme()" />
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- BILLING SECTION -->
+    <section class="section animate-in animate-delay-3">
+      <header class="section__header">
+        <div class="section__icon" aria-hidden="true">&#128179;</div>
+        <h2 class="section__title">Billing</h2>
+      </header>
+
+      <!-- Plan Card -->
+      <div class="plan-card">
+        <div class="plan-header">
+          <span class="plan-name">SimplyLouie Movement</span>
+          <span class="plan-badge">Active</span>
+        </div>
+        <div class="plan-price">$2 <span>/ month</span></div>
+        <p class="plan-renewal">Next renewal: <strong id="renewal-date">February 28, 2026</strong></p>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn--secondary" onclick="Settings.updateCard()">
+          <span aria-hidden="true">&#128179;</span>
+          Update Card
+        </button>
+        <a href="/cancel-full.html" class="btn btn--ghost">
+          Manage Membership
+        </a>
+      </div>
+    </section>
+
+    <!-- SECURITY SECTION -->
+    <section class="section animate-in animate-delay-4">
+      <header class="section__header">
+        <div class="section__icon" aria-hidden="true">&#128274;</div>
+        <h2 class="section__title">Security</h2>
+      </header>
+
+      <form id="password-form" onsubmit="Settings.changePassword(event)">
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="old-password" class="form-label">Current Password</label>
+            <input type="password" id="old-password" name="oldPassword" class="form-input" placeholder="Enter current password" />
+          </div>
+          <div class="form-group">
+            <label for="new-password" class="form-label">New Password</label>
+            <input type="password" id="new-password" name="newPassword" class="form-input" placeholder="Enter new password" />
+            <p class="form-hint">At least 6 characters.</p>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn--secondary">
+          <span aria-hidden="true">&#128274;</span>
+          Change Password
+        </button>
+      </form>
+    </section>
+
+    <!-- MOVEMENT MESSAGE -->
+    <div class="movement-message animate-in animate-delay-5">
+      <div class="movement-message__icon" aria-hidden="true">&#128154;</div>
+      <p class="movement-message__text">
+        You're safe here.<br/>
+        <span class="movement-message__highlight">You matter more than you know.</span>
+      </p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&#128054; SimplyLouie — People over profits. Change from the bottom up.</p>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <span aria-hidden="true">&#10003;</span>
+    <span id="toast-text">Changes saved!</span>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script src="api.js"></script>
+  <script>
+    /**
+     * SimplyLouie Settings Page
+     * Connected to real backend API
+     */
+    const Settings = (function() {
+      'use strict';
+
+      var user = null;
+
+      // Initialize
+      async function init() {
+        // Auth guard
+        if (!SimplyLouie.requireAuth()) return;
+
+        // Apply saved theme
+        SimplyLouie.applyTheme();
+        loadThemeToggle();
+
+        // Load user data
+        try {
+          var settings = await SimplyLouie.getSettings();
+          user = settings.user;
+          populateForm(settings);
+        } catch (error) {
+          console.error('Failed to load settings:', error);
+          showToast('Failed to load settings', 'error');
+        }
+      }
+
+      // Load theme toggle state
+      function loadThemeToggle() {
+        var savedTheme = localStorage.getItem('simplylouie_theme');
+        var toggle = document.getElementById('theme-toggle');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+          toggle.checked = true;
+        }
+      }
+
+      // Populate form with user data
+      function populateForm(settings) {
+        var u = settings.user;
+        document.getElementById('name').value = u.name || '';
+        document.getElementById('email').value = u.email || '';
+        document.getElementById('country').value = u.country || '';
+        document.getElementById('bio').value = u.bio || '';
+        document.getElementById('avatar-url').value = u.avatar_url || '';
+
+        document.getElementById('display-name').textContent = u.name || 'Movement Member';
+        document.getElementById('display-email').textContent = u.email || '';
+
+        // Update avatar display
+        if (u.avatar_url) {
+          document.getElementById('avatar-display').innerHTML = '<img src="' + u.avatar_url + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />';
+        } else {
+          document.getElementById('avatar-display').textContent = (u.name || 'M').charAt(0).toUpperCase();
+        }
+
+        // Update billing info
+        var badge = document.querySelector('.plan-badge');
+        if (settings.billing) {
+          badge.textContent = settings.billing.status.charAt(0).toUpperCase() + settings.billing.status.slice(1);
+        }
+
+        setRenewalDate();
+      }
+
+      // Toggle theme
+      async function toggleTheme() {
+        var toggle = document.getElementById('theme-toggle');
+        var newTheme = toggle.checked ? 'dark' : 'light';
+
+        try {
+          await SimplyLouie.updateTheme(newTheme);
+          showToast(newTheme === 'dark' ? 'Dark mode enabled' : 'Light mode enabled');
+        } catch (error) {
+          showToast('Failed to update theme', 'error');
+          toggle.checked = !toggle.checked;
+        }
+      }
+
+      // Set renewal date
+      function setRenewalDate() {
+        var date = new Date();
+        date.setMonth(date.getMonth() + 1);
+        document.getElementById('renewal-date').textContent = date.toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        });
+      }
+
+      // Save account
+      async function saveAccount(event) {
+        event.preventDefault();
+
+        var name = document.getElementById('name').value;
+        var country = document.getElementById('country').value;
+        var bio = document.getElementById('bio').value;
+        var avatarUrl = document.getElementById('avatar-url').value;
+
+        try {
+          var updated = await SimplyLouie.updateProfile({
+            name: name,
+            country: country,
+            bio: bio,
+            avatar_url: avatarUrl
+          });
+
+          document.getElementById('display-name').textContent = updated.name || 'Movement Member';
+
+          if (avatarUrl) {
+            document.getElementById('avatar-display').innerHTML = '<img src="' + avatarUrl + '" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />';
+          } else {
+            document.getElementById('avatar-display').textContent = (name || 'M').charAt(0).toUpperCase();
+          }
+
+          showToast('Account information saved!');
+        } catch (error) {
+          showToast(error.message || 'Failed to save', 'error');
+        }
+      }
+
+      // Change password
+      async function changePassword(event) {
+        event.preventDefault();
+
+        var oldPassword = document.getElementById('old-password').value;
+        var newPassword = document.getElementById('new-password').value;
+
+        if (!oldPassword || !newPassword) {
+          showToast('Please fill in both password fields', 'error');
+          return;
+        }
+
+        if (newPassword.length < 6) {
+          showToast('New password must be at least 6 characters', 'error');
+          return;
+        }
+
+        try {
+          await SimplyLouie.changePassword(oldPassword, newPassword);
+          document.getElementById('old-password').value = '';
+          document.getElementById('new-password').value = '';
+          showToast('Password changed successfully!');
+        } catch (error) {
+          showToast(error.message || 'Failed to change password', 'error');
+        }
+      }
+
+      // Update card
+      function updateCard() {
+        showToast('Redirecting to payment update...');
+        setTimeout(function() {
+          window.location.href = '/checkout-full.html';
+        }, 1000);
+      }
+
+      // Show toast
+      function showToast(message, type) {
+        type = type || 'success';
+        var toast = document.getElementById('toast');
+        var text = document.getElementById('toast-text');
+
+        text.textContent = message;
+        toast.style.background = type === 'error' ? '#d64545' : '#4a9c6d';
+        toast.classList.add('show');
+
+        setTimeout(function() {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+
+      // Initialize on load
+      init();
+
+      // Public API
+      return {
+        toggleTheme: toggleTheme,
+        saveAccount: saveAccount,
+        changePassword: changePassword,
+        updateCard: updateCard
+      };
+    })();
+  </script>
+</body>
+</html>

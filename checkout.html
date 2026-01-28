@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout – SimplyLouie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --brown: #5a3e2b;
+      --tan: #d9b899;
+      --cream: #f7f3ee;
+      --accent: #ff7a3d;
+      --text: #2b2b2b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 1.5rem;
+    }
+
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--brown);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .item-box {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      margin-bottom: 1.5rem;
+    }
+
+    .item-box h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+      color: var(--brown);
+    }
+
+    .price {
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    form {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+      display: block;
+      background: var(--accent);
+      color: white;
+      padding: 0.9rem;
+      border-radius: 999px;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--brown);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="api.js"></script>
+  <script>
+    SimplyLouie.applyTheme();
+    window.location.href = '/checkout-full.html';
+  </script>
+  <div class="page">
+
+    <a href="/merch.html" class="back-link">&larr; Back to Merch</a>
+
+    <h1>Checkout</h1>
+    <p>Every purchase helps fund the charities you vote for.</p>
+
+    <!-- ITEM SUMMARY -->
+    <div class="item-box">
+      <h2>Movement Gear</h2>
+      <p id="item-name">Selected Item</p>
+      <div class="price" id="item-price">$0</div>
+    </div>
+
+    <!-- PAYMENT FORM -->
+    <form action="/api/checkout" method="POST">
+      <label>Name on Card</label>
+      <input type="text" name="name" placeholder="Your name" required />
+
+      <label>Card Number</label>
+      <input type="text" name="card" placeholder="1234 1234 1234 1234" required />
+
+      <label>Expiration</label>
+      <input type="text" name="exp" placeholder="MM/YY" required />
+
+      <label>CVC</label>
+      <input type="text" name="cvc" placeholder="123" required />
+
+      <button class="btn-primary" type="submit">Complete Purchase</button>
+    </form>
+
+    <div class="footer">
+      SimplyLouie — people over profits, inspired by a rescue Saint Bernard.
+    </div>
+
+  </div>
+
+  <script>
+    // Simple item mapping for clean checkout experience
+    const params = new URLSearchParams(window.location.search);
+    const item = params.get("item");
+
+    const items = {
+      tee: { name: "Saint Bernard Tee", price: "$12" },
+      hoodie: { name: "Movement Hoodie", price: "$28" },
+      cap: { name: "SimplyLouie Cap", price: "$16" },
+      wristband: { name: "Movement Wristband", price: "$4" },
+      stickers: { name: "Sticker Pack", price: "$3" },
+      tote: { name: "Movement Tote", price: "$10" }
+    };
+
+    if (items[item]) {
+      document.getElementById("item-name").textContent = items[item].name;
+      document.getElementById("item-price").textContent = items[item].price;
+    }
+  </script>
+
+</body>
+</html>

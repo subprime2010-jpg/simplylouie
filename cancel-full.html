@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Membership – SimplyLouie</title>
+  <meta name="description" content="Manage your SimplyLouie membership. We're here for you, no matter what." />
+
+  <style>
+    /* ============================================
+       SIMPLYLOUIE CANCELLATION PAGE
+       Warm, supportive, no-pressure design
+    ============================================ */
+
+    :root {
+      --tan-light: #f5ebe0;
+      --tan: #d9b899;
+      --tan-dark: #c4a57b;
+      --brown-light: #8b7355;
+      --brown: #5a3e2b;
+      --brown-dark: #3d2a1d;
+      --cream: #faf8f5;
+      --white: #ffffff;
+      --charcoal: #2b2b2b;
+      --charcoal-light: #666666;
+      --accent: #ff7a3d;
+      --accent-hover: #e86a2d;
+      --success: #4a9c6d;
+      --warning: #e5a84b;
+      --warning-light: #fef8e8;
+
+      --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(90, 62, 43, 0.08);
+      --shadow-md: 0 4px 16px rgba(90, 62, 43, 0.12);
+      --shadow-lg: 0 8px 32px rgba(90, 62, 43, 0.16);
+      --transition: 0.3s ease;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--cream);
+      min-height: 100vh;
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* --- HEADER --- */
+    .header {
+      background: var(--white);
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header__inner {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .header__logo {
+      width: 36px;
+      height: 36px;
+      background: var(--tan);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .header__title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    /* --- MAIN --- */
+    .main {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* --- BACK LINK --- */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--brown);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    /* --- CARD --- */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* --- ICON --- */
+    .icon {
+      font-size: 4rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    /* --- HEADLINE --- */
+    .headline {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--brown);
+      text-align: center;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    @media (min-width: 480px) {
+      .headline {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* --- SUBLINE --- */
+    .subline {
+      font-size: 1rem;
+      color: var(--brown-light);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    /* --- PLAN INFO --- */
+    .plan {
+      background: var(--tan-light);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .plan__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .plan__name {
+      font-weight: 700;
+      color: var(--brown);
+      font-size: 1.1rem;
+    }
+
+    .plan__badge {
+      background: var(--success);
+      color: var(--white);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .plan__details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .plan__row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--charcoal-light);
+    }
+
+    .plan__value {
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    /* --- BENEFITS --- */
+    .benefits {
+      margin-bottom: 2rem;
+    }
+
+    .benefits__title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .benefits__list {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .benefits__item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--charcoal-light);
+    }
+
+    .benefits__icon {
+      width: 24px;
+      height: 24px;
+      background: var(--tan-light);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* --- BUTTONS --- */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn--primary {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .btn--primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--brown-light);
+      border: 1px solid var(--tan);
+    }
+
+    .btn--ghost:hover {
+      background: var(--tan-light);
+      color: var(--brown);
+    }
+
+    .btn__icon {
+      font-size: 1.1rem;
+    }
+
+    /* --- CONFIRMATION MODAL --- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 100;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      animation: slideIn 0.3s ease;
+    }
+
+    .modal__icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal__title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal__text {
+      color: var(--charcoal-light);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .modal__buttons {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .modal__buttons .btn {
+      flex: 1;
+    }
+
+    /* --- CANCELLED STATE --- */
+    .cancelled {
+      display: none;
+    }
+
+    .cancelled.show {
+      display: block;
+    }
+
+    .cancelled .card {
+      text-align: center;
+    }
+
+    .cancelled__message {
+      background: var(--warning-light);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .cancelled__message-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cancelled__message-title {
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 0.25rem;
+    }
+
+    .cancelled__message-text {
+      font-size: 0.9rem;
+      color: var(--charcoal-light);
+    }
+
+    .cancelled__warm {
+      background: linear-gradient(135deg, var(--tan-light), var(--cream));
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cancelled__warm-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cancelled__warm-text {
+      color: var(--brown);
+      font-weight: 500;
+    }
+
+    .cancelled__warm-highlight {
+      display: block;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* --- ACTIVE STATE --- */
+    .active-state {
+      display: block;
+    }
+
+    .active-state.hidden {
+      display: none;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--brown-light);
+      font-size: 0.875rem;
+    }
+
+    /* --- ACCESSIBILITY --- */
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__logo" aria-hidden="true">&#128054;</div>
+      <span class="header__title">SimplyLouie</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+    <!-- Back Link -->
+    <a href="/settings.html" class="back-link">
+      <span aria-hidden="true">&larr;</span>
+      Back to Settings
+    </a>
+
+    <!-- ACTIVE STATE -->
+    <div class="active-state" id="active-state">
+      <div class="card">
+        <!-- Icon -->
+        <div class="icon" aria-hidden="true">&#128054;</div>
+
+        <!-- Headline -->
+        <h1 class="headline">We're here for you, no matter what.</h1>
+
+        <!-- Subline -->
+        <p class="subline">If you need to pause, take a break, or step away, you're still part of the movement.</p>
+
+        <!-- Plan Info -->
+        <div class="plan">
+          <div class="plan__header">
+            <span class="plan__name">SimplyLouie Movement</span>
+            <span class="plan__badge">Active</span>
+          </div>
+          <div class="plan__details">
+            <div class="plan__row">
+              <span>Monthly price</span>
+              <span class="plan__value">$2.00</span>
+            </div>
+            <div class="plan__row">
+              <span>Member since</span>
+              <span class="plan__value" id="member-since">January 2026</span>
+            </div>
+            <div class="plan__row">
+              <span>Next renewal</span>
+              <span class="plan__value" id="next-renewal">February 28, 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Benefits reminder -->
+        <div class="benefits">
+          <h2 class="benefits__title">You'll lose access to:</h2>
+          <ul class="benefits__list">
+            <li class="benefits__item">
+              <span class="benefits__icon" aria-hidden="true">&#128172;</span>
+              <span>Simple AI for work, school, and daily life</span>
+            </li>
+            <li class="benefits__item">
+              <span class="benefits__icon" aria-hidden="true">&#128154;</span>
+              <span>Community and connection with others</span>
+            </li>
+            <li class="benefits__item">
+              <span class="benefits__icon" aria-hidden="true">&#127991;</span>
+              <span>Charity voting and giving power</span>
+            </li>
+            <li class="benefits__item">
+              <span class="benefits__icon" aria-hidden="true">&#128085;</span>
+              <span>Movement gear discounts</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+          <a href="/app.html" class="btn btn--primary">
+            <span class="btn__icon" aria-hidden="true">&#128154;</span>
+            Keep My Membership
+          </a>
+          <button class="btn btn--ghost" onclick="showConfirmModal()">
+            Cancel My Membership
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANCELLED STATE -->
+    <div class="cancelled" id="cancelled-state">
+      <div class="card">
+        <!-- Icon -->
+        <div class="icon" aria-hidden="true">&#128054;</div>
+
+        <!-- Headline -->
+        <h1 class="headline">Membership Cancelled</h1>
+
+        <!-- Cancelled message -->
+        <div class="cancelled__message">
+          <div class="cancelled__message-icon" aria-hidden="true">&#128197;</div>
+          <p class="cancelled__message-title">Access until end of billing period</p>
+          <p class="cancelled__message-text">You can continue using SimplyLouie until <strong id="access-until">February 28, 2026</strong>.</p>
+        </div>
+
+        <!-- Warm message -->
+        <div class="cancelled__warm">
+          <div class="cancelled__warm-icon" aria-hidden="true">&#128154;</div>
+          <p class="cancelled__warm-text">
+            You're always welcome back.<br/>
+            <span class="cancelled__warm-highlight">Second chances are what we do.</span>
+          </p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+          <button class="btn btn--primary" onclick="reactivate()">
+            <span class="btn__icon" aria-hidden="true">&#128260;</span>
+            Reactivate Membership
+          </button>
+          <a href="/app.html" class="btn btn--ghost">
+            Return to Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="confirm-modal" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal__icon" aria-hidden="true">&#128546;</div>
+      <h2 class="modal__title">Are you sure?</h2>
+      <p class="modal__text">
+        We'll miss you. But we understand — life happens. You can always come back when you're ready.
+      </p>
+      <div class="modal__buttons">
+        <button class="btn btn--ghost" onclick="closeModal()">
+          Keep Membership
+        </button>
+        <button class="btn btn--primary" onclick="confirmCancel()">
+          Yes, Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&#128054; SimplyLouie — People over profits. Always.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script src="api.js"></script>
+  <script>
+    /**
+     * SimplyLouie Cancellation Page
+     * Connected to real backend API
+     */
+    (function() {
+      'use strict';
+
+      // Auth guard
+      if (!SimplyLouie.requireAuth()) return;
+
+      // Apply theme
+      SimplyLouie.applyTheme();
+
+      // Set dates
+      var now = new Date();
+      var memberSince = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      var nextRenewal = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+      document.getElementById('member-since').textContent = memberSince.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      document.getElementById('next-renewal').textContent = nextRenewal.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById('access-until').textContent = nextRenewal.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+      // Check billing status
+      SimplyLouie.getBillingStatus().then(function(billing) {
+        if (billing.status === 'canceled') {
+          document.getElementById('active-state').classList.add('hidden');
+          document.getElementById('cancelled-state').classList.add('show');
+        }
+      }).catch(function(e) {
+        console.error('Failed to get billing status:', e);
+      });
+    })();
+
+    // Show confirmation modal
+    function showConfirmModal() {
+      document.getElementById('confirm-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal
+    function closeModal(event) {
+      if (event && event.target !== event.currentTarget) return;
+      document.getElementById('confirm-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Confirm cancellation
+    async function confirmCancel() {
+      try {
+        await SimplyLouie.cancelMembership();
+        closeModal();
+
+        // Hide active state, show cancelled state
+        document.getElementById('active-state').classList.add('hidden');
+        document.getElementById('cancelled-state').classList.add('show');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (error) {
+        alert(error.message || 'Failed to cancel membership');
+      }
+    }
+
+    // Reactivate
+    function reactivate() {
+      // Hide cancelled state, show active state
+      document.getElementById('cancelled-state').classList.remove('show');
+      document.getElementById('active-state').classList.remove('hidden');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Redirect to checkout to reactivate
+      window.location.href = '/checkout-full.html';
+    }
+
+    // Keyboard handling
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

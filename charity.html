@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Charity Voting – SimplyLouie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --brown: #5a3e2b;
+      --tan: #d9b899;
+      --cream: #f7f3ee;
+      --accent: #ff7a3d;
+      --text: #2b2b2b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 1.5rem;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.6rem;
+      color: var(--brown);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 0.8rem;
+    }
+
+    .vote-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+      padding: 0.9rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--brown);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--brown);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <a href="/app.html" class="back-link">&larr; Back to Dashboard</a>
+
+    <h1>Charity Voting</h1>
+    <p>
+      Every month, SimplyLouie members choose where part of the $2 goes.<br>
+      <strong>Your vote matters. Your voice decides.</strong>
+    </p>
+
+    <!-- CHARITY OPTION 1 -->
+    <div class="card">
+      <h2>Local Food Support – Nigeria</h2>
+      <p>Helping families with essential food supplies in tough times.</p>
+      <a href="/api/vote?charity=food-support" class="vote-btn">Vote for This Charity</a>
+    </div>
+
+    <!-- CHARITY OPTION 2 -->
+    <div class="card">
+      <h2>School Supplies Fund – Philippines</h2>
+      <p>Providing notebooks, pens, and learning materials for students.</p>
+      <a href="/api/vote?charity=school-supplies" class="vote-btn">Vote for This Charity</a>
+    </div>
+
+    <!-- CHARITY OPTION 3 -->
+    <div class="card">
+      <h2>Women's Safety Group – Kenya</h2>
+      <p>Supporting safe spaces, education, and protection for women.</p>
+      <a href="/api/vote?charity=womens-safety" class="vote-btn">Vote for This Charity</a>
+    </div>
+
+    <!-- CHARITY OPTION 4 -->
+    <div class="card">
+      <h2>Community Health Outreach – Ghana</h2>
+      <p>Helping local clinics provide basic care and health education.</p>
+      <a href="/api/vote?charity=health-outreach" class="vote-btn">Vote for This Charity</a>
+    </div>
+
+    <!-- CHARITY OPTION 5 -->
+    <div class="card">
+      <h2>Small Business Starter Kits – Indonesia</h2>
+      <p>Giving tools and materials to help people start micro-businesses.</p>
+      <a href="/api/vote?charity=starter-kits" class="vote-btn">Vote for This Charity</a>
+    </div>
+
+    <div class="footer">
+      SimplyLouie — people over profits, inspired by a rescue Saint Bernard.
+    </div>
+
+  </div>
+</body>
+</html>

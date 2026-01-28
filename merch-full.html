@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movement Gear – SimplyLouie</title>
+  <meta name="description" content="Wear the movement. Every purchase supports local charities chosen by the community. $2 pricing because everyone deserves to belong." />
+
+  <style>
+    /* ============================================
+       SIMPLYLOUIE MERCH PAGE
+       Warm, movement-aligned, Saint Bernard identity
+       Mobile-first, accessible design
+    ============================================ */
+
+    /* --- CSS VARIABLES --- */
+    :root {
+      /* Saint Bernard Palette */
+      --tan-light: #f5ebe0;
+      --tan: #d9b899;
+      --tan-dark: #c4a57b;
+      --brown-light: #8b7355;
+      --brown: #5a3e2b;
+      --brown-dark: #3d2a1d;
+      --cream: #faf8f5;
+      --white: #ffffff;
+      --charcoal: #2b2b2b;
+      --charcoal-light: #4a4a4a;
+
+      /* Accent Colors */
+      --accent: #ff7a3d;
+      --accent-hover: #e86a2d;
+      --success: #4a9c6d;
+      --heart: #e85d5d;
+
+      /* Spacing */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+
+      /* Typography */
+      --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-md: 1rem;
+      --font-size-lg: 1.125rem;
+      --font-size-xl: 1.5rem;
+      --font-size-2xl: 2rem;
+      --font-size-3xl: 2.5rem;
+
+      /* Layout */
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(90, 62, 43, 0.08);
+      --shadow-md: 0 4px 16px rgba(90, 62, 43, 0.12);
+      --shadow-lg: 0 8px 32px rgba(90, 62, 43, 0.16);
+      --transition: 0.25s ease;
+    }
+
+    /* --- RESET --- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-size-md);
+      line-height: 1.6;
+      color: var(--charcoal);
+      background: var(--cream);
+      min-height: 100vh;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* --- HEADER --- */
+    .header {
+      background: var(--white);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .header__logo {
+      width: 40px;
+      height: 40px;
+      background: var(--tan);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .header__title {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .header__subtitle {
+      font-size: var(--font-size-xs);
+      color: var(--brown-light);
+      display: none;
+    }
+
+    @media (min-width: 480px) {
+      .header__subtitle {
+        display: block;
+      }
+    }
+
+    .cart-btn {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      background: var(--tan-light);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: var(--transition);
+    }
+
+    .cart-btn:hover {
+      background: var(--tan);
+      transform: scale(1.05);
+    }
+
+    .cart-btn__count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0);
+      transition: var(--transition);
+    }
+
+    .cart-btn__count.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* --- HERO --- */
+    .hero {
+      background: linear-gradient(135deg, var(--tan-light) 0%, var(--cream) 100%);
+      padding: var(--space-2xl) var(--space-lg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--tan) 0%, transparent 70%);
+      opacity: 0.3;
+      border-radius: 50%;
+    }
+
+    .hero__content {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .hero__icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-md);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero__title {
+      font-size: var(--font-size-2xl);
+      font-weight: 800;
+      color: var(--brown);
+      margin-bottom: var(--space-sm);
+      line-height: 1.2;
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-lg);
+      color: var(--brown-light);
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero__message {
+      display: inline-block;
+      background: var(--white);
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-sm);
+      color: var(--brown);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero__message strong {
+      color: var(--accent);
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding: var(--space-2xl) var(--space-xl);
+      }
+
+      .hero__title {
+        font-size: var(--font-size-3xl);
+      }
+    }
+
+    /* --- MAIN CONTENT --- */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    /* --- SECTION HEADER --- */
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-header__title {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-header__desc {
+      color: var(--brown-light);
+      font-size: var(--font-size-md);
+    }
+
+    /* --- PRODUCT GRID --- */
+    .products {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    @media (min-width: 540px) {
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .products {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* --- PRODUCT CARD --- */
+    .product {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .product__image {
+      aspect-ratio: 1;
+      background: var(--tan-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product__icon {
+      font-size: 4rem;
+      opacity: 0.9;
+      transition: var(--transition);
+    }
+
+    .product:hover .product__icon {
+      transform: scale(1.1);
+    }
+
+    .product__badge {
+      position: absolute;
+      top: var(--space-md);
+      left: var(--space-md);
+      background: var(--accent);
+      color: var(--white);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .product__body {
+      padding: var(--space-lg);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product__category {
+      font-size: var(--font-size-xs);
+      color: var(--tan-dark);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .product__title {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: var(--space-xs);
+      line-height: 1.3;
+    }
+
+    .product__tagline {
+      font-size: var(--font-size-sm);
+      color: var(--brown-light);
+      font-style: italic;
+      margin-bottom: var(--space-md);
+    }
+
+    .product__desc {
+      font-size: var(--font-size-sm);
+      color: var(--charcoal-light);
+      flex: 1;
+      margin-bottom: var(--space-md);
+    }
+
+    .product__includes {
+      font-size: var(--font-size-xs);
+      color: var(--brown-light);
+      padding: var(--space-sm);
+      background: var(--tan-light);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .product__includes-title {
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: var(--space-xs);
+    }
+
+    .product__variants {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-md);
+    }
+
+    .product__variant {
+      font-size: var(--font-size-xs);
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--tan-light);
+      border-radius: var(--radius-full);
+      color: var(--brown);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .product__variant:hover,
+    .product__variant.selected {
+      border-color: var(--accent);
+      background: var(--white);
+    }
+
+    .product__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      margin-top: auto;
+    }
+
+    .product__price {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product__price-amount {
+      font-size: var(--font-size-xl);
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .product__price-note {
+      font-size: var(--font-size-xs);
+      color: var(--brown-light);
+    }
+
+    .add-to-cart {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--brown);
+      color: var(--white);
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .add-to-cart:hover {
+      background: var(--accent);
+      transform: scale(1.02);
+    }
+
+    .add-to-cart:active {
+      transform: scale(0.98);
+    }
+
+    .add-to-cart.added {
+      background: var(--success);
+    }
+
+    .add-to-cart__icon {
+      font-size: 1.1rem;
+    }
+
+    /* --- FEATURED PRODUCT --- */
+    .product--featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .product--featured {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .product--featured .product__image {
+        aspect-ratio: auto;
+        min-height: 300px;
+      }
+
+      .product--featured .product__icon {
+        font-size: 6rem;
+      }
+    }
+
+    /* --- MISSION BANNER --- */
+    .mission {
+      background: var(--brown);
+      color: var(--white);
+      padding: var(--space-xl) var(--space-lg);
+      border-radius: var(--radius-lg);
+      margin: var(--space-2xl) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--tan) 0%, transparent 70%);
+      opacity: 0.1;
+    }
+
+    .mission__icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .mission__title {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      color: var(--white);
+    }
+
+    .mission__text {
+      font-size: var(--font-size-md);
+      opacity: 0.9;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* --- CART DRAWER --- */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 200;
+      transition: var(--transition);
+    }
+
+    .cart-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 420px;
+      background: var(--white);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-overlay.open .cart-drawer {
+      transform: translateX(0);
+    }
+
+    .cart__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-lg);
+      border-bottom: 1px solid var(--tan-light);
+    }
+
+    .cart__title {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--brown);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .cart__close {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--brown-light);
+      transition: var(--transition);
+    }
+
+    .cart__close:hover {
+      background: var(--tan-light);
+      color: var(--brown);
+    }
+
+    .cart__items {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-md);
+    }
+
+    .cart__empty {
+      text-align: center;
+      padding: var(--space-2xl);
+      color: var(--brown-light);
+    }
+
+    .cart__empty-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-md);
+      opacity: 0.5;
+    }
+
+    .cart__empty-text {
+      font-size: var(--font-size-md);
+      margin-bottom: var(--space-sm);
+    }
+
+    .cart__empty-subtext {
+      font-size: var(--font-size-sm);
+    }
+
+    .cart-item {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--tan-light);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-md);
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+    }
+
+    .cart-item__image {
+      width: 70px;
+      height: 70px;
+      background: var(--tan);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .cart-item__details {
+      flex: 1;
+    }
+
+    .cart-item__name {
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: var(--space-xs);
+    }
+
+    .cart-item__variant {
+      font-size: var(--font-size-xs);
+      color: var(--brown-light);
+      margin-bottom: var(--space-sm);
+    }
+
+    .cart-item__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-item__qty {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .cart-item__qty-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-full);
+      background: var(--white);
+      color: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .cart-item__qty-btn:hover {
+      background: var(--brown);
+      color: var(--white);
+    }
+
+    .cart-item__qty-value {
+      font-weight: 600;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .cart-item__price {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .cart__footer {
+      padding: var(--space-lg);
+      border-top: 1px solid var(--tan-light);
+      background: var(--cream);
+    }
+
+    .cart__total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+    }
+
+    .cart__total-label {
+      font-size: var(--font-size-md);
+      color: var(--brown);
+    }
+
+    .cart__total-amount {
+      font-size: var(--font-size-xl);
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .cart__message {
+      font-size: var(--font-size-sm);
+      color: var(--brown-light);
+      text-align: center;
+      margin-bottom: var(--space-md);
+      padding: var(--space-sm);
+      background: var(--tan-light);
+      border-radius: var(--radius-sm);
+    }
+
+    .cart__checkout {
+      width: 100%;
+      background: var(--accent);
+      color: var(--white);
+      padding: var(--space-md);
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: var(--font-size-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      transition: var(--transition);
+    }
+
+    .cart__checkout:hover {
+      background: var(--accent-hover);
+      transform: scale(1.02);
+    }
+
+    .cart__checkout:disabled {
+      background: var(--tan);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* --- TOAST NOTIFICATION --- */
+    .toast {
+      position: fixed;
+      bottom: var(--space-lg);
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--brown);
+      color: var(--white);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-lg);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 300;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast__icon {
+      font-size: 1.2rem;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      background: var(--brown);
+      color: var(--white);
+      padding: var(--space-2xl) var(--space-lg);
+      text-align: center;
+    }
+
+    .footer__logo {
+      font-size: 2rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .footer__tagline {
+      font-size: var(--font-size-md);
+      opacity: 0.9;
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer__copy {
+      font-size: var(--font-size-sm);
+      opacity: 0.7;
+    }
+
+    /* --- ACCESSIBILITY --- */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* --- REDUCED MOTION --- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="/" class="header__brand">
+        <div class="header__logo" aria-hidden="true">&#128054;</div>
+        <div>
+          <div class="header__title">SimplyLouie</div>
+          <div class="header__subtitle">Movement Gear</div>
+        </div>
+      </a>
+
+      <button class="cart-btn" onclick="Cart.toggle()" aria-label="Open cart">
+        <span aria-hidden="true">&#128722;</span>
+        <span class="cart-btn__count" id="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__content">
+      <div class="hero__icon" aria-hidden="true">&#128054;</div>
+      <h1 class="hero__title">Wear the Movement</h1>
+      <p class="hero__subtitle">Every item helps fund local charities chosen by the community.</p>
+      <p class="hero__message">
+        <strong>$2 Movement Pricing</strong> — Because belonging shouldn't cost more.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <!-- SECTION: ESSENTIALS -->
+    <section aria-labelledby="essentials-title">
+      <div class="section-header">
+        <h2 class="section-header__title" id="essentials-title">Spread the Warmth</h2>
+        <p class="section-header__desc">Small items, big heart. Every piece carries a message of hope.</p>
+      </div>
+
+      <div class="products">
+        <!-- STICKER PACK -->
+        <article class="product" data-product-id="stickers">
+          <div class="product__image">
+            <span class="product__icon" aria-hidden="true">&#127991;</span>
+            <span class="product__badge">Popular</span>
+          </div>
+          <div class="product__body">
+            <div class="product__category">Stickers</div>
+            <h3 class="product__title">Sticker Pack</h3>
+            <p class="product__tagline">"Spread the Warmth"</p>
+            <p class="product__desc">A collection of 5 stickers to share kindness wherever you go.</p>
+            <div class="product__includes">
+              <div class="product__includes-title">Includes:</div>
+              Be Kind, Move Forward • People Over Profits • Second Chances Matter • Saint Bernard Silhouette • You're Safe Here
+            </div>
+            <div class="product__footer">
+              <div class="product__price">
+                <span class="product__price-amount">$2</span>
+                <span class="product__price-note">5 stickers</span>
+              </div>
+              <button class="add-to-cart" onclick="Cart.add('stickers', 'Sticker Pack', 2, '&#127991;')">
+                <span class="add-to-cart__icon" aria-hidden="true">+</span>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- WRISTBANDS -->
+        <article class="product" data-product-id="wristbands">
+          <div class="product__image">
+            <span class="product__icon" aria-hidden="true">&#11093;</span>
+          </div>
+          <div class="product__body">
+            <div class="product__category">Wearables</div>
+            <h3 class="product__title">Wristbands</h3>
+            <p class="product__tagline">"Carry the Message"</p>
+            <p class="product__desc">A daily reminder that you're not alone. Pick your message.</p>
+            <div class="product__variants" role="group" aria-label="Select variant">
+              <button class="product__variant selected" onclick="selectVariant(this, 'wristbands')">You're Not Alone</button>
+              <button class="product__variant" onclick="selectVariant(this, 'wristbands')">Keep Going</button>
+              <button class="product__variant" onclick="selectVariant(this, 'wristbands')">Be The Safe Person</button>
+            </div>
+            <div class="product__footer">
+              <div class="product__price">
+                <span class="product__price-amount">$2</span>
+                <span class="product__price-note">per band</span>
+              </div>
+              <button class="add-to-cart" onclick="Cart.add('wristbands', 'Wristband', 2, '&#11093;', getSelectedVariant('wristbands'))">
+                <span class="add-to-cart__icon" aria-hidden="true">+</span>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- MOVEMENT CARDS -->
+        <article class="product" data-product-id="cards">
+          <div class="product__image">
+            <span class="product__icon" aria-hidden="true">&#128140;</span>
+          </div>
+          <div class="product__body">
+            <div class="product__category">Cards</div>
+            <h3 class="product__title">Movement Cards</h3>
+            <p class="product__tagline">"Give Someone a Second Chance"</p>
+            <p class="product__desc">Handwritten-style cards to give to someone who needs them.</p>
+            <div class="product__includes">
+              <div class="product__includes-title">Messages include:</div>
+              "If today is heavy, let me help carry it" • "You matter more than you know" • "You're safe here"
+            </div>
+            <div class="product__footer">
+              <div class="product__price">
+                <span class="product__price-amount">$2</span>
+                <span class="product__price-note">3 cards</span>
+              </div>
+              <button class="add-to-cart" onclick="Cart.add('cards', 'Movement Cards', 2, '&#128140;')">
+                <span class="add-to-cart__icon" aria-hidden="true">+</span>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- POPSOCKET -->
+        <article class="product" data-product-id="popsocket">
+          <div class="product__image">
+            <span class="product__icon" aria-hidden="true">&#128241;</span>
+          </div>
+          <div class="product__body">
+            <div class="product__category">Accessories</div>
+            <h3 class="product__title">PopSocket</h3>
+            <p class="product__tagline">"Warmth in Your Hand"</p>
+            <p class="product__desc">Saint Bernard icon in warm tan tones. Grip your phone, carry the movement.</p>
+            <div class="product__footer">
+              <div class="product__price">
+                <span class="product__price-amount">$2</span>
+              </div>
+              <button class="add-to-cart" onclick="Cart.add('popsocket', 'PopSocket', 2, '&#128241;')">
+                <span class="add-to-cart__icon" aria-hidden="true">+</span>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- CAR DECAL -->
+        <article class="product" data-product-id="decal">
+          <div class="product__image">
+            <span class="product__icon" aria-hidden="true">&#128663;</span>
+          </div>
+          <div class="product__body">
+            <div class="product__category">Decals</div>
+            <h3 class="product__title">Car Decal</h3>
+            <p class="product__tagline">"Be Kind. Be Safe."</p>
+            <p class="product__desc">Clean Saint Bernard silhouette decal. Weather-resistant, looks great everywhere.</p>
+            <div class="product__footer">
+              <div class="product__price">
+                <span class="product__price-amount">$2</span>
+              </div>
+              <button class="add-to-cart" onclick="Cart.add('decal', 'Car Decal', 2, '&#128663;')">
+                <span class="add-to-cart__icon" aria-hidden="true">+</span>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- MISSION BANNER -->
+    <div class="mission">
+      <div class="mission__icon" aria-hidden="true">&#10084;&#65039;</div>
+      <h2 class="mission__title">Every Purchase Gives Back</h2>
+      <p class="mission__text">
+        100% of profits go to local charities chosen by SimplyLouie members. You decide where the love goes.
+      </p>
+    </div>
+
+    <!-- SECTION: FEATURED -->
+    <section aria-labelledby="featured-title">
+      <div class="section-header">
+        <h2 class="section-header__title" id="featured-title">Make a Statement</h2>
+        <p class="section-header__desc">Bigger items for bigger hearts. Wear the movement proudly.</p>
+      </div>
+
+      <div class="products">
+        <!-- HOODIE (FEATURED) -->
+        <article class="product product--featured" data-product-id="hoodie">
+          <div class="product__image">
+            <span class="product__icon" aria-hidden="true">&#129509;</span>
+            <span class="product__badge">Best Seller</span>
+          </div>
+          <div class="product__body">
+            <div class="product__category">Apparel</div>
+            <h3 class="product__title">The Movement Hoodie</h3>
+            <p class="product__tagline">"The Movement Uniform"</p>
+            <p class="product__desc">
+              Soft, cozy, and unmistakably part of something bigger. Features a small Saint Bernard chest icon
+              and "People Over Profits" sleeve print. This isn't merch—it's how you show you belong.
+            </p>
+            <div class="product__variants" role="group" aria-label="Select color">
+              <button class="product__variant selected" onclick="selectVariant(this, 'hoodie')">Warm Tan</button>
+              <button class="product__variant" onclick="selectVariant(this, 'hoodie')">Charcoal</button>
+            </div>
+            <div class="product__footer">
+              <div class="product__price">
+                <span class="product__price-amount">$2</span>
+                <span class="product__price-note">movement pricing</span>
+              </div>
+              <button class="add-to-cart" onclick="Cart.add('hoodie', 'Movement Hoodie', 2, '&#129509;', getSelectedVariant('hoodie'))">
+                <span class="add-to-cart__icon" aria-hidden="true">+</span>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- CREATOR PACK -->
+        <article class="product product--featured" data-product-id="creator-pack">
+          <div class="product__image">
+            <span class="product__icon" aria-hidden="true">&#127873;</span>
+            <span class="product__badge">Bundle</span>
+          </div>
+          <div class="product__body">
+            <div class="product__category">Starter Kit</div>
+            <h3 class="product__title">Creator Pack</h3>
+            <p class="product__tagline">"Start the Movement in Your City"</p>
+            <p class="product__desc">
+              Everything you need to spread the message in your community. Perfect for students, creators,
+              and anyone ready to make a difference locally.
+            </p>
+            <div class="product__includes">
+              <div class="product__includes-title">This pack includes:</div>
+              Sticker Sheet (5 designs) • Wristband • 3 Movement Cards • QR Code Card • "Ask Me About LOUIE" Badge
+            </div>
+            <div class="product__footer">
+              <div class="product__price">
+                <span class="product__price-amount">$2</span>
+                <span class="product__price-note">5 items</span>
+              </div>
+              <button class="add-to-cart" onclick="Cart.add('creator-pack', 'Creator Pack', 2, '&#127873;')">
+                <span class="add-to-cart__icon" aria-hidden="true">+</span>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__logo" aria-hidden="true">&#128054;</div>
+    <p class="footer__tagline">SimplyLouie — Inspired by a rescue Saint Bernard. Built for everyone.</p>
+    <p class="footer__copy">&copy; 2026 SimplyLouie. People over profits. Change from the bottom up.</p>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cart-overlay" onclick="Cart.close()">
+    <aside class="cart-drawer" onclick="event.stopPropagation()" role="dialog" aria-label="Shopping cart">
+      <header class="cart__header">
+        <h2 class="cart__title">
+          <span aria-hidden="true">&#128722;</span>
+          Your Cart
+        </h2>
+        <button class="cart__close" onclick="Cart.close()" aria-label="Close cart">
+          &times;
+        </button>
+      </header>
+
+      <div class="cart__items" id="cart-items">
+        <!-- Cart items rendered here -->
+      </div>
+
+      <footer class="cart__footer" id="cart-footer" style="display: none;">
+        <div class="cart__total">
+          <span class="cart__total-label">Total</span>
+          <span class="cart__total-amount" id="cart-total">$0</span>
+        </div>
+        <p class="cart__message">
+          &#128151; Every dollar helps fund charities chosen by the community.
+        </p>
+        <button class="cart__checkout" onclick="Cart.checkout()">
+          <span aria-hidden="true">&#10084;&#65039;</span>
+          Checkout — Spread the Warmth
+        </button>
+      </footer>
+    </aside>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <span class="toast__icon" aria-hidden="true">&#10003;</span>
+    <span class="toast__text" id="toast-text">Added to cart!</span>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script src="api.js"></script>
+  <script>
+    // Apply theme
+    SimplyLouie.applyTheme();
+  </script>
+  <script>
+    /**
+     * SimplyLouie Merch Store
+     * Cart System & Interactions
+     */
+
+    const Cart = (function() {
+      'use strict';
+
+      // State
+      let items = [];
+      let isOpen = false;
+
+      // Elements
+      const overlay = document.getElementById('cart-overlay');
+      const itemsContainer = document.getElementById('cart-items');
+      const footer = document.getElementById('cart-footer');
+      const countEl = document.getElementById('cart-count');
+      const totalEl = document.getElementById('cart-total');
+
+      // Initialize from localStorage
+      function init() {
+        const saved = localStorage.getItem('simplylouie-cart');
+        if (saved) {
+          try {
+            items = JSON.parse(saved);
+            updateUI();
+          } catch (e) {
+            items = [];
+          }
+        }
+      }
+
+      // Save to localStorage
+      function save() {
+        localStorage.setItem('simplylouie-cart', JSON.stringify(items));
+      }
+
+      // Add item to cart
+      function add(id, name, price, icon, variant = null) {
+        // Check if item already exists (with same variant)
+        const existingIndex = items.findIndex(item =>
+          item.id === id && item.variant === variant
+        );
+
+        if (existingIndex > -1) {
+          items[existingIndex].qty++;
+        } else {
+          items.push({
+            id,
+            name,
+            price,
+            icon,
+            variant,
+            qty: 1
+          });
+        }
+
+        save();
+        updateUI();
+        showToast(`${name} added to cart!`);
+
+        // Animate button
+        const btn = event.currentTarget;
+        btn.classList.add('added');
+        btn.innerHTML = '<span class="add-to-cart__icon">&#10003;</span> Added!';
+        setTimeout(() => {
+          btn.classList.remove('added');
+          btn.innerHTML = '<span class="add-to-cart__icon">+</span> Add to Cart';
+        }, 1500);
+      }
+
+      // Remove item from cart
+      function remove(index) {
+        items.splice(index, 1);
+        save();
+        updateUI();
+      }
+
+      // Update quantity
+      function updateQty(index, delta) {
+        items[index].qty += delta;
+        if (items[index].qty <= 0) {
+          remove(index);
+        } else {
+          save();
+          updateUI();
+        }
+      }
+
+      // Calculate total
+      function getTotal() {
+        return items.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      }
+
+      // Get total item count
+      function getCount() {
+        return items.reduce((sum, item) => sum + item.qty, 0);
+      }
+
+      // Update UI
+      function updateUI() {
+        const count = getCount();
+        const total = getTotal();
+
+        // Update count badge
+        countEl.textContent = count;
+        countEl.classList.toggle('visible', count > 0);
+
+        // Update cart items
+        if (items.length === 0) {
+          itemsContainer.innerHTML = `
+            <div class="cart__empty">
+              <div class="cart__empty-icon">&#128054;</div>
+              <p class="cart__empty-text">Your cart is empty</p>
+              <p class="cart__empty-subtext">Add some warmth to get started!</p>
+            </div>
+          `;
+          footer.style.display = 'none';
+        } else {
+          itemsContainer.innerHTML = items.map((item, index) => `
+            <div class="cart-item">
+              <div class="cart-item__image">${item.icon}</div>
+              <div class="cart-item__details">
+                <div class="cart-item__name">${item.name}</div>
+                ${item.variant ? `<div class="cart-item__variant">${item.variant}</div>` : ''}
+                <div class="cart-item__bottom">
+                  <div class="cart-item__qty">
+                    <button class="cart-item__qty-btn" onclick="Cart.updateQty(${index}, -1)" aria-label="Decrease quantity">-</button>
+                    <span class="cart-item__qty-value">${item.qty}</span>
+                    <button class="cart-item__qty-btn" onclick="Cart.updateQty(${index}, 1)" aria-label="Increase quantity">+</button>
+                  </div>
+                  <span class="cart-item__price">$${item.price * item.qty}</span>
+                </div>
+              </div>
+            </div>
+          `).join('');
+          footer.style.display = 'block';
+          totalEl.textContent = `$${total}`;
+        }
+      }
+
+      // Toggle cart
+      function toggle() {
+        isOpen ? close() : open();
+      }
+
+      // Open cart
+      function open() {
+        isOpen = true;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      // Close cart
+      function close() {
+        isOpen = false;
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      // Checkout
+      function checkout() {
+        if (items.length === 0) return;
+
+        // In production, redirect to checkout page
+        showToast('Redirecting to checkout... &#128151;');
+        setTimeout(() => {
+          window.location.href = '/checkout.html';
+        }, 1000);
+      }
+
+      // Initialize on load
+      init();
+
+      // Public API
+      return {
+        add,
+        remove,
+        updateQty,
+        toggle,
+        open,
+        close,
+        checkout
+      };
+    })();
+
+    /**
+     * Variant Selection
+     */
+    function selectVariant(btn, productId) {
+      const product = document.querySelector(`[data-product-id="${productId}"]`);
+      const variants = product.querySelectorAll('.product__variant');
+      variants.forEach(v => v.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    function getSelectedVariant(productId) {
+      const product = document.querySelector(`[data-product-id="${productId}"]`);
+      const selected = product.querySelector('.product__variant.selected');
+      return selected ? selected.textContent : null;
+    }
+
+    /**
+     * Toast Notification
+     */
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.innerHTML = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    /**
+     * Keyboard Navigation
+     */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        Cart.close();
+      }
+    });
+  </script>
+</body>
+</html>

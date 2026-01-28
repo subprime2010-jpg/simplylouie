@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout – SimplyLouie</title>
+  <meta name="description" content="Complete your order and join the movement. Every purchase supports local charities." />
+
+  <style>
+    /* ============================================
+       SIMPLYLOUIE CHECKOUT PAGE
+       Warm, movement-aligned, accessible design
+       Mobile-first layout
+    ============================================ */
+
+    /* --- CSS VARIABLES --- */
+    :root {
+      /* Saint Bernard Palette */
+      --tan-light: #f5ebe0;
+      --tan: #d9b899;
+      --tan-dark: #c4a57b;
+      --brown-light: #8b7355;
+      --brown: #5a3e2b;
+      --brown-dark: #3d2a1d;
+      --cream: #faf8f5;
+      --white: #ffffff;
+      --charcoal: #2b2b2b;
+      --charcoal-light: #4a4a4a;
+
+      /* Accent & States */
+      --accent: #ff7a3d;
+      --accent-hover: #e86a2d;
+      --success: #4a9c6d;
+      --success-light: #e8f5e9;
+      --error: #d64545;
+      --error-light: #fdeaea;
+
+      /* Spacing */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+
+      /* Typography */
+      --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-md: 1rem;
+      --font-size-lg: 1.125rem;
+      --font-size-xl: 1.5rem;
+      --font-size-2xl: 2rem;
+
+      /* Layout */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(90, 62, 43, 0.08);
+      --shadow-md: 0 4px 16px rgba(90, 62, 43, 0.12);
+      --shadow-lg: 0 8px 32px rgba(90, 62, 43, 0.16);
+      --transition: 0.25s ease;
+    }
+
+    /* --- RESET --- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-size-md);
+      line-height: 1.6;
+      color: var(--charcoal);
+      background: var(--cream);
+      min-height: 100vh;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* --- HEADER --- */
+    .header {
+      background: var(--white);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header__inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .header__logo {
+      width: 36px;
+      height: 36px;
+      background: var(--tan);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .header__title {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .header__secure {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--font-size-sm);
+      color: var(--success);
+    }
+
+    .header__secure-icon {
+      font-size: 1rem;
+    }
+
+    /* --- MAIN LAYOUT --- */
+    .main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .checkout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    @media (min-width: 768px) {
+      .checkout {
+        grid-template-columns: 1fr 380px;
+        align-items: start;
+      }
+    }
+
+    /* --- SECTION STYLING --- */
+    .section {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--tan-light);
+    }
+
+    .section__number {
+      width: 32px;
+      height: 32px;
+      background: var(--tan);
+      color: var(--brown-dark);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: var(--font-size-sm);
+    }
+
+    .section__title {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    /* --- FORM STYLES --- */
+    .form-group {
+      margin-bottom: var(--space-lg);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    @media (min-width: 480px) {
+      .form-row--2 {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-row--3 {
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: var(--space-xs);
+      font-size: var(--font-size-sm);
+    }
+
+    .form-label--required::after {
+      content: ' *';
+      color: var(--error);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: var(--space-md);
+      border: 2px solid var(--tan-light);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-md);
+      color: var(--charcoal);
+      background: var(--white);
+      transition: var(--transition);
+    }
+
+    .form-input::placeholder {
+      color: var(--brown-light);
+      opacity: 0.7;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(255, 122, 61, 0.1);
+    }
+
+    .form-input.error {
+      border-color: var(--error);
+      background: var(--error-light);
+    }
+
+    .form-error {
+      color: var(--error);
+      font-size: var(--font-size-xs);
+      margin-top: var(--space-xs);
+      display: none;
+    }
+
+    .form-input.error + .form-error {
+      display: block;
+    }
+
+    .form-hint {
+      font-size: var(--font-size-xs);
+      color: var(--brown-light);
+      margin-top: var(--space-xs);
+    }
+
+    /* --- CARD INPUT --- */
+    .card-input-group {
+      background: var(--tan-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+    }
+
+    .card-input-row {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .card-input-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .card-input {
+      flex: 1;
+      padding: var(--space-md);
+      border: 2px solid var(--white);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-md);
+      background: var(--white);
+      transition: var(--transition);
+    }
+
+    .card-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .card-input--number {
+      flex: 2;
+    }
+
+    .card-icons {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+      opacity: 0.6;
+      font-size: 1.5rem;
+    }
+
+    /* --- ORDER SUMMARY --- */
+    .summary {
+      position: sticky;
+      top: 80px;
+    }
+
+    .summary__items {
+      margin-bottom: var(--space-lg);
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--tan-light);
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-item__image {
+      width: 56px;
+      height: 56px;
+      background: var(--tan-light);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .summary-item__details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .summary-item__name {
+      font-weight: 600;
+      color: var(--brown);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .summary-item__variant {
+      font-size: var(--font-size-xs);
+      color: var(--brown-light);
+    }
+
+    .summary-item__qty {
+      font-size: var(--font-size-sm);
+      color: var(--charcoal-light);
+    }
+
+    .summary-item__price {
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .summary__divider {
+      height: 1px;
+      background: var(--tan-light);
+      margin: var(--space-md) 0;
+    }
+
+    .summary__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) 0;
+      font-size: var(--font-size-sm);
+      color: var(--charcoal-light);
+    }
+
+    .summary__row--total {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      color: var(--brown);
+      padding: var(--space-md) 0;
+      border-top: 2px solid var(--tan);
+      margin-top: var(--space-sm);
+    }
+
+    .summary__row--total .summary__value {
+      color: var(--accent);
+      font-size: var(--font-size-xl);
+    }
+
+    /* --- REASSURANCE --- */
+    .reassurance {
+      background: var(--success-light);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+      text-align: center;
+    }
+
+    .reassurance__icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .reassurance__title {
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: var(--space-xs);
+    }
+
+    .reassurance__text {
+      font-size: var(--font-size-sm);
+      color: var(--charcoal-light);
+    }
+
+    /* --- PAY BUTTON --- */
+    .pay-btn {
+      width: 100%;
+      background: var(--accent);
+      color: var(--white);
+      padding: var(--space-lg);
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: var(--font-size-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pay-btn:hover:not(:disabled) {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .pay-btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .pay-btn:disabled {
+      background: var(--tan);
+      cursor: not-allowed;
+    }
+
+    .pay-btn__icon {
+      font-size: 1.3rem;
+    }
+
+    .pay-btn__loading {
+      display: none;
+    }
+
+    .pay-btn.loading .pay-btn__text {
+      visibility: hidden;
+    }
+
+    .pay-btn.loading .pay-btn__loading {
+      display: block;
+      position: absolute;
+    }
+
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: var(--white);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* --- TRUST BADGES --- */
+    .trust {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--tan-light);
+    }
+
+    .trust__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--font-size-xs);
+      color: var(--brown-light);
+      text-align: center;
+    }
+
+    .trust__icon {
+      font-size: 1.5rem;
+    }
+
+    /* --- EMPTY CART --- */
+    .empty-cart {
+      text-align: center;
+      padding: var(--space-2xl);
+    }
+
+    .empty-cart__icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-md);
+      opacity: 0.5;
+    }
+
+    .empty-cart__title {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: var(--space-sm);
+    }
+
+    .empty-cart__text {
+      color: var(--brown-light);
+      margin-bottom: var(--space-lg);
+    }
+
+    .empty-cart__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--brown);
+      color: var(--white);
+      padding: var(--space-md) var(--space-xl);
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .empty-cart__btn:hover {
+      background: var(--accent);
+    }
+
+    /* --- BACK LINK --- */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: var(--brown);
+      font-weight: 600;
+      margin-bottom: var(--space-lg);
+      transition: var(--transition);
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      text-align: center;
+      padding: var(--space-xl) var(--space-lg);
+      color: var(--brown-light);
+      font-size: var(--font-size-sm);
+    }
+
+    .footer__text {
+      margin-bottom: var(--space-xs);
+    }
+
+    .footer__brand {
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    /* --- TOAST --- */
+    .toast {
+      position: fixed;
+      bottom: var(--space-lg);
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--error);
+      color: var(--white);
+      padding: var(--space-md) var(--space-xl);
+      border-radius: var(--radius-full);
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 300;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast.success {
+      background: var(--success);
+    }
+
+    /* --- ACCESSIBILITY --- */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* --- REDUCED MOTION --- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header__inner">
+      <a href="/" class="header__brand">
+        <div class="header__logo" aria-hidden="true">&#128054;</div>
+        <span class="header__title">SimplyLouie</span>
+      </a>
+      <div class="header__secure">
+        <span class="header__secure-icon" aria-hidden="true">&#128274;</span>
+        <span>Secure Checkout</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main" id="main-content">
+    <!-- Back Link -->
+    <a href="/merch-full.html" class="back-link">
+      <span aria-hidden="true">&larr;</span>
+      Back to Store
+    </a>
+
+    <!-- Empty Cart State (hidden by default) -->
+    <div class="empty-cart" id="empty-cart" style="display: none;">
+      <div class="empty-cart__icon" aria-hidden="true">&#128722;</div>
+      <h1 class="empty-cart__title">Your cart is empty</h1>
+      <p class="empty-cart__text">Looks like you haven't added any items yet. Let's fix that!</p>
+      <a href="/merch-full.html" class="empty-cart__btn">
+        <span aria-hidden="true">&#128054;</span>
+        Browse Movement Gear
+      </a>
+    </div>
+
+    <!-- Checkout Form (shown when cart has items) -->
+    <form class="checkout" id="checkout-form" onsubmit="Checkout.submit(event)">
+      <!-- LEFT: Form Sections -->
+      <div class="checkout__form">
+        <!-- Contact Information -->
+        <section class="section">
+          <header class="section__header">
+            <span class="section__number">1</span>
+            <h2 class="section__title">Contact Information</h2>
+          </header>
+
+          <div class="form-row form-row--2">
+            <div class="form-group">
+              <label for="firstName" class="form-label form-label--required">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                class="form-input"
+                placeholder="Your first name"
+                required
+                autocomplete="given-name"
+              />
+              <span class="form-error">Please enter your first name</span>
+            </div>
+            <div class="form-group">
+              <label for="lastName" class="form-label form-label--required">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                class="form-input"
+                placeholder="Your last name"
+                required
+                autocomplete="family-name"
+              />
+              <span class="form-error">Please enter your last name</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label form-label--required">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="you@example.com"
+              required
+              autocomplete="email"
+            />
+            <span class="form-error">Please enter a valid email</span>
+            <p class="form-hint">We'll send your order confirmation here.</p>
+          </div>
+        </section>
+
+        <!-- Shipping Address -->
+        <section class="section">
+          <header class="section__header">
+            <span class="section__number">2</span>
+            <h2 class="section__title">Shipping Address</h2>
+          </header>
+
+          <div class="form-group">
+            <label for="address" class="form-label form-label--required">Street Address</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              class="form-input"
+              placeholder="123 Main Street"
+              required
+              autocomplete="street-address"
+            />
+            <span class="form-error">Please enter your address</span>
+          </div>
+
+          <div class="form-group">
+            <label for="apartment" class="form-label">Apartment, suite, etc. (optional)</label>
+            <input
+              type="text"
+              id="apartment"
+              name="apartment"
+              class="form-input"
+              placeholder="Apt 4B"
+              autocomplete="address-line2"
+            />
+          </div>
+
+          <div class="form-row form-row--3">
+            <div class="form-group">
+              <label for="city" class="form-label form-label--required">City</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                class="form-input"
+                placeholder="City"
+                required
+                autocomplete="address-level2"
+              />
+              <span class="form-error">Please enter your city</span>
+            </div>
+            <div class="form-group">
+              <label for="state" class="form-label form-label--required">State</label>
+              <input
+                type="text"
+                id="state"
+                name="state"
+                class="form-input"
+                placeholder="State"
+                required
+                autocomplete="address-level1"
+              />
+            </div>
+            <div class="form-group">
+              <label for="zip" class="form-label form-label--required">ZIP</label>
+              <input
+                type="text"
+                id="zip"
+                name="zip"
+                class="form-input"
+                placeholder="12345"
+                required
+                autocomplete="postal-code"
+                pattern="[0-9]{5}"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="country" class="form-label form-label--required">Country</label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              class="form-input"
+              placeholder="Country"
+              required
+              autocomplete="country-name"
+            />
+          </div>
+        </section>
+
+        <!-- Payment -->
+        <section class="section">
+          <header class="section__header">
+            <span class="section__number">3</span>
+            <h2 class="section__title">Payment</h2>
+          </header>
+
+          <div class="form-group">
+            <label for="cardName" class="form-label form-label--required">Name on Card</label>
+            <input
+              type="text"
+              id="cardName"
+              name="cardName"
+              class="form-input"
+              placeholder="Name as it appears on card"
+              required
+              autocomplete="cc-name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label form-label--required">Card Details</label>
+            <div class="card-input-group">
+              <div class="card-input-row">
+                <input
+                  type="text"
+                  id="cardNumber"
+                  name="cardNumber"
+                  class="card-input card-input--number"
+                  placeholder="1234 5678 9012 3456"
+                  required
+                  autocomplete="cc-number"
+                  maxlength="19"
+                  inputmode="numeric"
+                  oninput="Checkout.formatCard(this)"
+                />
+              </div>
+              <div class="card-input-row">
+                <input
+                  type="text"
+                  id="cardExpiry"
+                  name="cardExpiry"
+                  class="card-input"
+                  placeholder="MM/YY"
+                  required
+                  autocomplete="cc-exp"
+                  maxlength="5"
+                  inputmode="numeric"
+                  oninput="Checkout.formatExpiry(this)"
+                />
+                <input
+                  type="text"
+                  id="cardCVC"
+                  name="cardCVC"
+                  class="card-input"
+                  placeholder="CVC"
+                  required
+                  autocomplete="cc-csc"
+                  maxlength="4"
+                  inputmode="numeric"
+                />
+              </div>
+              <div class="card-icons" aria-hidden="true">
+                <span>&#128179;</span>
+                <span title="Visa">&#127380;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reassurance Message -->
+          <div class="reassurance">
+            <div class="reassurance__icon" aria-hidden="true">&#128154;</div>
+            <p class="reassurance__title">You're safe here.</p>
+            <p class="reassurance__text">We'll take good care of this. Your information is encrypted and secure.</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT: Order Summary -->
+      <aside class="section summary" aria-labelledby="summary-title">
+        <header class="section__header">
+          <span class="section__number" aria-hidden="true">&#128722;</span>
+          <h2 class="section__title" id="summary-title">Order Summary</h2>
+        </header>
+
+        <!-- Cart Items -->
+        <div class="summary__items" id="summary-items">
+          <!-- Items rendered by JS -->
+        </div>
+
+        <!-- Totals -->
+        <div class="summary__divider"></div>
+
+        <div class="summary__row">
+          <span>Subtotal</span>
+          <span id="subtotal">$0</span>
+        </div>
+        <div class="summary__row">
+          <span>Shipping</span>
+          <span id="shipping">Free</span>
+        </div>
+        <div class="summary__row">
+          <span>Tax (estimated)</span>
+          <span id="tax">$0.00</span>
+        </div>
+        <div class="summary__row summary__row--total">
+          <span>Total</span>
+          <span class="summary__value" id="total">$0</span>
+        </div>
+
+        <!-- Pay Button -->
+        <button type="submit" class="pay-btn" id="pay-btn">
+          <span class="pay-btn__icon" aria-hidden="true">&#128154;</span>
+          <span class="pay-btn__text">Pay Now</span>
+          <span class="pay-btn__loading">
+            <div class="spinner"></div>
+          </span>
+        </button>
+
+        <!-- Trust Badges -->
+        <div class="trust">
+          <div class="trust__item">
+            <span class="trust__icon" aria-hidden="true">&#128274;</span>
+            <span>Secure<br/>Payment</span>
+          </div>
+          <div class="trust__item">
+            <span class="trust__icon" aria-hidden="true">&#128230;</span>
+            <span>Free<br/>Shipping</span>
+          </div>
+          <div class="trust__item">
+            <span class="trust__icon" aria-hidden="true">&#10084;&#65039;</span>
+            <span>Supports<br/>Charity</span>
+          </div>
+        </div>
+      </aside>
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer__text">
+      Every purchase helps fund local charities chosen by the community.
+    </p>
+    <p>
+      <span class="footer__brand">&#128054; SimplyLouie</span> — People over profits.
+    </p>
+  </footer>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="alert" aria-live="polite">
+    <span id="toast-text">Error message</span>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script src="api.js"></script>
+  <script>
+    // Apply theme
+    SimplyLouie.applyTheme();
+  </script>
+  <script>
+    /**
+     * SimplyLouie Checkout
+     * Clean, warm, movement-aligned checkout experience
+     */
+
+    const Checkout = (function() {
+      'use strict';
+
+      // State
+      let cart = [];
+      const TAX_RATE = 0.08; // 8% estimated tax
+
+      // Elements
+      const form = document.getElementById('checkout-form');
+      const emptyCart = document.getElementById('empty-cart');
+      const summaryItems = document.getElementById('summary-items');
+      const subtotalEl = document.getElementById('subtotal');
+      const taxEl = document.getElementById('tax');
+      const totalEl = document.getElementById('total');
+      const payBtn = document.getElementById('pay-btn');
+
+      // Initialize
+      function init() {
+        loadCart();
+        if (cart.length === 0) {
+          showEmptyState();
+        } else {
+          renderSummary();
+        }
+      }
+
+      // Load cart from localStorage
+      function loadCart() {
+        const saved = localStorage.getItem('simplylouie-cart');
+        if (saved) {
+          try {
+            cart = JSON.parse(saved);
+          } catch (e) {
+            cart = [];
+          }
+        }
+      }
+
+      // Show empty cart state
+      function showEmptyState() {
+        form.style.display = 'none';
+        emptyCart.style.display = 'block';
+      }
+
+      // Render order summary
+      function renderSummary() {
+        // Render items
+        summaryItems.innerHTML = cart.map(item => `
+          <div class="summary-item">
+            <div class="summary-item__image">${item.icon || '&#128230;'}</div>
+            <div class="summary-item__details">
+              <div class="summary-item__name">${escapeHtml(item.name)}</div>
+              ${item.variant ? `<div class="summary-item__variant">${escapeHtml(item.variant)}</div>` : ''}
+              <div class="summary-item__qty">Qty: ${item.qty}</div>
+            </div>
+            <div class="summary-item__price">$${item.price * item.qty}</div>
+          </div>
+        `).join('');
+
+        // Calculate totals
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        const tax = Math.round(subtotal * TAX_RATE * 100) / 100;
+        const total = subtotal + tax;
+
+        subtotalEl.textContent = `$${subtotal}`;
+        taxEl.textContent = `$${tax.toFixed(2)}`;
+        totalEl.textContent = `$${total.toFixed(2)}`;
+      }
+
+      // Format card number
+      function formatCard(input) {
+        let value = input.value.replace(/\D/g, '');
+        value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+        input.value = value.substring(0, 19);
+      }
+
+      // Format expiry date
+      function formatExpiry(input) {
+        let value = input.value.replace(/\D/g, '');
+        if (value.length >= 2) {
+          value = value.substring(0, 2) + '/' + value.substring(2);
+        }
+        input.value = value.substring(0, 5);
+      }
+
+      // Validate form
+      function validateForm() {
+        let isValid = true;
+        const requiredFields = form.querySelectorAll('[required]');
+
+        requiredFields.forEach(field => {
+          field.classList.remove('error');
+
+          if (!field.value.trim()) {
+            field.classList.add('error');
+            isValid = false;
+          }
+
+          // Email validation
+          if (field.type === 'email' && field.value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(field.value)) {
+              field.classList.add('error');
+              isValid = false;
+            }
+          }
+        });
+
+        // Card number validation (simple)
+        const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+        if (cardNumber.length < 13 || cardNumber.length > 19) {
+          document.getElementById('cardNumber').classList.add('error');
+          isValid = false;
+        }
+
+        return isValid;
+      }
+
+      // Submit form
+      async function submit(event) {
+        event.preventDefault();
+
+        // Validate
+        if (!validateForm()) {
+          showToast('Please fill in all required fields correctly.', 'error');
+          // Scroll to first error
+          const firstError = form.querySelector('.error');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            firstError.focus();
+          }
+          return;
+        }
+
+        // Show loading state
+        payBtn.classList.add('loading');
+        payBtn.disabled = true;
+
+        // Simulate payment processing
+        try {
+          await new Promise(resolve => setTimeout(resolve, 2000));
+
+          // Clear cart
+          localStorage.removeItem('simplylouie-cart');
+
+          // Store order info for thank you page
+          const formData = new FormData(form);
+          const orderInfo = {
+            name: formData.get('firstName'),
+            email: formData.get('email'),
+            total: totalEl.textContent,
+            items: cart.length,
+            date: new Date().toISOString()
+          };
+          sessionStorage.setItem('simplylouie-order', JSON.stringify(orderInfo));
+
+          // Show success
+          showToast('Payment successful! Redirecting...', 'success');
+
+          // Redirect to thank you page
+          setTimeout(() => {
+            window.location.href = '/thank-you-full.html';
+          }, 1500);
+
+        } catch (error) {
+          showToast('Payment failed. Please try again.', 'error');
+          payBtn.classList.remove('loading');
+          payBtn.disabled = false;
+        }
+      }
+
+      // Show toast
+      function showToast(message, type = 'error') {
+        const toast = document.getElementById('toast');
+        const text = document.getElementById('toast-text');
+        text.textContent = message;
+        toast.className = 'toast show ' + type;
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+
+      // Escape HTML
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // Initialize on load
+      init();
+
+      // Public API
+      return {
+        submit,
+        formatCard,
+        formatExpiry
+      };
+    })();
+  </script>
+</body>
+</html>

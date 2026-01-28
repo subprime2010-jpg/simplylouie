@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Log In – SimplyLouie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --brown: #5a3e2b;
+      --tan: #d9b899;
+      --cream: #f7f3ee;
+      --accent: #ff7a3d;
+      --text: #2b2b2b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 1.5rem;
+    }
+
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    form {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      margin-top: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+      display: block;
+      background: var(--accent);
+      color: white;
+      padding: 0.9rem;
+      border-radius: 999px;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--brown);
+      font-size: 0.9rem;
+    }
+
+    .link {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--brown);
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <h1>Welcome Back</h1>
+    <p>Log in to continue your journey with the $2 movement.</p>
+
+    <form id="login-form">
+      <label>Email</label>
+      <input type="email" name="email" placeholder="you@example.com" required />
+
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Your password" required />
+
+      <p class="error" id="error-msg" style="color: #b33939; display: none; margin-bottom: 1rem;"></p>
+
+      <button class="btn-primary" type="submit" id="submit-btn">Log In</button>
+    </form>
+
+    <a href="/signup.html" class="link">Don't have an account? Join for $2/month</a>
+
+    <div class="footer">
+      SimplyLouie — tech for everyone, inspired by a rescue Saint Bernard.
+    </div>
+
+  </div>
+
+  <script src="api.js"></script>
+  <script>
+    // Redirect if already logged in
+    if (SimplyLouie.isLoggedIn()) {
+      window.location.href = '/superapp.html';
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const btn = document.getElementById('submit-btn');
+      const errorMsg = document.getElementById('error-msg');
+
+      btn.disabled = true;
+      btn.textContent = 'Logging in...';
+      errorMsg.style.display = 'none';
+
+      try {
+        await SimplyLouie.login(form.email.value, form.password.value);
+        window.location.href = '/superapp.html';
+      } catch (error) {
+        errorMsg.textContent = error.message;
+        errorMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Log In';
+      }
+    });
+  </script>
+</body>
+</html>

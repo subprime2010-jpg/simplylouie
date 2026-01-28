@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SimplyLouie – The $2 Movement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#5a3e2b" />
+  <meta name="description" content="Simple AI for real people. $2/month. People over profits." />
+
+  <style>
+    /* ============================================
+       SIMPLYLOUIE SUPER-APP
+       Single-Page Application
+       Warm, human, anti-corporate design
+       Mobile-first, production-ready
+    ============================================ */
+
+    /* --- CSS CUSTOM PROPERTIES (THEME SYSTEM) --- */
+    :root {
+      /* Saint Bernard Palette - Light Mode */
+      --color-brown: #5a3e2b;
+      --color-tan: #d9b899;
+      --color-cream: #f7f3ee;
+      --color-accent: #ff7a3d;
+      --color-text: #2b2b2b;
+      --color-text-muted: #6a6a6a;
+      --color-card: #ffffff;
+      --color-card-alt: #fdfaf7;
+      --color-border: #e0d6cc;
+      --color-shadow: rgba(90, 62, 43, 0.08);
+      --color-overlay: rgba(0, 0, 0, 0.5);
+      --color-danger: #b33939;
+      --color-success: #2d8a4e;
+
+      /* Spacing */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+
+      /* Typography */
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-md: 1rem;
+      --font-size-lg: 1.25rem;
+      --font-size-xl: 1.5rem;
+      --font-size-2xl: 1.875rem;
+      --line-height: 1.6;
+      --font-weight-normal: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --font-weight-black: 800;
+
+      /* Borders & Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 999px;
+
+      /* Transitions */
+      --transition-fast: 150ms ease;
+      --transition-normal: 250ms ease;
+
+      /* Layout */
+      --nav-height: 56px;
+      --bottom-nav-height: 64px;
+      --max-width: 720px;
+    }
+
+    /* Dark Mode Theme */
+    :root.dark {
+      --color-brown: #f5e0c8;
+      --color-tan: #8a6a4b;
+      --color-cream: #121212;
+      --color-accent: #ff8a50;
+      --color-text: #f5f5f5;
+      --color-text-muted: #a0a0a0;
+      --color-card: #1e1e1e;
+      --color-card-alt: #252525;
+      --color-border: #3a3a3a;
+      --color-shadow: rgba(0, 0, 0, 0.4);
+      --color-overlay: rgba(0, 0, 0, 0.7);
+    }
+
+    /* --- GLOBAL RESET --- */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-size-md);
+      line-height: var(--line-height);
+      color: var(--color-text);
+      background: var(--color-cream);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* --- TYPOGRAPHY --- */
+    h1, h2, h3, h4 {
+      font-weight: var(--font-weight-bold);
+      color: var(--color-brown);
+      line-height: 1.3;
+    }
+
+    h1 { font-size: var(--font-size-2xl); }
+    h2 { font-size: var(--font-size-lg); }
+    h3 { font-size: var(--font-size-md); }
+
+    p {
+      margin-bottom: var(--space-md);
+    }
+
+    small {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+    }
+
+    strong {
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* --- TOP NAVIGATION --- */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: var(--color-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-md);
+      box-shadow: 0 1px 3px var(--color-shadow);
+      z-index: 100;
+      transition: background-color var(--transition-normal);
+    }
+
+    .top-nav__brand {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-black);
+      color: var(--color-brown);
+    }
+
+    .top-nav__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-border);
+      background: transparent;
+      color: var(--color-brown);
+      font-size: var(--font-size-lg);
+      transition: all var(--transition-fast);
+    }
+
+    .theme-toggle:hover {
+      background: var(--color-card-alt);
+    }
+
+    .theme-toggle__icon--dark { display: block; }
+    .theme-toggle__icon--light { display: none; }
+
+    :root.dark .theme-toggle__icon--dark { display: none; }
+    :root.dark .theme-toggle__icon--light { display: block; }
+
+    /* --- MAIN CONTENT AREA --- */
+    .main-content {
+      flex: 1;
+      margin-top: var(--nav-height);
+      margin-bottom: var(--bottom-nav-height);
+      padding: var(--space-md);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .main-content__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* --- SCREEN MANAGEMENT --- */
+    .screen {
+      display: none;
+      animation: fadeIn var(--transition-normal);
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- CARDS --- */
+    .card {
+      background: var(--color-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      box-shadow: 0 2px 8px var(--color-shadow);
+      transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
+    }
+
+    .card--alt {
+      background: var(--color-card-alt);
+    }
+
+    .card__header {
+      margin-bottom: var(--space-md);
+    }
+
+    .card__title {
+      margin-bottom: var(--space-xs);
+    }
+
+    .card__subtitle {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+    }
+
+    /* --- BUTTONS --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .btn--primary {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    .btn--primary:hover {
+      background: #e86a2d;
+      transform: translateY(-1px);
+    }
+
+    .btn--secondary {
+      background: var(--color-brown);
+      color: white;
+    }
+
+    .btn--secondary:hover {
+      opacity: 0.9;
+    }
+
+    .btn--danger {
+      background: var(--color-danger);
+      color: white;
+    }
+
+    .btn--danger:hover {
+      background: #9a2f2f;
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--color-brown);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn--ghost:hover {
+      background: var(--color-card-alt);
+    }
+
+    .btn--block {
+      width: 100%;
+    }
+
+    .btn--icon {
+      background: none;
+      border: none;
+      padding: var(--space-sm);
+      color: var(--color-brown);
+      font-size: var(--font-size-md);
+    }
+
+    /* --- FORM ELEMENTS --- */
+    .form-group {
+      margin-bottom: var(--space-md);
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: var(--space-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-brown);
+      font-size: var(--font-size-sm);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 0.875rem var(--space-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-md);
+      font-family: inherit;
+      background: transparent;
+      color: var(--color-text);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(255, 122, 61, 0.15);
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    /* --- BOTTOM NAVIGATION --- */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--bottom-nav-height);
+      background: var(--color-card);
+      display: flex;
+      align-items: stretch;
+      box-shadow: 0 -2px 8px var(--color-shadow);
+      z-index: 100;
+      padding-bottom: env(safe-area-inset-bottom);
+      transition: background-color var(--transition-normal);
+    }
+
+    .bottom-nav__item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      transition: color var(--transition-fast);
+      padding: var(--space-sm) 0;
+    }
+
+    .bottom-nav__item:hover {
+      color: var(--color-brown);
+    }
+
+    .bottom-nav__item.active {
+      color: var(--color-accent);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .bottom-nav__icon {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    /* --- MODAL --- */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: var(--color-overlay);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+      z-index: 200;
+      animation: fadeIn var(--transition-fast);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal__content {
+      background: var(--color-card);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      width: 100%;
+      max-width: 400px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 32px var(--color-shadow);
+      animation: slideUp var(--transition-normal);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal__header {
+      margin-bottom: var(--space-md);
+    }
+
+    .modal__title {
+      font-size: var(--font-size-xl);
+    }
+
+    .modal__close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+    }
+
+    /* --- FEED POST --- */
+    .post {
+      background: var(--color-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      box-shadow: 0 2px 8px var(--color-shadow);
+      transition: background-color var(--transition-normal);
+    }
+
+    .post__header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+      cursor: pointer;
+    }
+
+    .post__avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      background: var(--color-tan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-card);
+      font-size: var(--font-size-lg);
+      flex-shrink: 0;
+    }
+
+    .post__meta {
+      flex: 1;
+    }
+
+    .post__author {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-brown);
+    }
+
+    .post__location {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+    }
+
+    .post__time {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
+
+    .post__content {
+      font-size: var(--font-size-md);
+      line-height: 1.5;
+      margin-bottom: var(--space-md);
+    }
+
+    .post__actions {
+      display: flex;
+      gap: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .post__action {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .post__action:hover {
+      background: var(--color-card-alt);
+      color: var(--color-brown);
+    }
+
+    .post__action.liked {
+      color: var(--color-danger);
+    }
+
+    .post__action-icon {
+      font-size: 1.1rem;
+    }
+
+    /* --- COMMENTS --- */
+    .comments {
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+      display: none;
+    }
+
+    .comments.open {
+      display: block;
+    }
+
+    .comments__list {
+      margin-bottom: var(--space-md);
+    }
+
+    .comment {
+      display: flex;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
+    }
+
+    .comment__avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: var(--color-tan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-card);
+      flex-shrink: 0;
+    }
+
+    .comment__body {
+      flex: 1;
+      background: var(--color-card-alt);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-md);
+    }
+
+    .comment__author {
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-sm);
+      color: var(--color-brown);
+    }
+
+    .comment__text {
+      font-size: var(--font-size-sm);
+      margin-bottom: 0;
+    }
+
+    .comments__form {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .comments__input {
+      flex: 1;
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-sm);
+      background: transparent;
+      color: var(--color-text);
+    }
+
+    .comments__submit {
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    /* --- QUICK ACTIONS GRID --- */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .quick-action {
+      background: var(--color-card);
+      border-radius: var(--radius-md);
+      padding: var(--space-lg);
+      text-align: center;
+      box-shadow: 0 2px 8px var(--color-shadow);
+      transition: all var(--transition-fast);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .quick-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px var(--color-shadow);
+    }
+
+    .quick-action__icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .quick-action__title {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-brown);
+      margin-bottom: var(--space-xs);
+    }
+
+    .quick-action__desc {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      margin-bottom: 0;
+    }
+
+    /* --- SETTINGS SECTIONS --- */
+    .settings-section {
+      margin-bottom: var(--space-lg);
+    }
+
+    .settings-section__title {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-sm);
+      padding-left: var(--space-sm);
+    }
+
+    /* --- BADGE --- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .badge--success {
+      background: rgba(45, 138, 78, 0.15);
+      color: var(--color-success);
+    }
+
+    .badge--accent {
+      background: rgba(255, 122, 61, 0.15);
+      color: var(--color-accent);
+    }
+
+    /* --- TOAST NOTIFICATIONS --- */
+    .toast-container {
+      position: fixed;
+      top: calc(var(--nav-height) + var(--space-md));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .toast {
+      background: var(--color-card);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 16px var(--color-shadow);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      animation: slideDown var(--transition-normal);
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .toast--success { border-left: 4px solid var(--color-success); }
+    .toast--error { border-left: 4px solid var(--color-danger); }
+
+    /* --- LOADING SPINNER --- */
+    .spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* --- EMPTY STATE --- */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-xl);
+      color: var(--color-text-muted);
+    }
+
+    .empty-state__icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-md);
+      opacity: 0.5;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (min-width: 768px) {
+      .bottom-nav {
+        max-width: var(--max-width);
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      }
+
+      .quick-actions {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* --- UTILITY CLASSES --- */
+    .text-center { text-align: center; }
+    .text-muted { color: var(--color-text-muted); }
+    .mt-sm { margin-top: var(--space-sm); }
+    .mt-md { margin-top: var(--space-md); }
+    .mt-lg { margin-top: var(--space-lg); }
+    .mb-0 { margin-bottom: 0; }
+    .mb-sm { margin-bottom: var(--space-sm); }
+    .mb-md { margin-bottom: var(--space-md); }
+  </style>
+</head>
+
+<body>
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="top-nav">
+    <div class="top-nav__brand">SimplyLouie</div>
+    <div class="top-nav__actions">
+      <button class="theme-toggle" onclick="App.toggleTheme()" aria-label="Toggle theme">
+        <span class="theme-toggle__icon--dark">&#9790;</span>
+        <span class="theme-toggle__icon--light">&#9788;</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="main-content">
+    <div class="main-content__inner">
+
+      <!-- ========== DASHBOARD SCREEN ========== -->
+      <section id="screen-dashboard" class="screen active">
+
+        <!-- Welcome Card -->
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Welcome back!</h2>
+            <p class="card__subtitle">Simple AI for real people. What can we help with today?</p>
+          </div>
+
+          <form id="ask-form" onsubmit="App.handleAsk(event)">
+            <div class="form-group mb-0">
+              <textarea
+                id="ask-input"
+                class="form-textarea"
+                placeholder="Ask SimplyLouie anything... homework, business ideas, writing help, translations..."
+                rows="3"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block mt-md">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- AI Response Card (hidden by default) -->
+        <div id="ai-response" class="card" style="display: none;">
+          <div class="card__header">
+            <h3 class="card__title">SimplyLouie says:</h3>
+          </div>
+          <div id="ai-response-content"></div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <a href="charity.html" class="quick-action">
+            <div class="quick-action__icon">&#10084;</div>
+            <div class="quick-action__title">Charity Vote</div>
+            <p class="quick-action__desc">Choose where we give</p>
+          </a>
+          <a href="merch.html" class="quick-action">
+            <div class="quick-action__icon">&#128085;</div>
+            <div class="quick-action__title">Movement Gear</div>
+            <p class="quick-action__desc">Shop & support</p>
+          </a>
+        </div>
+
+        <!-- Movement Stats -->
+        <div class="card card--alt">
+          <h3 class="mb-sm">The $2 Movement</h3>
+          <p class="text-muted mb-sm">You're part of something real.</p>
+          <div style="display: flex; gap: var(--space-lg); flex-wrap: wrap;">
+            <div>
+              <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-accent);">12,847</div>
+              <div class="text-muted" style="font-size: var(--font-size-sm);">Members worldwide</div>
+            </div>
+            <div>
+              <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-accent);">$4,230</div>
+              <div class="text-muted" style="font-size: var(--font-size-sm);">Donated this month</div>
+            </div>
+            <div>
+              <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-accent);">5</div>
+              <div class="text-muted" style="font-size: var(--font-size-sm);">Countries served</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== COMMUNITY SCREEN ========== -->
+      <section id="screen-community" class="screen">
+
+        <!-- Create Post -->
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title">Share with the community</h2>
+            <p class="card__subtitle">Your story might help someone else.</p>
+          </div>
+
+          <form id="post-form" onsubmit="App.handlePost(event)">
+            <div class="form-group mb-0">
+              <textarea
+                id="post-input"
+                class="form-textarea"
+                placeholder="Share a win, a struggle, a question..."
+                rows="3"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary mt-md">
+              Post to Community
+            </button>
+          </form>
+        </div>
+
+        <!-- Feed -->
+        <div id="feed"></div>
+
+      </section>
+
+      <!-- ========== SETTINGS SCREEN ========== -->
+      <section id="screen-settings" class="screen">
+
+        <!-- Account Section -->
+        <div class="settings-section">
+          <h3 class="settings-section__title">Account</h3>
+          <div class="card">
+            <form id="account-form" onsubmit="App.handleAccountUpdate(event)">
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" id="settings-email" placeholder="you@example.com" value="user@example.com" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">New Password</label>
+                <input type="password" class="form-input" id="settings-password" placeholder="Leave blank to keep current" />
+              </div>
+              <button type="submit" class="btn btn--primary">Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Billing Section -->
+        <div class="settings-section">
+          <h3 class="settings-section__title">Billing</h3>
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md);">
+              <div>
+                <strong>Your Plan</strong>
+                <p class="text-muted mb-0">SimplyLouie Movement</p>
+              </div>
+              <span class="badge badge--success">$2/month</span>
+            </div>
+            <form id="billing-form" onsubmit="App.handleBillingUpdate(event)">
+              <div class="form-group">
+                <label class="form-label">Update Card</label>
+                <input type="text" class="form-input" id="settings-card" placeholder="**** **** **** 4242" />
+              </div>
+              <button type="submit" class="btn btn--ghost">Update Payment Method</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Preferences Section -->
+        <div class="settings-section">
+          <h3 class="settings-section__title">Preferences</h3>
+          <div class="card">
+            <div class="form-group">
+              <label class="form-label">Your Country</label>
+              <input type="text" class="form-input" id="settings-country" placeholder="Nigeria, Philippines, Kenya..." value="Kenya" />
+            </div>
+            <div class="form-group mb-0">
+              <label class="form-label">Favorite Charity Category</label>
+              <input type="text" class="form-input" id="settings-charity" placeholder="Education, health, food..." value="Education" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="settings-section">
+          <h3 class="settings-section__title">Subscription</h3>
+          <div class="card">
+            <p class="mb-md">If you ever need to leave, you can cancel anytime. No pressure. No tricks.</p>
+            <button class="btn btn--danger" onclick="App.showCancelModal()">Cancel Subscription</button>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-lg text-muted" style="font-size: var(--font-size-sm);">
+          <p class="mb-sm">SimplyLouie v1.0</p>
+          <p class="mb-0">People over profits. Change from the bottom up.</p>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==================== BOTTOM NAVIGATION ==================== -->
+  <nav class="bottom-nav">
+    <button class="bottom-nav__item active" onclick="App.navigate('dashboard')" data-screen="dashboard">
+      <span class="bottom-nav__icon">&#127968;</span>
+      <span>Home</span>
+    </button>
+    <button class="bottom-nav__item" onclick="App.navigate('community')" data-screen="community">
+      <span class="bottom-nav__icon">&#128101;</span>
+      <span>Community</span>
+    </button>
+    <button class="bottom-nav__item" onclick="App.navigate('settings')" data-screen="settings">
+      <span class="bottom-nav__icon">&#9881;</span>
+      <span>Settings</span>
+    </button>
+  </nav>
+
+  <!-- ==================== PROFILE MODAL ==================== -->
+  <div id="profile-modal" class="modal" onclick="App.closeProfileModal(event)">
+    <div class="modal__content" onclick="event.stopPropagation()">
+      <div class="modal__header">
+        <h2 class="modal__title" id="profile-name"></h2>
+        <p class="text-muted" id="profile-location"></p>
+      </div>
+      <p id="profile-bio"></p>
+      <div id="profile-stats" style="display: flex; gap: var(--space-lg); margin-bottom: var(--space-md);">
+        <div>
+          <strong id="profile-posts">0</strong>
+          <span class="text-muted"> posts</span>
+        </div>
+        <div>
+          <strong id="profile-likes">0</strong>
+          <span class="text-muted"> likes received</span>
+        </div>
+      </div>
+      <button class="btn btn--primary btn--block" onclick="App.closeProfileModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- ==================== CANCEL MODAL ==================== -->
+  <div id="cancel-modal" class="modal" onclick="App.closeCancelModal(event)">
+    <div class="modal__content" onclick="event.stopPropagation()">
+      <div class="modal__header text-center">
+        <div style="font-size: 3rem; margin-bottom: var(--space-sm);">&#128546;</div>
+        <h2 class="modal__title">We're sad to see you go</h2>
+        <p class="text-muted">Are you sure you want to cancel?</p>
+      </div>
+      <p>You'll lose access to:</p>
+      <ul style="margin: var(--space-md) 0; padding-left: var(--space-lg);">
+        <li>All AI tools</li>
+        <li>Community features</li>
+        <li>Charity voting</li>
+        <li>Movement gear discounts</li>
+      </ul>
+      <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-lg);">
+        <button class="btn btn--primary" style="flex: 1;" onclick="App.closeCancelModal()">Keep Subscription</button>
+        <button class="btn btn--danger" style="flex: 1;" onclick="App.confirmCancel()">Yes, Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST CONTAINER ==================== -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script src="api.js"></script>
+  <script>
+    /**
+     * SimplyLouie Super-App
+     * Connected to real backend API
+     */
+    const App = (function() {
+      'use strict';
+
+      // ============ STATE ============
+      const state = {
+        currentScreen: 'dashboard',
+        user: null,
+        posts: [],
+        postsLoaded: false
+      };
+
+      // ============ INITIALIZATION ============
+      async function init() {
+        // Auth guard
+        if (!SimplyLouie.requireAuth()) return;
+
+        // Apply theme
+        SimplyLouie.applyTheme();
+
+        // Load user
+        try {
+          state.user = await SimplyLouie.getProfile();
+          updateUserDisplay();
+        } catch (error) {
+          console.error('Failed to load user:', error);
+          window.location.href = '/login.html';
+          return;
+        }
+
+        // Connect realtime
+        SimplyLouie.connectRealtime({
+          onMessage: handleRealtimeMessage
+        });
+
+        console.log('SimplyLouie Super-App initialized');
+      }
+
+      function updateUserDisplay() {
+        if (!state.user) return;
+        document.getElementById('settings-email').value = state.user.email || '';
+        document.getElementById('settings-country').value = state.user.country || '';
+      }
+
+      // ============ THEME SYSTEM ============
+      async function toggleTheme() {
+        const currentTheme = localStorage.getItem('simplylouie_theme') || 'light';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+        try {
+          await SimplyLouie.updateTheme(newTheme);
+          showToast(newTheme === 'dark' ? 'Dark mode activated' : 'Light mode activated', 'success');
+        } catch (error) {
+          showToast('Failed to update theme', 'error');
+        }
+      }
+
+      // ============ NAVIGATION ============
+      function navigate(screen) {
+        state.currentScreen = screen;
+
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-' + screen).classList.add('active');
+
+        document.querySelectorAll('.bottom-nav__item').forEach(item => {
+          item.classList.toggle('active', item.dataset.screen === screen);
+        });
+
+        document.querySelector('.main-content').scrollTop = 0;
+
+        // Load posts when navigating to community
+        if (screen === 'community' && !state.postsLoaded) {
+          loadPosts();
+        }
+      }
+
+      // ============ ASK AI ============
+      function handleAsk(event) {
+        event.preventDefault();
+        const input = document.getElementById('ask-input');
+        const question = input.value.trim();
+
+        if (!question) return;
+
+        const responseCard = document.getElementById('ai-response');
+        const responseContent = document.getElementById('ai-response-content');
+        responseCard.style.display = 'block';
+        responseContent.innerHTML = '<div class="spinner" style="margin: 0 auto;"></div>';
+
+        setTimeout(function() {
+          const responses = [
+            'Great question! Here is what I can help you with:\n\nLet me break this down for you in simple terms...',
+            'I understand your question. Here is my suggestion: Start with the basics and build from there.',
+            'Thanks for asking! Based on what you have shared, I would recommend focusing on the most important parts first.'
+          ];
+          var response = responses[Math.floor(Math.random() * responses.length)];
+          responseContent.innerHTML = '<p style="white-space: pre-line; margin-bottom: 0;">' + response + '</p>';
+          input.value = '';
+          showToast('Response generated!', 'success');
+        }, 1500);
+      }
+
+      // ============ COMMUNITY POSTS ============
+      async function loadPosts() {
+        const feed = document.getElementById('feed');
+        feed.innerHTML = '<div class="empty-state"><div class="spinner"></div><p>Loading posts...</p></div>';
+
+        try {
+          const data = await SimplyLouie.getPosts(20, 0);
+          state.posts = data.posts;
+          state.postsLoaded = true;
+          renderFeed();
+        } catch (error) {
+          feed.innerHTML = '<div class="empty-state"><p>Failed to load posts. Please try again.</p></div>';
+        }
+      }
+
+      async function handlePost(event) {
+        event.preventDefault();
+        const input = document.getElementById('post-input');
+        const content = input.value.trim();
+
+        if (!content) return;
+
+        try {
+          const newPost = await SimplyLouie.createPost(content);
+          state.posts.unshift(newPost);
+          input.value = '';
+          renderFeed();
+          showToast('Posted to community!', 'success');
+        } catch (error) {
+          showToast(error.message || 'Failed to create post', 'error');
+        }
+      }
+
+      function renderFeed() {
+        const feed = document.getElementById('feed');
+
+        if (state.posts.length === 0) {
+          feed.innerHTML = '<div class="empty-state"><div class="empty-state__icon">&#128172;</div><p>No posts yet. Be the first to share!</p></div>';
+          return;
+        }
+
+        feed.innerHTML = state.posts.map(function(post) {
+          var avatar = post.author ? post.author.name.charAt(0).toUpperCase() : '?';
+          var authorName = post.author ? post.author.name : 'Unknown';
+          var authorCountry = post.author ? (post.author.country || '') : '';
+
+          return '<article class="post" data-post-id="' + post.id + '">' +
+            '<div class="post__header" onclick="App.openProfile(\'' + post.id + '\')">' +
+              '<div class="post__avatar">' + avatar + '</div>' +
+              '<div class="post__meta">' +
+                '<div class="post__author">' + escapeHtml(authorName) + '</div>' +
+                '<div class="post__location">' + escapeHtml(authorCountry) + '</div>' +
+                '<div class="post__time">' + (post.relative_time || 'Just now') + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="post__content">' + escapeHtml(post.content) + '</div>' +
+            '<div class="post__actions">' +
+              '<button class="post__action ' + (post.user_liked ? 'liked' : '') + '" onclick="App.toggleLike(\'' + post.id + '\')">' +
+                '<span class="post__action-icon">' + (post.user_liked ? '&#10084;' : '&#9825;') + '</span>' +
+                '<span>' + (post.likes || 0) + '</span>' +
+              '</button>' +
+              '<button class="post__action" onclick="App.toggleComments(\'' + post.id + '\')">' +
+                '<span class="post__action-icon">&#128172;</span>' +
+                '<span>' + (post.comments || 0) + ' comments</span>' +
+              '</button>' +
+            '</div>' +
+            '<div class="comments" id="comments-' + post.id + '">' +
+              '<div class="comments__list" id="comments-list-' + post.id + '"></div>' +
+              '<form class="comments__form" onsubmit="App.addComment(event, \'' + post.id + '\')">' +
+                '<input type="text" class="comments__input" placeholder="Write a comment..." id="comment-input-' + post.id + '" />' +
+                '<button type="submit" class="btn btn--primary comments__submit">Post</button>' +
+              '</form>' +
+            '</div>' +
+          '</article>';
+        }).join('');
+      }
+
+      async function toggleLike(postId) {
+        try {
+          var result = await SimplyLouie.likePost(postId);
+          var post = state.posts.find(function(p) { return p.id === postId; });
+          if (post) {
+            post.user_liked = result.liked;
+            post.likes = result.likes;
+            renderFeed();
+          }
+        } catch (error) {
+          showToast('Failed to like post', 'error');
+        }
+      }
+
+      async function toggleComments(postId) {
+        var commentsEl = document.getElementById('comments-' + postId);
+        var commentsList = document.getElementById('comments-list-' + postId);
+
+        if (commentsEl.classList.contains('open')) {
+          commentsEl.classList.remove('open');
+          return;
+        }
+
+        commentsEl.classList.add('open');
+        commentsList.innerHTML = '<div class="spinner" style="margin: 0.5rem auto;"></div>';
+
+        try {
+          var comments = await SimplyLouie.getComments(postId);
+          commentsList.innerHTML = comments.map(function(c) {
+            var avatar = c.author ? c.author.name.charAt(0).toUpperCase() : '?';
+            var name = c.author ? c.author.name : 'Unknown';
+            return '<div class="comment">' +
+              '<div class="comment__avatar">' + avatar + '</div>' +
+              '<div class="comment__body">' +
+                '<div class="comment__author">' + escapeHtml(name) + '</div>' +
+                '<p class="comment__text">' + escapeHtml(c.content) + '</p>' +
+              '</div>' +
+            '</div>';
+          }).join('') || '<p style="color: var(--color-text-muted); text-align: center; padding: 0.5rem;">No comments yet.</p>';
+
+          document.getElementById('comment-input-' + postId).focus();
+        } catch (error) {
+          commentsList.innerHTML = '<p style="color: var(--color-text-muted);">Failed to load comments.</p>';
+        }
+      }
+
+      async function addComment(event, postId) {
+        event.preventDefault();
+        var input = document.getElementById('comment-input-' + postId);
+        var content = input.value.trim();
+
+        if (!content) return;
+
+        try {
+          await SimplyLouie.addComment(postId, content);
+          input.value = '';
+          var post = state.posts.find(function(p) { return p.id === postId; });
+          if (post) post.comments = (post.comments || 0) + 1;
+          await toggleComments(postId);
+          toggleComments(postId);
+          showToast('Comment added!', 'success');
+        } catch (error) {
+          showToast('Failed to add comment', 'error');
+        }
+      }
+
+      // ============ PROFILE MODAL ============
+      function openProfile(postId) {
+        var post = state.posts.find(function(p) { return p.id === postId; });
+        if (!post || !post.author) return;
+
+        document.getElementById('profile-name').textContent = post.author.name || 'Unknown';
+        document.getElementById('profile-location').textContent = post.author.country || '';
+        document.getElementById('profile-bio').textContent = post.author.bio || 'Movement member';
+        document.getElementById('profile-posts').textContent = '-';
+        document.getElementById('profile-likes').textContent = '-';
+
+        document.getElementById('profile-modal').classList.add('open');
+      }
+
+      function closeProfileModal(event) {
+        if (event && event.target !== event.currentTarget) return;
+        document.getElementById('profile-modal').classList.remove('open');
+      }
+
+      // ============ CANCEL MODAL ============
+      function showCancelModal() {
+        document.getElementById('cancel-modal').classList.add('open');
+      }
+
+      function closeCancelModal(event) {
+        if (event && event.target !== event.currentTarget) return;
+        document.getElementById('cancel-modal').classList.remove('open');
+      }
+
+      async function confirmCancel() {
+        try {
+          await SimplyLouie.cancelMembership();
+          closeCancelModal();
+          showToast('Subscription cancelled. We hope to see you again!', 'error');
+          setTimeout(function() {
+            window.location.href = '/cancel.html';
+          }, 2000);
+        } catch (error) {
+          showToast('Failed to cancel subscription', 'error');
+        }
+      }
+
+      // ============ SETTINGS ============
+      async function handleAccountUpdate(event) {
+        event.preventDefault();
+        var email = document.getElementById('settings-email').value;
+        var password = document.getElementById('settings-password').value;
+
+        if (password) {
+          showToast('Use the password change form to update password', 'error');
+          return;
+        }
+
+        showToast('Account settings saved!', 'success');
+      }
+
+      async function handleBillingUpdate(event) {
+        event.preventDefault();
+        showToast('Redirecting to payment update...', 'success');
+        setTimeout(function() {
+          window.location.href = '/checkout-full.html';
+        }, 1000);
+      }
+
+      // ============ REALTIME ============
+      function handleRealtimeMessage(message) {
+        switch (message.type) {
+          case 'NEW_POST':
+            if (state.user && message.data.author && message.data.author.id !== state.user.id) {
+              state.posts.unshift(message.data);
+              if (state.currentScreen === 'community') renderFeed();
+            }
+            break;
+          case 'LIKE':
+          case 'UNLIKE':
+            var post = state.posts.find(function(p) { return p.id === message.data.postId; });
+            if (post) {
+              post.likes = message.data.likes;
+              if (state.currentScreen === 'community') renderFeed();
+            }
+            break;
+          case 'NEW_USER':
+            showToast(message.data.name + ' joined the movement!', 'success');
+            break;
+        }
+      }
+
+      // ============ TOAST NOTIFICATIONS ============
+      function showToast(message, type) {
+        type = type || 'success';
+        var container = document.getElementById('toast-container');
+        var toast = document.createElement('div');
+        toast.className = 'toast toast--' + type;
+        toast.innerHTML = '<span>' + (type === 'success' ? '&#10003;' : '&#10007;') + '</span><span>' + message + '</span>';
+        container.appendChild(toast);
+
+        setTimeout(function() {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(-20px)';
+          setTimeout(function() { toast.remove(); }, 300);
+        }, 3000);
+      }
+
+      // ============ UTILITIES ============
+      function escapeHtml(text) {
+        if (!text) return '';
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // ============ PUBLIC API ============
+      return {
+        init: init,
+        toggleTheme: toggleTheme,
+        navigate: navigate,
+        handleAsk: handleAsk,
+        handlePost: handlePost,
+        toggleLike: toggleLike,
+        toggleComments: toggleComments,
+        addComment: addComment,
+        openProfile: openProfile,
+        closeProfileModal: closeProfileModal,
+        showCancelModal: showCancelModal,
+        closeCancelModal: closeCancelModal,
+        confirmCancel: confirmCancel,
+        handleAccountUpdate: handleAccountUpdate,
+        handleBillingUpdate: handleBillingUpdate
+      };
+    })();
+
+    document.addEventListener('DOMContentLoaded', App.init);
+  </script>
+</body>
+</html>

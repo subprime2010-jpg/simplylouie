@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SimplyLouie App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --brown: #5a3e2b;
+      --tan: #d9b899;
+      --cream: #f7f3ee;
+      --accent: #ff7a3d;
+      --text: #2b2b2b;
+      --card: #ffffff;
+      --shadow: rgba(0,0,0,0.06);
+    }
+
+    :root.dark {
+      --brown: #f5e0c8;
+      --tan: #8a6a4b;
+      --cream: #151515;
+      --accent: #ff7a3d;
+      --text: #f5f5f5;
+      --card: #222222;
+      --shadow: rgba(0,0,0,0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* TOP NAV */
+    .nav {
+      background: var(--card);
+      padding: 0.8rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 4px var(--shadow);
+      z-index: 2;
+    }
+
+    .nav-title {
+      font-weight: 800;
+      color: var(--brown);
+      font-size: 1.2rem;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .toggle {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--tan);
+      cursor: pointer;
+      background: transparent;
+      color: var(--brown);
+      font-weight: 600;
+    }
+
+    /* MAIN CONTENT */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.1rem;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+      padding-bottom: 4.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 1.4rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px var(--shadow);
+      margin-bottom: 1.3rem;
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--brown);
+    }
+
+    .card small {
+      display: block;
+      margin-bottom: 0.6rem;
+      color: var(--tan);
+      font-size: 0.85rem;
+    }
+
+    .card p {
+      margin-bottom: 0.8rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #777;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      resize: none;
+      background: transparent;
+      color: var(--text);
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #777;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-primary,
+    .btn-danger {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-danger {
+      background: #b33939;
+    }
+
+    .screen { display: none; }
+    .active { display: block; }
+
+    /* BOTTOM NAV (native-style) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      box-shadow: 0 -1px 4px var(--shadow);
+      display: flex;
+      justify-content: space-around;
+      padding: 0.4rem 0;
+      z-index: 3;
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 0.4rem 0;
+      font-size: 0.8rem;
+      color: var(--brown);
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    .tab span {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .tab.active-tab {
+      opacity: 1;
+      font-weight: 700;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 0.6rem;
+      color: var(--brown);
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 3.2rem;
+    }
+
+    /* PROFILE MODAL */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal-content {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 360px;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+
+    .modal-content h2 {
+      color: var(--brown);
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-content p {
+      margin-bottom: 0.8rem;
+    }
+
+    @media (min-width: 800px) {
+      .bottom-nav {
+        max-width: 720px;
+        margin: 0 auto;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 16px 16px 0 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOP NAV -->
+  <div class="nav">
+    <div class="nav-title">SimplyLouie</div>
+    <div class="nav-actions">
+      <button class="toggle" onclick="toggleTheme()">Dark / Light</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="screen active">
+      <div class="card">
+        <h2>Ask Anything</h2>
+        <small>Simple AI for homework, work, and life.</small>
+        <form action="/api/ask" method="POST">
+          <textarea name="prompt" placeholder="Ask SimplyLouie anything..."></textarea>
+          <button class="btn-primary" type="submit">Send</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Charity Voting</h2>
+        <p>You choose where part of your $2 goes.</p>
+        <a href="/charity.html" class="btn-primary">Vote Now</a>
+      </div>
+
+      <div class="card">
+        <h2>Movement Gear</h2>
+        <p>Saint-Bernard-inspired designs that help fund more good.</p>
+        <a href="/merch.html" class="btn-primary">Shop Gear</a>
+      </div>
+    </div>
+
+    <!-- COMMUNITY -->
+    <div id="community" class="screen">
+      <div class="card">
+        <h2>Share Something</h2>
+        <small>Your story might help someone else.</small>
+        <form action="/api/community/post" method="POST">
+          <textarea name="content" placeholder="Share a win, a struggle, a question..."></textarea>
+          <button class="btn-primary" type="submit">Post</button>
+        </form>
+      </div>
+
+      <div id="feed"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div id="settings" class="screen">
+      <div class="card">
+        <h2>Account Information</h2>
+        <form action="/api/settings/update-account" method="POST">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="you@example.com" required />
+          <label>Change Password</label>
+          <input type="password" name="password" placeholder="New password" />
+          <button class="btn-primary" type="submit">Save Changes</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Billing</h2>
+        <p>Your plan: <strong>$2/month</strong></p>
+        <form action="/api/settings/update-card" method="POST">
+          <label>Update Card</label>
+          <input type="text" name="card" placeholder="1234 1234 1234 1234" required />
+          <button class="btn-primary" type="submit">Update Card</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Cancel Subscription</h2>
+        <p>If you ever need to leave, you can cancel anytime. No pressure.</p>
+        <a href="/cancel.html" class="btn-danger">Cancel Subscription</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      SimplyLouie — people over profits, inspired by a rescue Saint Bernard.
+    </div>
+  </div>
+
+  <!-- PROFILE MODAL -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+      <h2 id="profileName"></h2>
+      <p id="profileCountry" style="opacity: 0.8;"></p>
+      <p id="profileBio"></p>
+      <button class="btn-primary" style="margin-top: 1rem;" onclick="closeProfile()">Close</button>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="tab active-tab" onclick="showScreen('dashboard', this)">
+      <span>&#127968;</span>Home
+    </div>
+    <div class="tab" onclick="showScreen('community', this)">
+      <span>&#128101;</span>Community
+    </div>
+    <div class="tab" onclick="showScreen('settings', this)">
+      <span>&#9881;</span>Settings
+    </div>
+  </div>
+
+  <script src="api.js"></script>
+  <script>
+    // Auth guard - redirect to superapp.html (the full version)
+    if (!SimplyLouie.isLoggedIn()) {
+      window.location.href = '/login.html';
+    } else {
+      window.location.href = '/superapp.html';
+    }
+  </script>
+  <script>
+    // --- SCREEN NAVIGATION ---
+    function showScreen(id, el) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active-tab'));
+      if (el) el.classList.add('active-tab');
+    }
+
+    // --- DARK MODE TOGGLE ---
+    function toggleTheme() {
+      const root = document.documentElement;
+      root.classList.toggle('dark');
+    }
+
+    // --- FEED DATA MOCK (replace with API later) ---
+    const samplePosts = [
+      {
+        name: "Amina",
+        country: "Kenya",
+        bio: "Small business starter - Loves helping others",
+        text: "Used SimplyLouie to write my first business proposal!",
+        time: "2 minutes ago",
+        likes: 12
+      },
+      {
+        name: "Daniel",
+        country: "Ghana",
+        bio: "Student - Future teacher",
+        text: "It helped me pass my English exam. My mom cried.",
+        time: "10 minutes ago",
+        likes: 34
+      },
+      {
+        name: "Liza",
+        country: "Philippines",
+        bio: "Online seller - Proud mom",
+        text: "My first online sale! SimplyLouie helped me write my product messages.",
+        time: "20 minutes ago",
+        likes: 19
+      }
+    ];
+
+    function renderFeed() {
+      const feed = document.getElementById("feed");
+      feed.innerHTML = "";
+
+      samplePosts.forEach((post, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.style.cursor = "default";
+
+        card.innerHTML = `
+          <h2 onclick="openProfile(${index})" style="cursor:pointer;">
+            "${post.text.slice(0, 40)}..."
+          </h2>
+          <small onclick="openProfile(${index})" style="cursor:pointer;">
+            - ${post.name}, ${post.country} - ${post.time}
+          </small>
+          <p>${post.text}</p>
+
+          <div style="display:flex; justify-content:space-between; margin-top:0.8rem;">
+            <button onclick="likePost(${index})" style="
+              background:none;
+              border:none;
+              color:var(--brown);
+              font-weight:600;
+              cursor:pointer;
+            ">
+              &#10084; ${post.likes}
+            </button>
+
+            <button onclick="toggleComments(${index})" style="
+              background:none;
+              border:none;
+              color:var(--brown);
+              font-weight:600;
+              cursor:pointer;
+            ">
+              &#128172; Comment
+            </button>
+          </div>
+
+          <div id="comments-${index}" style="display:none; margin-top:1rem;">
+            <textarea placeholder="Write a comment..." style="height:80px;"></textarea>
+            <button class="btn-primary" style="margin-top:0.5rem;">Post Comment</button>
+          </div>
+        `;
+
+        feed.appendChild(card);
+      });
+    }
+
+    function likePost(i) {
+      samplePosts[i].likes++;
+      renderFeed();
+    }
+
+    function toggleComments(i) {
+      const box = document.getElementById(`comments-${i}`);
+      box.style.display = box.style.display === "none" ? "block" : "none";
+    }
+
+    function openProfile(i) {
+      const p = samplePosts[i];
+      document.getElementById("profileName").textContent = p.name;
+      document.getElementById("profileCountry").textContent = p.country;
+      document.getElementById("profileBio").textContent = p.bio;
+      document.getElementById("profileModal").style.display = "flex";
+    }
+
+    function closeProfile() {
+      document.getElementById("profileModal").style.display = "none";
+    }
+
+    // Initial render
+    renderFeed();
+
+    // Real-time mock updates every 25 seconds
+    setInterval(() => {
+      samplePosts.unshift({
+        name: "New Member",
+        country: "Your Region",
+        bio: "Just joined the movement",
+        text: "Someone new just joined SimplyLouie!",
+        time: "Just now",
+        likes: 0
+      });
+      if (samplePosts.length > 10) samplePosts.pop();
+      renderFeed();
+    }, 25000);
+  </script>
+
+</body>
+</html>
