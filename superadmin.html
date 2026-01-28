@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOUIE SYSTEM - Founder Dashboard</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    /* ============================================
+       LOUIE SYSTEM - FOUNDER DASHBOARD
+       Warm, movement-aligned, zero corporate energy
+    ============================================ */
+
+    :root {
+      --bg: #faf8f5;
+      --bg-card: #ffffff;
+      --bg-sidebar: #5a3e2b;
+      --tan: #d9b899;
+      --tan-light: #f5ebe0;
+      --brown: #5a3e2b;
+      --brown-light: #8b7355;
+      --accent: #ff7a3d;
+      --accent-hover: #e86a2d;
+      --text: #2b2b2b;
+      --text-muted: #666666;
+      --success: #4a9c6d;
+      --warning: #e5a84b;
+      --danger: #d64545;
+      --border: #e8e0d8;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --shadow: 0 2px 12px rgba(90, 62, 43, 0.08);
+      --shadow-lg: 0 4px 24px rgba(90, 62, 43, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Layout */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: var(--bg-sidebar);
+      color: white;
+      padding: 1.5rem;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar__brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .sidebar__logo {
+      font-size: 2rem;
+    }
+
+    .sidebar__title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .sidebar__subtitle {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    .sidebar__nav {
+      list-style: none;
+    }
+
+    .sidebar__section {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.5;
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .sidebar__link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.25rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .sidebar__link:hover,
+    .sidebar__link.active {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .sidebar__link.active {
+      background: var(--accent);
+    }
+
+    .sidebar__icon {
+      font-size: 1.1rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .sidebar__footer {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+    }
+
+    .sidebar__user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+    }
+
+    .sidebar__avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--tan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .sidebar__username {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .sidebar__role {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      margin-left: 260px;
+      padding: 2rem;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .header__title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .header__actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    /* Section */
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section__title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 1rem;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card--wide {
+      grid-column: span 2;
+    }
+
+    .card--full {
+      grid-column: 1 / -1;
+    }
+
+    .card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .card__title {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card__icon {
+      font-size: 1.5rem;
+    }
+
+    .card__value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .card__value--small {
+      font-size: 1.5rem;
+    }
+
+    .card__change {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .card__change--up { color: var(--success); }
+    .card__change--down { color: var(--danger); }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 0.875rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--brown);
+      font-size: 0.875rem;
+    }
+
+    td {
+      font-size: 0.9rem;
+    }
+
+    tr:hover {
+      background: var(--tan-light);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn--primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn--primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn--secondary {
+      background: var(--tan-light);
+      color: var(--brown);
+    }
+
+    .btn--danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--brown);
+      border: 1px solid var(--border);
+    }
+
+    .btn--small {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    /* Toggle Switch */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toggle-row:last-child {
+      border-bottom: none;
+    }
+
+    .toggle-label {
+      font-weight: 500;
+    }
+
+    .toggle-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .toggle {
+      position: relative;
+      width: 52px;
+      height: 28px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: var(--success);
+    }
+
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(24px);
+    }
+
+    /* Kill Switch Button */
+    .killswitch {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background: var(--tan-light);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.75rem;
+    }
+
+    .killswitch__info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .killswitch__icon {
+      font-size: 1.25rem;
+    }
+
+    .killswitch__name {
+      font-weight: 600;
+    }
+
+    .killswitch__status {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .killswitch__status--enabled {
+      background: rgba(74, 156, 109, 0.15);
+      color: var(--success);
+    }
+
+    .killswitch__status--disabled {
+      background: rgba(214, 69, 69, 0.15);
+      color: var(--danger);
+    }
+
+    /* File Upload */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 3rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--accent);
+      background: var(--tan-light);
+    }
+
+    .upload-zone__icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .upload-zone__text {
+      color: var(--text-muted);
+    }
+
+    .upload-zone input {
+      display: none;
+    }
+
+    /* Scan Results */
+    .scan-result {
+      background: var(--tan-light);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .scan-result__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .scan-result__title {
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .risk-score {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .risk-score--low {
+      background: rgba(74, 156, 109, 0.15);
+      color: var(--success);
+    }
+
+    .risk-score--medium {
+      background: rgba(229, 168, 75, 0.15);
+      color: var(--warning);
+    }
+
+    .risk-score--high {
+      background: rgba(214, 69, 69, 0.15);
+      color: var(--danger);
+    }
+
+    .scan-result__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .scan-field {
+      background: white;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .scan-field__label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .scan-field__value {
+      font-weight: 600;
+      color: var(--brown);
+      margin-top: 0.25rem;
+    }
+
+    /* Select */
+    select {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      background: white;
+      cursor: pointer;
+    }
+
+    /* Status Badge */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status--healthy {
+      background: rgba(74, 156, 109, 0.15);
+      color: var(--success);
+    }
+
+    .status--warning {
+      background: rgba(229, 168, 75, 0.15);
+      color: var(--warning);
+    }
+
+    .status--error {
+      background: rgba(214, 69, 69, 0.15);
+      color: var(--danger);
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+    }
+
+    .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--brown);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      display: none;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 200px;
+      }
+      .main {
+        margin-left: 200px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .main {
+        margin-left: 0;
+      }
+      .layout {
+        flex-direction: column;
+      }
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .card--wide, .card--full {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <span class="sidebar__logo">&#128054;</span>
+        <div>
+          <div class="sidebar__title">LOUIE SYSTEM</div>
+          <div class="sidebar__subtitle">Founder Dashboard</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="sidebar__nav">
+          <li class="sidebar__section">Overview</li>
+          <li><a class="sidebar__link active" data-section="overview"><span class="sidebar__icon">&#127968;</span> Dashboard</a></li>
+
+          <li class="sidebar__section">Financials</li>
+          <li><a class="sidebar__link" data-section="financials"><span class="sidebar__icon">&#128176;</span> Global Revenue</a></li>
+          <li><a class="sidebar__link" data-section="stripe"><span class="sidebar__icon">&#128179;</span> Stripe Breakdown</a></li>
+
+          <li class="sidebar__section">Analytics</li>
+          <li><a class="sidebar__link" data-section="users"><span class="sidebar__icon">&#128101;</span> User Metrics</a></li>
+          <li><a class="sidebar__link" data-section="community"><span class="sidebar__icon">&#128172;</span> Community</a></li>
+          <li><a class="sidebar__link" data-section="system"><span class="sidebar__icon">&#9881;</span> System Health</a></li>
+
+          <li class="sidebar__section">Intelligence</li>
+          <li><a class="sidebar__link" data-section="intelligence"><span class="sidebar__icon">&#129504;</span> LOUIE Intel</a></li>
+          <li><a class="sidebar__link" data-section="docs"><span class="sidebar__icon">&#128196;</span> Doc Scanner</a></li>
+
+          <li class="sidebar__section">Controls</li>
+          <li><a class="sidebar__link" data-section="toggles"><span class="sidebar__icon">&#128268;</span> Feature Toggles</a></li>
+          <li><a class="sidebar__link" data-section="killswitches"><span class="sidebar__icon">&#9888;</span> Kill Switches</a></li>
+          <li><a class="sidebar__link" data-section="environment"><span class="sidebar__icon">&#128736;</span> Environment</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__avatar" id="user-avatar">F</div>
+          <div>
+            <div class="sidebar__username" id="user-name">Founder</div>
+            <div class="sidebar__role">Founder Access</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Overview Section -->
+      <section id="section-overview" class="section active">
+        <div class="header">
+          <h1 class="header__title">Dashboard Overview</h1>
+          <div class="header__actions">
+            <button class="btn btn--ghost btn--small" onclick="refreshAll()">&#8635; Refresh</button>
+            <button class="btn btn--danger btn--small" onclick="logout()">Logout</button>
+          </div>
+        </div>
+
+        <div class="cards" id="overview-cards">
+          <div class="loading"><div class="spinner"></div>Loading dashboard...</div>
+        </div>
+      </section>
+
+      <!-- Financials Section -->
+      <section id="section-financials" class="section">
+        <div class="header">
+          <h1 class="header__title">Global Financials</h1>
+        </div>
+
+        <h3 class="section__title">Revenue Summary</h3>
+        <div class="cards" id="financials-summary"></div>
+
+        <h3 class="section__title">Revenue by Company</h3>
+        <div class="card card--full">
+          <div class="table-container">
+            <table id="company-table">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Gross</th>
+                  <th>Net</th>
+                  <th>Refunds</th>
+                  <th>Chargebacks</th>
+                  <th>Subscriptions</th>
+                  <th>New Signups</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 class="section__title">Revenue by Region</h3>
+        <div class="card card--full">
+          <div class="table-container">
+            <table id="region-table">
+              <thead>
+                <tr>
+                  <th>Region</th>
+                  <th>Gross</th>
+                  <th>Net</th>
+                  <th>Signups</th>
+                  <th>Active Subscriptions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stripe Section -->
+      <section id="section-stripe" class="section">
+        <div class="header">
+          <h1 class="header__title">Stripe Income Breakdown</h1>
+        </div>
+
+        <h3 class="section__title">Overview</h3>
+        <div class="cards" id="stripe-overview"></div>
+
+        <h3 class="section__title">Passive Income</h3>
+        <div class="cards" id="stripe-passive"></div>
+
+        <h3 class="section__title">Active Subscriptions</h3>
+        <div class="cards" id="stripe-active"></div>
+
+        <h3 class="section__title">Products</h3>
+        <div class="card card--full">
+          <div class="table-container">
+            <table id="products-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price ID</th>
+                  <th>Revenue</th>
+                  <th>Active Subscriptions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Users Section -->
+      <section id="section-users" class="section">
+        <div class="header">
+          <h1 class="header__title">User Metrics</h1>
+        </div>
+        <div class="cards" id="user-metrics"></div>
+      </section>
+
+      <!-- Community Section -->
+      <section id="section-community" class="section">
+        <div class="header">
+          <h1 class="header__title">Community Metrics</h1>
+        </div>
+        <div class="cards" id="community-metrics"></div>
+      </section>
+
+      <!-- System Section -->
+      <section id="section-system" class="section">
+        <div class="header">
+          <h1 class="header__title">System Health</h1>
+        </div>
+        <div class="cards" id="system-metrics"></div>
+
+        <h3 class="section__title">Recent Webhook Logs</h3>
+        <div class="card card--full">
+          <div class="table-container">
+            <table id="webhook-table">
+              <thead>
+                <tr>
+                  <th>Endpoint</th>
+                  <th>Status</th>
+                  <th>Response</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Intelligence Section -->
+      <section id="section-intelligence" class="section">
+        <div class="header">
+          <h1 class="header__title">LOUIE Intelligence</h1>
+        </div>
+        <div class="cards" id="intelligence-metrics"></div>
+
+        <h3 class="section__title">Recent Events</h3>
+        <div class="card card--full">
+          <div class="table-container">
+            <table id="intel-events-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Source</th>
+                  <th>Data</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Docs Section -->
+      <section id="section-docs" class="section">
+        <div class="header">
+          <h1 class="header__title">Document Scanning Engine</h1>
+        </div>
+
+        <div class="card">
+          <div class="upload-zone" id="upload-zone">
+            <div class="upload-zone__icon">&#128196;</div>
+            <p class="upload-zone__text">Drop a file here or click to upload<br><small>PDF, JPG, PNG, CSV, XLSX (max 50MB)</small></p>
+            <input type="file" id="file-input" accept=".pdf,.jpg,.jpeg,.png,.csv,.xlsx" />
+          </div>
+
+          <div id="scan-result" class="scan-result" style="display: none;"></div>
+        </div>
+      </section>
+
+      <!-- Toggles Section -->
+      <section id="section-toggles" class="section">
+        <div class="header">
+          <h1 class="header__title">Feature Toggles</h1>
+        </div>
+
+        <div class="card">
+          <h3 class="section__title">Feature Flags</h3>
+          <div id="feature-toggles"></div>
+        </div>
+
+        <div class="card" style="margin-top: 1.5rem;">
+          <h3 class="section__title">Experimental Flags</h3>
+          <div id="experimental-toggles"></div>
+        </div>
+      </section>
+
+      <!-- Killswitches Section -->
+      <section id="section-killswitches" class="section">
+        <div class="header">
+          <h1 class="header__title">Kill Switches</h1>
+        </div>
+
+        <div class="card">
+          <p style="margin-bottom: 1rem; color: var(--text-muted);">Emergency controls to disable modules instantly. Use with caution.</p>
+          <div id="killswitches-list"></div>
+        </div>
+      </section>
+
+      <!-- Environment Section -->
+      <section id="section-environment" class="section">
+        <div class="header">
+          <h1 class="header__title">Environment Controls</h1>
+        </div>
+
+        <div class="cards" id="env-info"></div>
+
+        <div class="card">
+          <h3 class="section__title">Update Environment</h3>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <div>
+              <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Environment</label>
+              <select id="env-select">
+                <option value="development">Development</option>
+                <option value="staging">Staging</option>
+                <option value="production">Production</option>
+              </select>
+            </div>
+            <div>
+              <label style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Log Level</label>
+              <select id="log-level-select">
+                <option value="debug">Debug</option>
+                <option value="info">Info</option>
+                <option value="warn">Warn</option>
+                <option value="error">Error</option>
+              </select>
+            </div>
+            <div style="align-self: flex-end;">
+              <button class="btn btn--primary" onclick="updateEnv()">Update Environment</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span id="toast-icon">&#10003;</span>
+    <span id="toast-text"></span>
+  </div>
+
+  <script>
+    /**
+     * LOUIE SYSTEM - Founder Dashboard
+     * API Client & UI Controller
+     */
+
+    const API_BASE = 'http://localhost:3000';
+    let authToken = localStorage.getItem('admin_token');
+
+    // ============================================
+    // AUTH CHECK
+    // ============================================
+
+    if (!authToken) {
+      showLoginModal();
+    } else {
+      loadDashboard();
+    }
+
+    function showLoginModal() {
+      const email = prompt('Admin Email:');
+      const password = prompt('Admin Password:');
+
+      if (email && password) {
+        login(email, password);
+      } else {
+        alert('Login required');
+        showLoginModal();
+      }
+    }
+
+    async function login(email, password) {
+      try {
+        const res = await fetch(API_BASE + '/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          authToken = data.data.token;
+          localStorage.setItem('admin_token', authToken);
+          document.getElementById('user-name').textContent = data.data.admin.name;
+          document.getElementById('user-avatar').textContent = data.data.admin.name.charAt(0);
+          loadDashboard();
+        } else {
+          alert(data.message);
+          showLoginModal();
+        }
+      } catch (error) {
+        alert('Login failed: ' + error.message);
+        showLoginModal();
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('admin_token');
+      authToken = null;
+      location.reload();
+    }
+
+    // ============================================
+    // API CLIENT
+    // ============================================
+
+    async function api(endpoint) {
+      try {
+        const res = await fetch(API_BASE + endpoint, {
+          headers: { 'Authorization': 'Bearer ' + authToken }
+        });
+        const data = await res.json();
+        if (!data.success && data.message.includes('authorization')) {
+          logout();
+        }
+        return data;
+      } catch (error) {
+        console.error('API Error:', error);
+        return { success: false, message: error.message };
+      }
+    }
+
+    async function apiPost(endpoint, body) {
+      try {
+        const res = await fetch(API_BASE + endpoint, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + authToken,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        });
+        return await res.json();
+      } catch (error) {
+        console.error('API Error:', error);
+        return { success: false, message: error.message };
+      }
+    }
+
+    // ============================================
+    // NAVIGATION
+    // ============================================
+
+    document.querySelectorAll('.sidebar__link').forEach(link => {
+      link.addEventListener('click', function() {
+        const section = this.dataset.section;
+        if (!section) return;
+
+        document.querySelectorAll('.sidebar__link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById('section-' + section).classList.add('active');
+
+        loadSection(section);
+      });
+    });
+
+    // ============================================
+    // LOAD DATA
+    // ============================================
+
+    async function loadDashboard() {
+      // Load admin info
+      const me = await api('/admin/me');
+      if (me.success) {
+        document.getElementById('user-name').textContent = me.data.name;
+        document.getElementById('user-avatar').textContent = me.data.name.charAt(0);
+      }
+
+      loadSection('overview');
+    }
+
+    async function loadSection(section) {
+      switch (section) {
+        case 'overview':
+          loadOverview();
+          break;
+        case 'financials':
+          loadFinancials();
+          break;
+        case 'stripe':
+          loadStripe();
+          break;
+        case 'users':
+          loadUsers();
+          break;
+        case 'community':
+          loadCommunity();
+          break;
+        case 'system':
+          loadSystem();
+          break;
+        case 'intelligence':
+          loadIntelligence();
+          break;
+        case 'docs':
+          setupDocScanner();
+          break;
+        case 'toggles':
+          loadToggles();
+          break;
+        case 'killswitches':
+          loadKillswitches();
+          break;
+        case 'environment':
+          loadEnvironment();
+          break;
+      }
+    }
+
+    function refreshAll() {
+      const activeSection = document.querySelector('.sidebar__link.active');
+      if (activeSection) {
+        loadSection(activeSection.dataset.section);
+        showToast('Data refreshed');
+      }
+    }
+
+    // ============================================
+    // OVERVIEW
+    // ============================================
+
+    async function loadOverview() {
+      const [fin, stripe, users, community] = await Promise.all([
+        api('/admin/financials/summary'),
+        api('/admin/stripe/overview'),
+        api('/admin/metrics/users'),
+        api('/admin/metrics/community')
+      ]);
+
+      let html = '';
+
+      if (fin.success) {
+        html += createCard('Today\'s Revenue', '$' + formatNum(fin.data.total_today), '&#128176;');
+        html += createCard('This Month', '$' + formatNum(fin.data.total_month), '&#128200;');
+        html += createCard('Lifetime Revenue', '$' + formatNum(fin.data.total_lifetime), '&#128142;');
+      }
+
+      if (stripe.success) {
+        html += createCard('Active Subscriptions', formatNum(stripe.data.subscription_count), '&#128179;');
+        html += createCard('MRR', '$' + formatNum(stripe.data.mrr), '&#128185;');
+        html += createCard('Churn Rate', stripe.data.churn_rate + '%', '&#128200;', stripe.data.churn_rate < 5 ? 'success' : 'warning');
+      }
+
+      if (users.success) {
+        html += createCard('Total Users', formatNum(users.data.total_users), '&#128101;');
+        html += createCard('Daily Active', formatNum(users.data.daily_active), '&#128170;');
+        html += createCard('New Today', formatNum(users.data.new_users_today), '&#127881;');
+      }
+
+      if (community.success) {
+        html += createCard('Posts Today', formatNum(community.data.posts_today), '&#128172;');
+        html += createCard('Total Posts', formatNum(community.data.total_posts), '&#128196;');
+        html += createCard('Total Likes', formatNum(community.data.total_likes), '&#10084;');
+      }
+
+      document.getElementById('overview-cards').innerHTML = html;
+    }
+
+    // ============================================
+    // FINANCIALS
+    // ============================================
+
+    async function loadFinancials() {
+      const [summary, byCompany, byRegion] = await Promise.all([
+        api('/admin/financials/summary'),
+        api('/admin/financials/by-company'),
+        api('/admin/financials/by-region')
+      ]);
+
+      if (summary.success) {
+        document.getElementById('financials-summary').innerHTML =
+          createCard('Today', '$' + formatNum(summary.data.total_today), '&#128197;') +
+          createCard('This Week', '$' + formatNum(summary.data.total_week), '&#128198;') +
+          createCard('This Month', '$' + formatNum(summary.data.total_month), '&#128200;') +
+          createCard('Year to Date', '$' + formatNum(summary.data.total_ytd), '&#128176;') +
+          createCard('Lifetime', '$' + formatNum(summary.data.total_lifetime), '&#128142;');
+      }
+
+      if (byCompany.success) {
+        const tbody = document.querySelector('#company-table tbody');
+        tbody.innerHTML = byCompany.data.map(c =>
+          '<tr>' +
+          '<td><strong>' + c.company_name + '</strong></td>' +
+          '<td>$' + formatNum(c.gross) + '</td>' +
+          '<td>$' + formatNum(c.net) + '</td>' +
+          '<td>$' + formatNum(c.refunds) + '</td>' +
+          '<td>$' + formatNum(c.chargebacks) + '</td>' +
+          '<td>' + formatNum(c.active_subscriptions) + '</td>' +
+          '<td>' + formatNum(c.new_signups) + '</td>' +
+          '</tr>'
+        ).join('');
+      }
+
+      if (byRegion.success) {
+        const tbody = document.querySelector('#region-table tbody');
+        tbody.innerHTML = byRegion.data.map(r =>
+          '<tr>' +
+          '<td><strong>' + r.region + '</strong></td>' +
+          '<td>$' + formatNum(r.gross) + '</td>' +
+          '<td>$' + formatNum(r.net) + '</td>' +
+          '<td>' + formatNum(r.signups) + '</td>' +
+          '<td>' + formatNum(r.active_subscriptions) + '</td>' +
+          '</tr>'
+        ).join('');
+      }
+    }
+
+    // ============================================
+    // STRIPE
+    // ============================================
+
+    async function loadStripe() {
+      const [overview, passive, active, products] = await Promise.all([
+        api('/admin/stripe/overview'),
+        api('/admin/stripe/passive'),
+        api('/admin/stripe/active'),
+        api('/admin/stripe/products')
+      ]);
+
+      if (overview.success) {
+        document.getElementById('stripe-overview').innerHTML =
+          createCard('Total Revenue', '$' + formatNum(overview.data.total_revenue), '&#128176;') +
+          createCard('Passive', '$' + formatNum(overview.data.passive_revenue), '&#128164;') +
+          createCard('Active', '$' + formatNum(overview.data.active_revenue), '&#9889;') +
+          createCard('MRR', '$' + formatNum(overview.data.mrr), '&#128185;') +
+          createCard('ARR', '$' + formatNum(overview.data.arr), '&#128200;');
+      }
+
+      if (passive.success) {
+        document.getElementById('stripe-passive').innerHTML =
+          createCard('Growth Rate', passive.data.passive_growth_rate + '%', '&#128200;') +
+          passive.data.passive_products.map(p =>
+            createCard(p.name, '$' + formatNum(p.revenue), '&#128179;')
+          ).join('');
+      }
+
+      if (active.success) {
+        document.getElementById('stripe-active').innerHTML =
+          createCard('Signups Today', formatNum(active.data.new_signups_today), '&#127881;') +
+          createCard('Signups This Week', formatNum(active.data.new_signups_week), '&#128200;') +
+          createCard('Signups This Month', formatNum(active.data.new_signups_month), '&#128197;') +
+          createCard('Trial Conversion', active.data.trial_to_paid_conversion + '%', '&#128170;');
+      }
+
+      if (products.success) {
+        const tbody = document.querySelector('#products-table tbody');
+        tbody.innerHTML = products.data.map(p =>
+          '<tr>' +
+          '<td><strong>' + p.product_name + '</strong></td>' +
+          '<td><code>' + p.price_id + '</code></td>' +
+          '<td>$' + formatNum(p.revenue) + '</td>' +
+          '<td>' + (p.active_subscriptions !== null ? formatNum(p.active_subscriptions) : '-') + '</td>' +
+          '</tr>'
+        ).join('');
+      }
+    }
+
+    // ============================================
+    // USERS & COMMUNITY
+    // ============================================
+
+    async function loadUsers() {
+      const data = await api('/admin/metrics/users');
+      if (data.success) {
+        document.getElementById('user-metrics').innerHTML =
+          createCard('Total Users', formatNum(data.data.total_users), '&#128101;') +
+          createCard('Daily Active', formatNum(data.data.daily_active), '&#128170;') +
+          createCard('Monthly Active', formatNum(data.data.monthly_active), '&#128200;') +
+          createCard('New Today', formatNum(data.data.new_users_today), '&#127881;');
+      }
+    }
+
+    async function loadCommunity() {
+      const data = await api('/admin/metrics/community');
+      if (data.success) {
+        document.getElementById('community-metrics').innerHTML =
+          createCard('Posts Today', formatNum(data.data.posts_today), '&#128172;') +
+          createCard('Comments Today', formatNum(data.data.comments_today), '&#128172;') +
+          createCard('Likes Today', formatNum(data.data.likes_today), '&#10084;') +
+          createCard('Total Posts', formatNum(data.data.total_posts), '&#128196;') +
+          createCard('Total Comments', formatNum(data.data.total_comments), '&#128172;') +
+          createCard('Total Likes', formatNum(data.data.total_likes), '&#10084;');
+      }
+    }
+
+    // ============================================
+    // SYSTEM
+    // ============================================
+
+    async function loadSystem() {
+      const data = await api('/admin/metrics/system');
+      if (data.success) {
+        document.getElementById('system-metrics').innerHTML =
+          createCard('Uptime', data.data.api_uptime_formatted, '&#9889;', 'success') +
+          createCard('Error Rate', (data.data.error_rate * 100).toFixed(2) + '%', '&#128165;', data.data.error_rate < 0.05 ? 'success' : 'warning') +
+          createCard('Latency', data.data.latency + 'ms', '&#9200;', data.data.latency < 100 ? 'success' : 'warning') +
+          createCard('Webhook Status', '<span class="status status--' + (data.data.webhook_status === 'healthy' ? 'healthy' : 'warning') + '">' + data.data.webhook_status + '</span>', '&#128268;');
+
+        const tbody = document.querySelector('#webhook-table tbody');
+        tbody.innerHTML = data.data.webhook_logs.length > 0
+          ? data.data.webhook_logs.map(w =>
+              '<tr>' +
+              '<td>' + (w.endpoint || '-') + '</td>' +
+              '<td><span class="status status--' + (w.status === 'success' ? 'healthy' : 'error') + '">' + (w.status || '-') + '</span></td>' +
+              '<td>' + (w.response_code || '-') + '</td>' +
+              '<td>' + (w.created_at || '-') + '</td>' +
+              '</tr>'
+            ).join('')
+          : '<tr><td colspan="4" style="text-align:center;color:var(--text-muted);">No webhook logs yet</td></tr>';
+      }
+    }
+
+    // ============================================
+    // INTELLIGENCE
+    // ============================================
+
+    async function loadIntelligence() {
+      const [docs, recent] = await Promise.all([
+        api('/admin/intelligence/docs'),
+        api('/admin/intelligence/recent')
+      ]);
+
+      if (docs.success) {
+        document.getElementById('intelligence-metrics').innerHTML =
+          createCard('Scanned Today', formatNum(docs.data.docs_scanned_today), '&#128196;') +
+          createCard('Total Scanned', formatNum(docs.data.docs_scanned_total), '&#128451;') +
+          createCard('Fraud Flags', formatNum(docs.data.fraud_flags_today), '&#128681;', docs.data.fraud_flags_today > 0 ? 'warning' : 'success') +
+          createCard('Income Models', formatNum(docs.data.income_models_generated), '&#128176;') +
+          createCard('Employers Detected', formatNum(docs.data.employer_detections), '&#127970;') +
+          createCard('Lender Predictions', formatNum(docs.data.lender_predictions), '&#127974;');
+      }
+
+      if (recent.success) {
+        const tbody = document.querySelector('#intel-events-table tbody');
+        tbody.innerHTML = recent.data.length > 0
+          ? recent.data.map(e =>
+              '<tr>' +
+              '<td><strong>' + e.event_type + '</strong></td>' +
+              '<td>' + (e.source || '-') + '</td>' +
+              '<td><code>' + JSON.stringify(e.data).slice(0, 50) + '...</code></td>' +
+              '<td>' + e.created_at + '</td>' +
+              '</tr>'
+            ).join('')
+          : '<tr><td colspan="4" style="text-align:center;color:var(--text-muted);">No events yet</td></tr>';
+      }
+    }
+
+    // ============================================
+    // DOC SCANNER
+    // ============================================
+
+    function setupDocScanner() {
+      const uploadZone = document.getElementById('upload-zone');
+      const fileInput = document.getElementById('file-input');
+
+      uploadZone.addEventListener('click', () => fileInput.click());
+
+      uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.style.borderColor = 'var(--accent)';
+      });
+
+      uploadZone.addEventListener('dragleave', () => {
+        uploadZone.style.borderColor = 'var(--border)';
+      });
+
+      uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.style.borderColor = 'var(--border)';
+        if (e.dataTransfer.files.length > 0) {
+          scanDocument(e.dataTransfer.files[0]);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+          scanDocument(e.target.files[0]);
+        }
+      });
+    }
+
+    async function scanDocument(file) {
+      const resultDiv = document.getElementById('scan-result');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = '<div class="loading"><div class="spinner"></div>Scanning document...</div>';
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await fetch(API_BASE + '/admin/docs/scan', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + authToken },
+          body: formData
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          const r = data.data;
+          const riskClass = r.risk_score < 30 ? 'low' : r.risk_score < 70 ? 'medium' : 'high';
+
+          resultDiv.innerHTML =
+            '<div class="scan-result__header">' +
+            '<span class="scan-result__title">Scan Results</span>' +
+            '<span class="risk-score risk-score--' + riskClass + '">Risk Score: ' + r.risk_score.toFixed(1) + '</span>' +
+            '</div>' +
+            '<p style="margin-bottom: 1rem;">' + r.summary + '</p>' +
+            '<div class="scan-result__grid">' +
+            '<div class="scan-field"><div class="scan-field__label">Region</div><div class="scan-field__value">' + r.region + '</div></div>' +
+            '<div class="scan-field"><div class="scan-field__label">Employer</div><div class="scan-field__value">' + (r.employer_structure.name || 'Unknown') + '</div></div>' +
+            '<div class="scan-field"><div class="scan-field__label">Monthly Income</div><div class="scan-field__value">$' + formatNum(r.income_map.gross_monthly) + '</div></div>' +
+            '<div class="scan-field"><div class="scan-field__label">Annual Estimate</div><div class="scan-field__value">$' + formatNum(r.income_map.annual_estimate) + '</div></div>' +
+            '<div class="scan-field"><div class="scan-field__label">Income Stability</div><div class="scan-field__value">' + r.income_map.income_stability + '</div></div>' +
+            '<div class="scan-field"><div class="scan-field__label">Employer Type</div><div class="scan-field__value">' + r.employer_structure.type + '</div></div>' +
+            '</div>' +
+            (r.fraud_signals.length > 0 ? '<div style="margin-top: 1rem; padding: 1rem; background: rgba(214,69,69,0.1); border-radius: 8px;"><strong style="color: var(--danger);">Fraud Signals:</strong><ul style="margin-top: 0.5rem; padding-left: 1.5rem;">' + r.fraud_signals.map(f => '<li>' + f.description + '</li>').join('') + '</ul></div>' : '') +
+            '<div style="margin-top: 1rem;"><strong>Recommended Next Steps:</strong><ul style="margin-top: 0.5rem; padding-left: 1.5rem;">' + r.recommended_next_steps.map(s => '<li>' + s + '</li>').join('') + '</ul></div>';
+
+          showToast('Document scanned successfully');
+        } else {
+          resultDiv.innerHTML = '<p style="color: var(--danger);">Scan failed: ' + data.message + '</p>';
+        }
+      } catch (error) {
+        resultDiv.innerHTML = '<p style="color: var(--danger);">Scan error: ' + error.message + '</p>';
+      }
+    }
+
+    // ============================================
+    // TOGGLES
+    // ============================================
+
+    async function loadToggles() {
+      const data = await api('/admin/toggles');
+      if (data.success) {
+        document.getElementById('feature-toggles').innerHTML =
+          Object.entries(data.data.feature_flags).map(([key, value]) =>
+            createToggleRow(key, value, 'feature')
+          ).join('');
+
+        document.getElementById('experimental-toggles').innerHTML =
+          Object.entries(data.data.experimental_flags).map(([key, value]) =>
+            createToggleRow(key, value, 'experimental')
+          ).join('');
+      }
+    }
+
+    function createToggleRow(key, value, category) {
+      const id = 'toggle-' + key;
+      return '<div class="toggle-row">' +
+        '<div>' +
+        '<div class="toggle-label">' + key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) + '</div>' +
+        '<div class="toggle-desc">' + category + '</div>' +
+        '</div>' +
+        '<label class="toggle">' +
+        '<input type="checkbox" id="' + id + '" ' + (value ? 'checked' : '') + ' onchange="updateToggle(\'' + key + '\', this.checked)">' +
+        '<span class="toggle-slider"></span>' +
+        '</label>' +
+        '</div>';
+    }
+
+    async function updateToggle(key, value) {
+      const data = await apiPost('/admin/toggles/update', { key, value: String(value) });
+      if (data.success) {
+        showToast('Toggle updated: ' + key);
+      } else {
+        showToast('Failed: ' + data.message, true);
+        loadToggles();
+      }
+    }
+
+    // ============================================
+    // KILLSWITCHES
+    // ============================================
+
+    async function loadKillswitches() {
+      const data = await api('/admin/killswitches');
+      if (data.success) {
+        document.getElementById('killswitches-list').innerHTML =
+          data.data.map(k => createKillswitchRow(k)).join('');
+      }
+    }
+
+    function createKillswitchRow(k) {
+      const icons = {
+        billing: '&#128179;',
+        posting: '&#128172;',
+        signups: '&#128101;',
+        docs: '&#128196;',
+        api: '&#9889;'
+      };
+
+      return '<div class="killswitch">' +
+        '<div class="killswitch__info">' +
+        '<span class="killswitch__icon">' + (icons[k.module] || '&#9888;') + '</span>' +
+        '<span class="killswitch__name">' + k.module.charAt(0).toUpperCase() + k.module.slice(1) + '</span>' +
+        '</div>' +
+        '<div style="display: flex; align-items: center; gap: 1rem;">' +
+        '<span class="killswitch__status killswitch__status--' + (k.enabled ? 'enabled' : 'disabled') + '">' + (k.enabled ? 'ENABLED' : 'DISABLED') + '</span>' +
+        '<button class="btn btn--' + (k.enabled ? 'danger' : 'primary') + ' btn--small" onclick="toggleKillswitch(\'' + k.module + '\', ' + !k.enabled + ')">' +
+        (k.enabled ? 'Disable' : 'Enable') +
+        '</button>' +
+        '</div>' +
+        '</div>';
+    }
+
+    async function toggleKillswitch(module, enabled) {
+      if (!confirm((enabled ? 'Enable' : 'Disable') + ' ' + module + '?')) return;
+
+      const data = await apiPost('/admin/killswitch', { module, enabled });
+      if (data.success) {
+        showToast('Killswitch ' + (enabled ? 'enabled' : 'disabled') + ': ' + module);
+        loadKillswitches();
+      } else {
+        showToast('Failed: ' + data.message, true);
+      }
+    }
+
+    // ============================================
+    // ENVIRONMENT
+    // ============================================
+
+    async function loadEnvironment() {
+      const data = await api('/admin/env');
+      if (data.success) {
+        document.getElementById('env-info').innerHTML =
+          createCard('Environment', data.data.current_environment, '&#127760;') +
+          createCard('Log Level', data.data.log_level, '&#128196;') +
+          createCard('Build Version', data.data.build_version, '&#128230;') +
+          createCard('Node Version', data.data.node_version, '&#128295;') +
+          createCard('Platform', data.data.platform, '&#128187;');
+
+        document.getElementById('env-select').value = data.data.current_environment;
+        document.getElementById('log-level-select').value = data.data.log_level;
+      }
+    }
+
+    async function updateEnv() {
+      const env = document.getElementById('env-select').value;
+      const log_level = document.getElementById('log-level-select').value;
+
+      const data = await apiPost('/admin/env/update', { env, log_level });
+      if (data.success) {
+        showToast('Environment updated');
+        loadEnvironment();
+      } else {
+        showToast('Failed: ' + data.message, true);
+      }
+    }
+
+    // ============================================
+    // HELPERS
+    // ============================================
+
+    function createCard(title, value, icon, status) {
+      return '<div class="card">' +
+        '<div class="card__header">' +
+        '<span class="card__title">' + title + '</span>' +
+        '<span class="card__icon">' + icon + '</span>' +
+        '</div>' +
+        '<div class="card__value">' + value + '</div>' +
+        '</div>';
+    }
+
+    function formatNum(num) {
+      if (num === null || num === undefined) return '-';
+      return num.toLocaleString();
+    }
+
+    function showToast(message, isError) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').textContent = message;
+      document.getElementById('toast-icon').innerHTML = isError ? '&#10007;' : '&#10003;';
+      toast.style.background = isError ? 'var(--danger)' : 'var(--brown)';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+  </script>
+</body>
+</html>
