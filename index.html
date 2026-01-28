@@ -2,451 +2,291 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SimplyLouie – The $2 Movement</title>
+  <title>SimplyLouie – Simple AI for Real Life</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <style>
-    /* ------------------------------
-       SIMPLYLOUIE MOVEMENT CSS
-       Warm, human, anti-corporate
-       Mobile-first
-    ------------------------------ */
-
-    :root {
-      --brown: #5a3e2b;
-      --tan: #d9b899;
-      --cream: #f7f3ee;
-      --black: #1a1a1a;
-      --accent: #ff7a3d;
-      --text: #2b2b2b;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 0 1.2rem 2.5rem;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 0;
-    }
-
-    .nav-left {
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: var(--brown);
-    }
-
-    .nav-right {
-      display: flex;
-      gap: 0.8rem;
-      font-size: 0.9rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-right a {
-      text-decoration: none;
-      opacity: 0.85;
-    }
-
-    h1, h2 {
-      font-weight: 700;
-      color: var(--brown);
-      margin-bottom: 0.6rem;
-    }
-
-    h1 {
-      font-size: 1.9rem;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-    }
-
-    h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--brown);
-      margin-top: 1.2rem;
-      margin-bottom: 0.4rem;
-    }
-
-    p {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      padding: 0.75rem 1.4rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      margin-right: 0.6rem;
-      font-size: 0.95rem;
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      background: var(--brown);
-      color: white;
-      padding: 0.75rem 1.4rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .hero {
-      padding: 2.5rem 0 1.5rem;
-      text-align: center;
-    }
-
-    .hero-offer {
-      font-weight: 600;
-      color: var(--brown);
-      margin-top: 0.5rem;
-    }
-
-    .hero-tagline {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    section {
-      margin: 1.8rem 0;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-    }
-
-    .section-muted {
-      background: #fdfaf7;
-    }
-
-    ul {
-      margin: 1rem 0;
-      padding-left: 1.2rem;
-    }
-
-    ul li {
-      margin-bottom: 0.6rem;
-    }
-
-    .price-note {
-      font-size: 0.95rem;
-      color: var(--brown);
-      font-weight: 500;
-    }
-
-    .testimonial {
-      margin-bottom: 1.2rem;
-      padding: 1rem;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    }
-
-    .footer {
-      text-align: center;
-      padding: 2rem 0 0;
-      color: var(--brown);
-      font-size: 0.9rem;
-    }
-
-    @media (min-width: 720px) {
-      .hero {
-        text-align: left;
-      }
-
-      .hero-inner {
-        display: flex;
-        flex-direction: column;
-        max-width: 640px;
-      }
-
-      .hero-ctas {
-        display: flex;
-        align-items: center;
-      }
-
-      section {
-        padding: 2rem;
-      }
-    }
-  </style>
+  <meta name="description" content="SimplyLouie is a calm, simple AI that helps you with work, school, business, and everyday life. Made for Nigeria, Philippines, Indonesia, Kenya, and Ghana." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <div class="page">
-
-    <!-- NAV -->
-    <header class="nav">
-      <div class="nav-left">SimplyLouie</div>
-      <nav class="nav-right">
-        <a href="#tools">Tools</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#movement">Movement</a>
-        <a href="#start-trial">Start Free Trial</a>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <div class="logo">
+          <div class="logo-ear logo-ear--left"></div>
+          <div class="logo-ear logo-ear--right"></div>
+          <div class="logo-face"></div>
+          <div class="logo-snout"></div>
+        </div>
+        <span class="brand-name">SimplyLouie</span>
+      </a>
+      <nav class="nav">
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="movement.html" class="nav-link">Our Movement</a>
+        <a href="onboarding.html" class="nav-cta">Start Free</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-inner">
-        <h1>Don't let corporations tell you who to be.</h1>
-        <p>
-          SimplyLouie is simple AI for real people — not Silicon Valley.<br>
-          People over profits. Change from the bottom up.
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <span class="hero-eyebrow">Calm, simple, on your side</span>
+        <h1 class="hero-title">Simple AI that helps you get through the day.</h1>
+        <p class="hero-subtitle">
+          SimplyLouie is a calm, simple AI that helps you with work, school, business, and everyday life.
+          Made for real people in places where life moves fast and tools are often too complicated.
         </p>
-        <p class="hero-offer">One week free. Then $2/month for everything.</p>
-        <p class="hero-tagline">
-          Made for Nigeria, Philippines, Indonesia, Kenya, and Ghana — and anyone who's been overlooked.
+        <p class="hero-markets">
+          Built especially for <strong>Nigeria, Philippines, Indonesia, Kenya, and Ghana</strong>.
         </p>
-        <div class="hero-ctas">
-          <a href="#start-trial" class="btn-primary">Start Free Trial</a>
-          <a href="#movement" class="btn-secondary">Join the Movement</a>
+        <div class="hero-actions">
+          <a href="onboarding.html" class="btn btn--primary">Join on Telegram</a>
+          <a href="pricing.html" class="btn btn--secondary">See Pricing</a>
+        </div>
+        <p class="hero-note">
+          <strong>One week free.</strong> Then $2/month. No pressure, no tricks.
+        </p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <span class="hero-card-title">What Louie does for you</span>
+          <span class="hero-card-tag">Made for real people</span>
+        </div>
+        <ul class="hero-card-list">
+          <li>Helps you write messages, homework, and business posts without stress</li>
+          <li>Keeps things simple — no dashboards, no confusion, just clear answers</li>
+          <li>Works on your phone, through Telegram, wherever you already are</li>
+          <li>Stays calm when life feels heavy, so you don't have to carry it alone</li>
+        </ul>
+        <div class="hero-card-pills">
+          <span class="pill">Work</span>
+          <span class="pill">School</span>
+          <span class="pill">Small business</span>
+          <span class="pill">Everyday life</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- INSPIRED -->
-    <section class="inspired section-muted">
-      <h2>Inspired by a rescue Saint Bernard.</h2>
-      <p>
-        He came from fear and uncertainty, but with love and patience he got a second chance.<br>
-        Now his spirit lives in SimplyLouie — warm, loyal, protective — helping you build yours.
-      </p>
-    </section>
-
-    <!-- WHY SIMPLYLOUIE EXISTS -->
-    <section id="why" class="section-muted">
-      <h2>Why SimplyLouie Exists.</h2>
-      <p>
-        Big corporations built AI for themselves — expensive, complicated, out of reach.
-        We built SimplyLouie for everyone else.
-      </p>
-
-      <p>
-        Inspired by a rescued Saint Bernard who got a second chance, we believe people deserve the same:
-        warmth, support, and a real shot at a better life.
-      </p>
-
-      <ul>
-        <li>Tech that respects you.</li>
-        <li>Pricing that includes you.</li>
-        <li>A community that lifts you up.</li>
-        <li>Charity chosen by the people, not executives.</li>
-      </ul>
-
-      <a href="#start-trial" class="btn-primary">Join the Movement</a>
-    </section>
-
-    <!-- TOOLS -->
-    <section id="tools" class="section-muted">
-      <h2>Simple tools that help you every day.</h2>
-      <p>No complexity. No corporate nonsense. Just tools that make life easier for real people.</p>
-
-      <ul>
-        <li><strong>Ask Anything:</strong> Homework, work tasks, writing, explanations.</li>
-        <li><strong>Business Help:</strong> Marketing ideas, customer messages, planning.</li>
-        <li><strong>Daily Life:</strong> Forms, letters, translations, summaries.</li>
-        <li><strong>Local Focus:</strong> Built for Nigeria, Philippines, Indonesia, Kenya, Ghana.</li>
-        <li><strong>Movement Tools:</strong> Charity voting, community, merch access.</li>
-      </ul>
-
-      <a href="#start-trial" class="btn-primary">Start Free Trial</a>
-    </section>
-
-    <!-- COUNTRIES -->
-    <section id="countries" class="section-muted">
-      <h2>Built for real people in your country.</h2>
-      <p>SimplyLouie was made for places the big corporations ignore.</p>
-
-      <ul>
-        <li><strong>Nigeria:</strong> Students, workers, hustlers leveling up daily.</li>
-        <li><strong>Philippines:</strong> Parents, freelancers, creators getting real support.</li>
-        <li><strong>Indonesia:</strong> Small businesses and students growing with simple tools.</li>
-        <li><strong>Kenya:</strong> Entrepreneurs and learners building from the ground up.</li>
-        <li><strong>Ghana:</strong> Young professionals and dreamers using AI without the high price.</li>
-      </ul>
-
-      <a href="#start-trial" class="btn-primary">Start Free Trial</a>
-    </section>
-
-    <!-- PRICING -->
-    <section class="value" id="pricing">
-      <h2>Everything for $2/month. One week free.</h2>
-      <p>No tiers. No tricks. No "premium" people.</p>
-      <ul>
-        <li>Simple AI that helps with work, school, business, and everyday life.</li>
-        <li>Built for real people in Nigeria, Philippines, Indonesia, Kenya, and Ghana.</li>
-        <li>You choose which local charities we support with part of your membership.</li>
-        <li>Access to movement gear (merch) that helps fund more good.</li>
-      </ul>
-      <p class="price-note">
-        $2 across the board. Because opportunity shouldn't be locked behind paywalls.
-      </p>
-    </section>
-
-    <!-- CHARITY -->
-    <section id="charity" class="section-muted">
-      <h2>You choose where we give.</h2>
-      <p>
-        Part of your $2/month goes to local charities — but not chosen by us.<br>
-        <strong>You vote. The community decides.</strong>
-      </p>
-
-      <ul>
-        <li>Support real people in your country.</li>
-        <li>Monthly community voting inside the app.</li>
-        <li>Transparent results — no corporate games.</li>
-        <li>Every member has an equal voice.</li>
-      </ul>
-
-      <a href="#start-trial" class="btn-primary">Join the Movement</a>
-    </section>
-
-    <!-- MERCH -->
-    <section id="merch" class="section-muted">
-      <h2>Movement Gear that Gives Back.</h2>
-      <p>
-        This isn't corporate merch. It's how you show you're part of something real.<br>
-        Every item helps fund the charities the community votes for.
-      </p>
-
-      <ul>
-        <li>Warm, Saint-Bernard-inspired designs.</li>
-        <li>Simple, clean, movement-first style.</li>
-        <li>Profits support the causes you choose.</li>
-        <li>Wear it to spread the message: people over profits.</li>
-      </ul>
-
-      <a href="#start-trial" class="btn-primary">Join the Movement</a>
-    </section>
-
-    <!-- COMMUNITY -->
-    <section id="community-section" class="section-muted">
-      <h2>A community built from the ground up.</h2>
-      <p>
-        SimplyLouie isn't a corporation. It's people — students, workers, parents, hustlers, creators —
-        all lifting each other up with the same $2 tools.
-      </p>
-
-      <ul>
-        <li>Share ideas and learn from others.</li>
-        <li>See how people in your country grow with SimplyLouie.</li>
-        <li>Vote on new features and improvements.</li>
-        <li>Help shape the future of the movement.</li>
-      </ul>
-
-      <a href="#start-trial" class="btn-primary">Join the Community</a>
-    </section>
-
-    <!-- MOVEMENT -->
-    <section class="movement section-muted" id="movement">
-      <h2>Join the bottom-up movement.</h2>
-      <p>
-        We won't let corporations dictate who you are or what you can become.<br>
-        This is tech for everyone, built from the ground up by people who care.
-      </p>
-      <p>
-        Real people helping real people. A community where you belong.
-      </p>
-      <a href="#start-trial" class="btn-primary">Join for $2/month</a>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section id="testimonials" class="section-muted">
-      <h2>What people are saying.</h2>
-      <p>Real voices from the movement.</p>
-
-      <div class="testimonial">
-        <p>"I've never seen an AI made for people in my country. $2 is something I can actually afford."</p>
-        <strong>— Chinedu, Nigeria</strong>
+  <!-- How SimplyLouie Helps -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Your helper, not another app to learn</p>
+        <h2 class="section-title">How SimplyLouie Helps</h2>
+        <p class="section-subtitle">
+          You don't need to be good with technology. Just tell Louie what you need, and it handles the rest.
+        </p>
       </div>
 
-      <div class="testimonial">
-        <p>"It helps me with school and my small business. No stress, no complicated menus."</p>
-        <strong>— Maria, Philippines</strong>
+      <div class="helps-grid">
+        <div class="help-card">
+          <div class="help-icon">✍️</div>
+          <h3>Write anything, stress-free</h3>
+          <p>Messages to your boss, school essays, business posts, formal letters — Louie helps you say what you mean, clearly and confidently.</p>
+        </div>
+
+        <div class="help-card">
+          <div class="help-icon">💡</div>
+          <h3>Get answers that make sense</h3>
+          <p>No confusing jargon. Ask Louie anything — about health, money, work, or life — and get plain, honest answers you can actually use.</p>
+        </div>
+
+        <div class="help-card">
+          <div class="help-icon">📱</div>
+          <h3>Works where you already are</h3>
+          <p>No new apps to download. Just Telegram. Works on any phone, even with slow data. Help should meet you where you are.</p>
+        </div>
+
+        <div class="help-card">
+          <div class="help-icon">🤝</div>
+          <h3>Someone in your corner</h3>
+          <p>When you're stuck, overwhelmed, or just need someone to think with — Louie listens without judgment and helps you figure things out.</p>
+        </div>
+
+        <div class="help-card">
+          <div class="help-icon">🏪</div>
+          <h3>Grow your small business</h3>
+          <p>Write product descriptions, reply to customers, plan your week, draft proposals — all the small things that add up to big growth.</p>
+        </div>
+
+        <div class="help-card">
+          <div class="help-icon">📚</div>
+          <h3>Study smarter, not harder</h3>
+          <p>Break down difficult topics, prepare for exams, check your work — Louie explains things in a way that actually makes sense to you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why $2 Matters -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Priced for real life</p>
+        <h2 class="section-title">Why $2 Matters</h2>
+        <p class="section-subtitle">
+          We know $2 is real money. That's why we made sure it's worth every bit.
+        </p>
       </div>
 
-      <div class="testimonial">
-        <p>"I love that we vote on which charities get support. It feels like we're building something together."</p>
-        <strong>— Yusuf, Kenya</strong>
+      <div class="pricing-wrapper">
+        <div class="price-display">
+          <div class="price-amount">$2</div>
+          <div class="price-period">per month</div>
+          <p class="price-context">Less than a plate of rice. More help than you'd expect.</p>
+        </div>
+
+        <div class="benefits-list">
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <p><strong>Unlimited help</strong> — Ask as many questions as you need. No daily limits, no counting messages.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <p><strong>One week free</strong> — Try everything first. If it's not for you, just walk away. No tricks.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <p><strong>Cancel anytime</strong> — Life changes. We get it. No contracts, no guilt, no questions asked.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <p><strong>Local payment options</strong> — Pay the way that works for you. Mobile money, bank transfer, card.</p>
+          </div>
+        </div>
+
+        <div class="pricing-cta">
+          <a href="onboarding.html" class="btn btn--primary">Start Your Free Week</a>
+          <p class="pricing-note">No payment needed to try. Just your Telegram account.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Made for Real People -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">You're not alone in this</p>
+        <h2 class="section-title">Made for Real People</h2>
+        <p class="section-subtitle">
+          SimplyLouie was built for people like you — juggling work, family, dreams, and everything in between.
+        </p>
       </div>
 
-      <div class="testimonial">
-        <p>"Finally, an app that doesn't treat us like second-class users. This feels like a family."</p>
-        <strong>— Putri, Indonesia</strong>
+      <div class="stories-grid">
+        <div class="story-card">
+          <p class="story-quote">I used to spend hours writing proposals for my tailoring business. Now I just tell Louie what I want to say, and it's done in minutes.</p>
+          <div class="story-author">
+            <div class="story-avatar">A</div>
+            <div>
+              <div class="story-name">Amina</div>
+              <div class="story-location">Lagos, Nigeria</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <p class="story-quote">My English isn't perfect, but Louie helps me write professional emails for my freelance work. My clients think I'm a native speaker now.</p>
+          <div class="story-author">
+            <div class="story-avatar">R</div>
+            <div>
+              <div class="story-name">Rico</div>
+              <div class="story-location">Cebu, Philippines</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <p class="story-quote">When my father got sick, I had so many questions about his medication. Louie explained everything in simple Swahili. It gave me peace of mind.</p>
+          <div class="story-author">
+            <div class="story-avatar">G</div>
+            <div>
+              <div class="story-name">Grace</div>
+              <div class="story-location">Nairobi, Kenya</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-card">
+          <p class="story-quote">I'm a student working part-time. $2 is what I can afford. But Louie helps me with assignments, interview prep, everything. It's like having a smart friend.</p>
+          <div class="story-author">
+            <div class="story-avatar">D</div>
+            <div>
+              <div class="story-name">Dwi</div>
+              <div class="story-location">Jakarta, Indonesia</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <a href="#start-trial" class="btn-primary">Start Free Trial</a>
-    </section>
+      <div class="people-message">
+        <p>
+          We didn't build SimplyLouie for people who already have everything figured out. We built it for the student studying by phone light, the mom running a business from her kitchen, the worker sending money home and trying to make every cedi, peso, and naira count.
+        </p>
+        <p class="message-emphasis">
+          You deserve tools that respect your time, your money, and your intelligence.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <!-- FAQ -->
-    <section id="faq" class="section-muted">
-      <h2>Frequently Asked Questions</h2>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo">
+              <div class="logo-ear logo-ear--left"></div>
+              <div class="logo-ear logo-ear--right"></div>
+              <div class="logo-face"></div>
+              <div class="logo-snout"></div>
+            </div>
+            <span class="brand-name">SimplyLouie</span>
+          </div>
+          <p class="footer-tagline">Simple AI for everyone who just needs a little help. No tech talk, no confusion — just answers.</p>
+        </div>
 
-      <h3>Why is everything only $2?</h3>
-      <p>Because opportunity shouldn't be locked behind paywalls. No tiers, no upsells, no tricks.</p>
+        <nav class="footer-nav">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="onboarding.html">Get Started</a></li>
+            <li><a href="#">Help Center</a></li>
+          </ul>
+        </nav>
 
-      <h3>What do I get for $2?</h3>
-      <p>All tools, charity voting, community, merch access — everything.</p>
+        <nav class="footer-nav">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="movement.html">Our Movement</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </nav>
 
-      <h3>Is this really for my country?</h3>
-      <p>Yes. Built for real people in Nigeria, Philippines, Indonesia, Kenya, and Ghana.</p>
+        <nav class="footer-nav">
+          <h4>Countries</h4>
+          <ul>
+            <li><a href="#">Nigeria</a></li>
+            <li><a href="#">Philippines</a></li>
+            <li><a href="#">Indonesia</a></li>
+            <li><a href="#">Kenya</a></li>
+            <li><a href="#">Ghana</a></li>
+          </ul>
+        </nav>
+      </div>
 
-      <h3>Where does the charity money go?</h3>
-      <p>The community votes monthly. You choose. We give. Transparent and simple.</p>
-
-      <h3>Can I cancel anytime?</h3>
-      <p>Yes. No contracts. No pressure. No corporate games.</p>
-
-      <a href="#start-trial" class="btn-primary">Start Free Trial</a>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="cta" id="start-trial">
-      <h2>Start your free week.</h2>
-      <p>
-        One week free with your card. Then just $2/month for everything.<br>
-        Cancel anytime. No hidden tiers. No corporate games.
-      </p>
-      <a href="/signup.html" class="btn-primary">Get Started</a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>SimplyLouie — tech for everyone, inspired by a rescue Saint Bernard.</p>
-      <p>People over profits. Change from the bottom up.</p>
-      <p>&copy; 2026 SimplyLouie</p>
-    </footer>
-
-  </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 SimplyLouie. Made with care for real people.</p>
+        <p class="footer-markets">Built for Nigeria, Philippines, Indonesia, Kenya, and Ghana.</p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
