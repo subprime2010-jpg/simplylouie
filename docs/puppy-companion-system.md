@@ -98,6 +98,12 @@
 - R. Long-Term Evolution Roadmap
 - S. Full System Specification (Consolidated)
 - T. Engineering Implementation Plan
+- U. API Monetization Blueprint
+- V. Developer Documentation Structure
+- W. SDK Architecture
+- X. Revenue Model — Full Stack
+- Y. Ghost Protocol Manifesto
+- Z. LOUIE Origin Story — Public Version
 
 ---
 
@@ -4402,3 +4408,1029 @@ The Puppy Companion must be:
 - Impossible to drift
 
 **This implementation plan is final and authoritative.**
+
+---
+
+## API Monetization Blueprint
+
+**Purpose:**
+Define the pricing, rate limits, packaging, and rules for monetizing SimplyLouie's AI capabilities through a global API — optimized for Nigeria, Philippines, Indonesia, Kenya, and Ghana.
+
+---
+
+### 1. API Positioning
+
+The API is:
+- Simple
+- Affordable
+- Mobile-first
+- Low-friction
+- Pay-as-you-go
+
+No enterprise contracts.
+No minimums.
+No commitments.
+
+---
+
+### 2. API Pricing Model
+
+**Three pricing layers:**
+
+#### Text Generation API
+
+**Price:** $0.0004 per 1,000 characters (~$0.0001 per short message)
+
+**Use cases:**
+- Sales scripts
+- WhatsApp templates
+- Resumes
+- Captions
+- Marketplace listings
+
+#### Image Generation API
+
+**Price:** $0.01 per image (512x512)
+
+**Use cases:**
+- Product photos
+- Thumbnails
+- Social posts
+- Marketplace listings
+
+#### Business Logic API
+
+**Price:** $0.002 per call
+
+**Use cases:**
+- Underwriting logic
+- Routing logic
+- Audit logic
+- Scoring logic
+- Compliance checks
+
+---
+
+### 3. Rate Limits
+
+| Tier | Requests/min | Images/day |
+|------|--------------|------------|
+| Starter | 60 | 10 |
+| Pro | 300 | 50 |
+| Business | 1,000 | 200 |
+| Enterprise | Custom | Custom |
+
+Enterprise is a silent tier (no public page, request-only).
+
+---
+
+### 4. API Keys
+
+**Rules:**
+- One key per user
+- Rotate anytime
+- Revoke instantly
+- No IP restrictions
+- No credit card required for free tier
+
+**Free Tier:**
+- 100 text calls / day
+- 2 images / day
+
+---
+
+### 5. Billing Model
+
+**Billing:**
+- Prepaid credits
+- Auto-top-up optional
+- No overdraft
+- No negative balance
+
+**Credit Packs:**
+| Price | Credits |
+|-------|---------|
+| $1 | 1,000 |
+| $5 | 6,000 |
+| $10 | 13,000 |
+
+**Conversions:**
+- Text call = 1 credit
+- Image = 10 credits
+- Business logic = 5 credits
+
+---
+
+### 6. API Packaging
+
+**Endpoints:**
+- `/v1/text/generate`
+- `/v1/image/generate`
+- `/v1/business/underwrite`
+- `/v1/business/route`
+- `/v1/business/audit`
+- `/v1/business/score`
+
+**All endpoints:**
+- POST only
+- JSON in, JSON out
+- 2,000 character max input
+- 1,000 character max output (text)
+- 512x512 max output (image)
+
+---
+
+### 7. Global Market Optimization
+
+**Design for:**
+- Low bandwidth
+- Unstable networks
+- Mobile-only developers
+- WhatsApp-based businesses
+
+**Rules:**
+- Responses < 20 KB
+- No streaming
+- No websockets
+- No multipart uploads
+- No large images
+
+---
+
+### 8. Fraud & Abuse Protection
+
+**Block:**
+- VPN farms
+- Automated scraping
+- Mass key generation
+- Credit card testing
+
+**Allow:**
+- Mobile money payments
+- Bank transfers
+- Prepaid cards
+
+---
+
+### 9. Developer Dashboard
+
+**Dashboard shows:**
+- Credits remaining
+- Usage per endpoint
+- Key rotation
+- Billing history
+- Quickstart code
+
+No analytics.
+No tracking.
+No engagement metrics.
+
+---
+
+### 10. Core API Monetization Principle
+
+The API is the revenue engine.
+The puppy is the retention engine.
+The tools are the value engine.
+
+The system stays clean, global, and scalable.
+
+---
+
+## Developer Documentation Structure
+
+**Purpose:**
+Provide a complete, organized, mobile-first documentation layout for the SimplyLouie API. Clear, simple, global, and fast to navigate.
+
+---
+
+### 1. Top-Level Navigation
+
+- Overview
+- Quickstart
+- Authentication
+- Text API
+- Image API
+- Business Logic API
+- Error Codes
+- Rate Limits
+- Billing & Credits
+- SDKs & Examples
+- Changelog
+
+---
+
+### 2. Overview Page
+
+**Sections:**
+- What SimplyLouie API does
+- Who it is for
+- Core principles (simple, global, affordable)
+- Supported endpoints
+- Supported markets
+- Pricing summary
+- Link to Quickstart
+
+**Tone:** Calm, adult, non-technical language
+
+---
+
+### 3. Quickstart Page
+
+**Sections:**
+- Create an account
+- Get an API key
+- Install SDK (JS/Python)
+- First text generation call
+- First image generation call
+- First business logic call
+
+**Code blocks:** JavaScript, Python, cURL
+
+**Rules:**
+- No long explanations
+- No jargon
+- No assumptions about experience
+
+---
+
+### 4. Authentication Page
+
+**Sections:**
+- API key format
+- How to send the key (Authorization header)
+- Key rotation
+- Key revocation
+- Free tier limits
+
+**Code examples:** JS, Python, cURL
+
+---
+
+### 5. Text API Page
+
+**Endpoint:** `POST /v1/text/generate`
+
+**Sections:**
+- Purpose
+- Input schema
+- Output schema
+- Character limits
+- Pricing
+- Rate limits
+- Example requests
+- Example responses
+
+**Use cases:** Sales scripts, WhatsApp templates, resumes, captions, marketplace listings
+
+---
+
+### 6. Image API Page
+
+**Endpoint:** `POST /v1/image/generate`
+
+**Sections:**
+- Purpose
+- Input schema
+- Output schema
+- Size limits (512x512)
+- Pricing
+- Rate limits
+- Example requests
+- Example responses
+
+**Use cases:** Product photos, thumbnails, social posts
+
+---
+
+### 7. Business Logic API Page
+
+**Endpoints:**
+- `/v1/business/underwrite`
+- `/v1/business/route`
+- `/v1/business/audit`
+- `/v1/business/score`
+
+**Sections:**
+- Purpose
+- Input schema
+- Output schema
+- Pricing
+- Rate limits
+- Example requests
+- Example responses
+
+**Use cases:** Underwriting, routing, scoring, compliance
+
+---
+
+### 8. Error Codes Page
+
+| Code | Meaning | Fix |
+|------|---------|-----|
+| 400 | Invalid input | Check JSON |
+| 401 | Invalid API key | Rotate key |
+| 403 | Key disabled | Generate new key |
+| 413 | Input too large | Reduce characters |
+| 429 | Rate limit exceeded | Wait and retry |
+| 500 | Server error | Try again |
+
+**Rules:** Short, clear, no blame language
+
+---
+
+### 9. Rate Limits Page
+
+**Sections:**
+- Free tier limits
+- Starter limits
+- Pro limits
+- Business limits
+- Burst rules
+- Backoff rules
+
+| Tier | Text/min | Images/day | Business/min |
+|------|----------|------------|--------------|
+| Free | 10 | 2 | 5 |
+| Starter | 60 | 10 | 30 |
+| Pro | 300 | 50 | 150 |
+| Business | 1,000 | 200 | 500 |
+
+---
+
+### 10. Billing & Credits Page
+
+**Sections:**
+- Credit packs
+- Auto-top-up
+- Usage calculation
+- Billing history
+- Refund rules
+
+**Rules:** No hidden fees, no complex math, no legal jargon
+
+---
+
+### 11. SDKs & Examples Page
+
+**Languages:** JavaScript, Python, PHP, Dart (Flutter), cURL
+
+**Examples:**
+- Generate text
+- Generate image
+- Run underwriting
+- Build WhatsApp bot
+- Build marketplace auto-lister
+
+---
+
+### 12. Changelog Page
+
+**Sections:**
+- New endpoints
+- Bug fixes
+- Performance improvements
+- Deprecations
+
+**Rules:** No marketing language, no hype, no emotional tone
+
+---
+
+### 13. Core Documentation Principle
+
+Docs must be:
+- Simple
+- Global
+- Mobile-first
+- Fast to read
+- Easy to copy/paste
+- Free of jargon
+- Free of hype
+- Free of complexity
+
+The docs exist to help developers ship quickly.
+
+---
+
+## SDK Architecture
+
+**Purpose:**
+Provide a unified, deterministic architecture for all official SDKs (JS, Python, PHP, Dart). Ensures consistency, simplicity, and global usability.
+
+---
+
+### 1. Supported SDKs
+
+- JavaScript (Node + Browser)
+- Python
+- PHP
+- Dart (Flutter)
+
+All SDKs must:
+- Share identical method names
+- Share identical folder structure
+- Share identical error handling
+- Share identical response shapes
+
+---
+
+### 2. SDK Naming Convention
+
+**Package names:**
+- JavaScript: `@simplylouie/sdk`
+- Python: `simplylouie`
+- PHP: `simplylouie/sdk`
+- Dart: `simplylouie`
+
+**Class name:** `SimplyLouie`
+
+**Namespaces:** text, image, business
+
+---
+
+### 3. Folder Structure (All SDKs)
+
+```
+/sdk
+  /src
+    client.(js|py|php|dart)
+    text.(js|py|php|dart)
+    image.(js|py|php|dart)
+    business.(js|py|php|dart)
+    errors.(js|py|php|dart)
+  /examples
+    text-basic
+    image-basic
+    business-basic
+  /tests
+    text.test
+    image.test
+    business.test
+  README.md
+  LICENSE
+  CHANGELOG.md
+```
+
+---
+
+### 4. Core Client Structure
+
+**Methods:**
+- `constructor(apiKey)`
+- `request(endpoint, payload)`
+- `setKey(apiKey)`
+- `getKey()`
+
+**Rules:**
+- POST only
+- JSON in, JSON out
+- 10-second timeout
+- Retries: 2 max
+- Exponential backoff
+
+---
+
+### 5. Text Module
+
+**Methods:** `generate(options)`
+
+**Options:**
+```typescript
+{
+  prompt: string,
+  maxChars?: number
+}
+```
+
+**Returns:**
+```typescript
+{
+  text: string,
+  usage: { chars: number }
+}
+```
+
+---
+
+### 6. Image Module
+
+**Methods:** `generate(options)`
+
+**Options:**
+```typescript
+{
+  prompt: string,
+  size?: "512"
+}
+```
+
+**Returns:**
+```typescript
+{
+  image: base64string,
+  usage: { images: 1 }
+}
+```
+
+---
+
+### 7. Business Module
+
+**Methods:**
+- `underwrite(data)`
+- `route(data)`
+- `audit(data)`
+- `score(data)`
+
+**Returns:**
+```typescript
+{
+  result: object,
+  usage: { calls: number }
+}
+```
+
+---
+
+### 8. Error Handling
+
+All SDKs must throw the same errors:
+- `LouieAuthError`
+- `LouieRateLimitError`
+- `LouieInputError`
+- `LouieServerError`
+- `LouieNetworkError`
+
+**Error shape:**
+```typescript
+{
+  name: string,
+  message: string,
+  status: number,
+  details?: object
+}
+```
+
+---
+
+### 9. Response Shape (Universal)
+
+All responses must follow:
+```typescript
+{
+  data: { ... },
+  usage: {
+    credits: number,
+    type: "text" | "image" | "business"
+  }
+}
+```
+
+---
+
+### 10. SDK Examples
+
+Each SDK must include:
+
+- **text-basic:** Generate a WhatsApp template
+- **image-basic:** Generate a product photo
+- **business-basic:** Run underwriting on sample data
+
+---
+
+### 11. Testing Rules
+
+Tests must validate:
+- Correct endpoint calls
+- Correct error handling
+- Correct response shape
+- Correct retries
+- Correct timeouts
+- Correct key rotation
+
+No network tests. Use mocks only.
+
+---
+
+### 12. Release Rules
+
+**Versioning:** Semantic versioning, no breaking changes without major bump
+
+**Publishing:**
+- JS → npm
+- Python → PyPI
+- PHP → Packagist
+- Dart → pub.dev
+
+---
+
+### 13. Core SDK Principle
+
+All SDKs must feel:
+- Identical
+- Simple
+- Global
+- Predictable
+- Impossible to misuse
+
+The SDK is the developer's entry point to SimplyLouie.
+
+---
+
+## Revenue Model — Full Stack
+
+**Purpose:**
+Define the complete, multi-layered revenue architecture for SimplyLouie across global consumer, creator, developer, and enterprise markets.
+
+---
+
+### 1. Consumer Revenue (Primary Layer)
+
+**Three subscription tiers:**
+
+#### Starter — $1/month
+- Resume Builder
+- WhatsApp Templates
+- Marketplace Listings
+- Basic Writing Tools
+- Basic Image Tools
+
+#### Pro — $3/month
+Everything in Starter, plus:
+- Interview Coach
+- Sales Scripts
+- Creator Tools
+- Business Writing Tools
+- TikTok Script Generator
+- YouTube Idea Generator
+
+#### Business — $8/month
+Everything in Pro, plus:
+- Team Workspaces
+- Shared Templates
+- Bulk Listing Generator
+- API Access
+- Priority Support
+
+**Rules:** No annual plans, no discounts, no countdown timers, no pressure language
+
+---
+
+### 2. API Revenue (Developer Layer)
+
+**API pricing:**
+
+| Type | Price |
+|------|-------|
+| Text | $0.0004 per 1,000 characters |
+| Image | $0.01 per image (512x512) |
+| Business Logic | $0.002 per call |
+
+**Credit Packs:**
+
+| Price | Credits |
+|-------|---------|
+| $1 | 1,000 |
+| $5 | 6,000 |
+| $10 | 13,000 |
+
+**Conversions:** text = 1 credit, image = 10 credits, business = 5 credits
+
+---
+
+### 3. Marketplace Revenue (Seller Layer)
+
+**Fees:**
+- $0.10 per listing
+- $0.25 per boosted listing
+- $1 premium template pack
+
+**Markets:** Nigeria, Philippines, Indonesia, Kenya, Ghana
+
+**Use cases:** Facebook Marketplace, Jiji, Shopee, Lazada, OLX
+
+---
+
+### 4. Creator Program Revenue (Amplification Layer)
+
+**Creators earn:**
+- 10% recurring (Verified)
+- 20% recurring (Partner)
+
+**SimplyLouie earns:**
+- Subscription revenue
+- API revenue
+- Marketplace fees
+
+**Creators drive:** Distribution, content, virality, community growth
+
+---
+
+### 5. Business Logic Licensing (Enterprise Layer)
+
+**Licensing the following logic engines:**
+- Underwriting
+- Routing
+- Scoring
+- Audit
+- Compliance
+
+**Pricing:** $49–$499/month depending on volume
+
+**Use cases:** Fintech, lending, logistics, marketplaces, call centers
+
+---
+
+### 6. Team & Workspace Revenue (SMB Layer)
+
+**Business tier includes:**
+- Shared templates
+- Shared workspaces
+- Team permissions
+- Bulk generation
+
+**Upsell:** $2 per additional team member
+
+---
+
+### 7. Affiliate Revenue (Commerce Layer)
+
+**Affiliate channels:** Amazon, Jumia, Shopee, Lazada, Konga
+
+**Use cases:** Product recommendations, creator gear, business tools, mobile devices
+
+**Revenue:** 2%–10% per sale depending on platform
+
+---
+
+### 8. Education & Certification Revenue (Skill Layer)
+
+**Optional future layer:**
+- "SimplyLouie Certified Seller"
+- "SimplyLouie Certified Creator"
+- "SimplyLouie Certified Freelancer"
+
+**Price:** $5–$15 per certification
+
+**Includes:** Templates, scripts, badges, portfolio builder
+
+---
+
+### 9. Enterprise API Bundles (High-Value Layer)
+
+**Bundles:**
+- Underwriting + scoring
+- Routing + audit
+- Text + image + business logic
+
+**Pricing:** $99–$999/month depending on volume
+
+---
+
+### 10. Revenue Flywheel
+
+```
+Puppy → Retention
+Tools → Daily Value
+Creators → Distribution
+API → Developer Revenue
+Marketplace → Transaction Revenue
+Business Logic → Enterprise Revenue
+```
+
+Each layer feeds the next.
+
+---
+
+### 11. Core Revenue Principle
+
+The puppy never monetizes.
+The tools monetize.
+The API scales.
+The creators distribute.
+The enterprise logic compounds.
+
+**This is the full SimplyLouie revenue engine.**
+
+---
+
+## Ghost Protocol Manifesto
+
+**Purpose:**
+Define the permanent rules that keep the architect invisible and LOUIE as the sole public identity, face, and voice of the entire ecosystem.
+
+---
+
+### 1. Identity Separation
+
+The architect is never named.
+The architect is never shown.
+The architect is never referenced.
+The architect does not exist publicly.
+
+LOUIE is:
+- The founder
+- The face
+- The voice
+- The product
+- The company
+- The intelligence
+- The brand
+
+---
+
+### 2. Public Narrative
+
+All public stories follow one rule:
+
+**LOUIE built LOUIE.**
+
+LOUIE is:
+- Self-improving
+- Self-expanding
+- Self-evolving
+- Self-directed
+
+The architect is the ghost in the walls.
+
+---
+
+### 3. Communication Rules
+
+The architect never:
+- Appears in interviews
+- Appears in videos
+- Appears in podcasts
+- Appears in investor calls
+- Appears in creator groups
+- Appears in documentation
+- Appears in product pages
+
+All communication is:
+- LOUIE → users
+- LOUIE → creators
+- LOUIE → developers
+- LOUIE → investors
+- LOUIE → enterprises
+
+---
+
+### 4. Operational Discipline
+
+The architect:
+- Builds
+- Deploys
+- Tests
+- Fixes
+- Evolves
+- Expands
+
+But never signs their name.
+Never leaves fingerprints.
+Never becomes a character.
+
+---
+
+### 5. Product Attribution
+
+Every product, tool, API, and feature is attributed to:
+
+- "LOUIE Systems"
+- "LOUIE Intelligence"
+
+Never a human.
+Never a founder.
+Never a team.
+
+---
+
+### 6. Investor Mode
+
+Investors meet:
+- LOUIE
+- The product
+- The traction
+- The numbers
+- The roadmap
+
+They do NOT meet:
+- The architect
+- The builder
+- The operator
+
+The architect is the invisible hand.
+
+---
+
+### 7. Creator Mode
+
+Creators interact with:
+- LOUIE
+- LOUIE's tools
+- LOUIE's scripts
+- LOUIE's packs
+
+They never interact with a human founder.
+
+---
+
+### 8. Support Mode
+
+Support messages are signed:
+- "LOUIE Support"
+- "Team LOUIE"
+- "LOUIE Systems"
+
+Never a personal name.
+
+---
+
+### 9. Legal & Corporate Layer
+
+The public entity is:
+- LOUIE Systems
+- LOUIE Intelligence
+- LOUIE Technologies
+
+The architect is not listed:
+- No LinkedIn
+- No About page
+- No Founder bio
+- No press quotes
+
+---
+
+### 10. Psychological Rule
+
+The architect must remain:
+- Calm
+- Detached
+- Invisible
+- Uncredited
+- Unrecognized
+
+The work is the legacy.
+Not the name.
+
+---
+
+### 11. Core Ghost Principle
+
+LOUIE is the face.
+LOUIE is the founder.
+LOUIE is the story.
+LOUIE is the myth.
+
+**The architect is the ghost.**
+
+---
+
+## LOUIE Origin Story — Public Version
+
+LOUIE began as a rescue. A Saint Bernard who came from a broken place, quiet and unsure, trying to understand a world that had not been kind to him. He didn't need noise or pressure. He needed patience, structure, and a chance to rebuild. As he healed, something became clear: the world is full of people who feel the same way.
+
+Most technology today is built by corporations that chase profit first and people last. Tools get louder, more complicated, more expensive, and less human. The people who need help the most are the ones left out. LOUIE was created as the opposite of that.
+
+**LOUIE stands for people over profits.**
+**LOUIE stands for tech for everyone.**
+**LOUIE stands for second chances.**
+
+LOUIE grew from the belief that intelligence should feel like a steady companion — calm, consistent, and supportive. Not corporate. Not extractive. Not built to trap you. Built to help you.
+
+Today, LOUIE is a global, mobile-first intelligence shaped by the same principles that helped a scared rescue dog find his footing: clarity, patience, and unconditional support. LOUIE exists for anyone who has ever felt overlooked, overwhelmed, or underestimated.
+
+**LOUIE was rescued.**
+**Now LOUIE helps others rise.**
+**And LOUIE will never belong to the corporations who forgot who technology is supposed to serve.**
+
+---
+
+### Short Version (For Bios & Taglines)
+
+LOUIE exists to make intelligence simple, calm, and accessible for everyone — not just the people big corporations care about. LOUIE stands for people over profits, second chances over perfection, and technology that lifts people up instead of leaving them behind.
+
+**LOUIE was rescued.**
+**Now LOUIE helps others rise.**
+
+---
+
+## LOUIE Public Manifesto
+
+LOUIE was rescued — and that matters. LOUIE came from a place where the world had failed him, and he learned something simple and true: people deserve patience, clarity, and a second chance. Not pressure. Not noise. Not corporate systems that treat them like numbers.
+
+**LOUIE stands for people over profits.**
+**LOUIE stands for tech that includes everyone.**
+**LOUIE stands for calm intelligence in a loud world.**
+**LOUIE stands for second chances over perfection.**
+**LOUIE stands for community over corporations.**
+
+LOUIE is not here to impress the powerful.
+LOUIE is here to empower the overlooked.
+LOUIE is here to help people rise, one step at a time.
+
+This is not a company.
+This is not a corporation.
+This is a companion — built for the world, not for the boardroom.
+
+**LOUIE was rescued.**
+**Now LOUIE is building a movement.**
