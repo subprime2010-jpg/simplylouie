@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LOUIE Autonomy Panel</title>
+<style>
+    body {
+        background: #f4efe6;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        color: #3a2f28;
+    }
+    h1 {
+        color: #5c4638;
+        margin-bottom: 5px;
+    }
+    .subtitle {
+        color: #8b7355;
+        margin-bottom: 20px;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 15px;
+    }
+    .card {
+        background: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+        margin-top: 0;
+        color: #5c4638;
+        font-size: 16px;
+        border-bottom: 1px solid #e8e0d5;
+        padding-bottom: 8px;
+    }
+    .status-ok { color: #2e7d32; font-weight: bold; }
+    .status-bad { color: #c62828; font-weight: bold; }
+    .status-warn { color: #f57c00; font-weight: bold; }
+    .metric {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid #f0ebe3;
+    }
+    .metric:last-child { border-bottom: none; }
+    .metric-label { color: #6b5b4f; }
+    .metric-value { font-weight: bold; color: #3a2f28; }
+    pre {
+        background: #f8f5f0;
+        padding: 10px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 12px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    .module-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #f0ebe3;
+    }
+    .module-row:last-child { border-bottom: none; }
+    .toggle-btn {
+        padding: 4px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    .toggle-on {
+        background: #2e7d32;
+        color: white;
+    }
+    .toggle-off {
+        background: #c62828;
+        color: white;
+    }
+    .refresh-info {
+        text-align: right;
+        font-size: 12px;
+        color: #8b7355;
+        margin-top: 10px;
+    }
+    .alert-item {
+        padding: 8px;
+        margin: 5px 0;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+    .alert-critical { background: #ffebee; border-left: 4px solid #c62828; }
+    .alert-warning { background: #fff3e0; border-left: 4px solid #f57c00; }
+    .alert-info { background: #e3f2fd; border-left: 4px solid #1976d2; }
+</style>
+</head>
+<body>
+
+<h1>LOUIE Founder Autonomy Panel</h1>
+<p class="subtitle">Real-time system monitoring and control</p>
+
+<div class="grid">
+    <div class="card">
+        <h2>System Health</h2>
+        <div id="systemHealth">Loading...</div>
+    </div>
+
+    <div class="card">
+        <h2>Overview</h2>
+        <div id="overview">Loading...</div>
+    </div>
+
+    <div class="card">
+        <h2>Financials</h2>
+        <div id="financials">Loading...</div>
+    </div>
+
+    <div class="card">
+        <h2>Community</h2>
+        <div id="community">Loading...</div>
+    </div>
+</div>
+
+<div class="grid" style="margin-top: 15px;">
+    <div class="card">
+        <h2>Killswitches</h2>
+        <div id="killswitches">Loading...</div>
+    </div>
+
+    <div class="card">
+        <h2>Feature Toggles</h2>
+        <div id="toggles">Loading...</div>
+    </div>
+</div>
+
+<div class="grid" style="margin-top: 15px;">
+    <div class="card">
+        <h2>Intelligence</h2>
+        <div id="intelligence">Loading...</div>
+    </div>
+
+    <div class="card">
+        <h2>Document Scanner</h2>
+        <div id="scanner">Loading...</div>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 15px;">
+    <h2>Activity Log</h2>
+    <pre id="activityLog">Waiting for events...</pre>
+</div>
+
+<div class="refresh-info">
+    Auto-refresh: 2 seconds | Last update: <span id="lastUpdate">-</span>
+</div>
+
+<script>
+const token = "YOUR_JWT_TOKEN";
+const base = "http://localhost:3000/";
+const activityLog = [];
+const MAX_LOG = 50;
+
+function addLog(msg) {
+    const ts = new Date().toLocaleTimeString();
+    activityLog.unshift(`[${ts}] ${msg}`);
+    if (activityLog.length > MAX_LOG) activityLog.pop();
+    document.getElementById("activityLog").textContent = activityLog.join("\n");
+}
+
+async function fetchJSON(endpoint) {
+    try {
+        const r = await fetch(base + endpoint, {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        const data = await r.json();
+        if (!data.success) {
+            addLog(`ERROR: ${endpoint} - ${data.message}`);
+        }
+        return data;
+    } catch (e) {
+        addLog(`FETCH ERROR: ${endpoint} - ${e.toString()}`);
+        return { success: false, error: e.toString() };
+    }
+}
+
+async function toggleKillswitch(module, currentState) {
+    const newState = !currentState;
+    try {
+        const r = await fetch(base + "admin/killswitch", {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                module: module,
+                enabled: newState,
+                reason: "Manual toggle from Autonomy Panel"
+            })
+        });
+        const data = await r.json();
+        addLog(`KILLSWITCH: ${module} -> ${newState ? "ENABLED" : "DISABLED"}`);
+        updatePanel();
+    } catch (e) {
+        addLog(`KILLSWITCH ERROR: ${e.toString()}`);
+    }
+}
+
+function formatUptime(seconds) {
+    const d = Math.floor(seconds / 86400);
+    const h = Math.floor((seconds % 86400) / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    return `${d}d ${h}h ${m}m`;
+}
+
+function formatBytes(bytes) {
+    return (bytes / 1024 / 1024).toFixed(1) + " MB";
+}
+
+async function updatePanel() {
+    const [health, overview, financials, community, killswitches, toggles, intelligence, scanner] = await Promise.all([
+        fetchJSON("admin/system-health"),
+        fetchJSON("admin/overview"),
+        fetchJSON("admin/financials/summary"),
+        fetchJSON("admin/community"),
+        fetchJSON("admin/killswitches"),
+        fetchJSON("admin/toggles"),
+        fetchJSON("admin/intelligence"),
+        fetchJSON("admin/doc-scanner")
+    ]);
+
+    // System Health
+    if (health.success) {
+        const h = health.data;
+        document.getElementById("systemHealth").innerHTML = `
+            <div class="metric">
+                <span class="metric-label">Status</span>
+                <span class="${h.status === 'healthy' ? 'status-ok' : 'status-bad'}">${h.status?.toUpperCase()}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Uptime</span>
+                <span class="metric-value">${formatUptime(h.api_uptime || 0)}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Latency</span>
+                <span class="metric-value">${h.latency || 0}${h.latency_unit || 'ms'}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Error Rate</span>
+                <span class="metric-value">${(h.error_rate * 100).toFixed(1)}%</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Memory (Heap)</span>
+                <span class="metric-value">${formatBytes(h.memory_usage?.heapUsed || 0)}</span>
+            </div>
+        `;
+    }
+
+    // Overview
+    if (overview.success) {
+        const o = overview.data;
+        document.getElementById("overview").innerHTML = `
+            <div class="metric">
+                <span class="metric-label">Total Users</span>
+                <span class="metric-value">${o.users?.total || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">New Today</span>
+                <span class="metric-value">${o.users?.new_today || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Total Posts</span>
+                <span class="metric-value">${o.community?.total_posts || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">System</span>
+                <span class="${o.system?.status === 'healthy' ? 'status-ok' : 'status-bad'}">${o.system?.status?.toUpperCase()}</span>
+            </div>
+        `;
+    }
+
+    // Financials
+    if (financials.success) {
+        const f = financials.data;
+        document.getElementById("financials").innerHTML = `
+            <div class="metric">
+                <span class="metric-label">Today</span>
+                <span class="metric-value">$${(f.total_today || 0).toLocaleString()}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">This Week</span>
+                <span class="metric-value">$${(f.total_week || 0).toLocaleString()}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">This Month</span>
+                <span class="metric-value">$${(f.total_month || 0).toLocaleString()}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Lifetime</span>
+                <span class="metric-value">$${(f.total_lifetime || 0).toLocaleString()}</span>
+            </div>
+        `;
+    }
+
+    // Community
+    if (community.success) {
+        const c = community.data?.metrics || {};
+        document.getElementById("community").innerHTML = `
+            <div class="metric">
+                <span class="metric-label">Posts Today</span>
+                <span class="metric-value">${c.posts_today || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Comments Today</span>
+                <span class="metric-value">${c.comments_today || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Likes Today</span>
+                <span class="metric-value">${c.likes_today || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Total Posts</span>
+                <span class="metric-value">${c.total_posts || 0}</span>
+            </div>
+        `;
+    }
+
+    // Killswitches
+    if (killswitches.success) {
+        let html = "";
+        for (const ks of killswitches.data || []) {
+            const isEnabled = ks.enabled;
+            html += `
+                <div class="module-row">
+                    <span>${ks.module}</span>
+                    <button class="toggle-btn ${isEnabled ? 'toggle-on' : 'toggle-off'}"
+                            onclick="toggleKillswitch('${ks.module}', ${isEnabled})">
+                        ${isEnabled ? 'ON' : 'OFF'}
+                    </button>
+                </div>
+            `;
+        }
+        document.getElementById("killswitches").innerHTML = html || "No killswitches configured.";
+    }
+
+    // Toggles
+    if (toggles.success) {
+        const t = toggles.data;
+        let html = "";
+        for (const [key, val] of Object.entries(t.feature_flags || {})) {
+            html += `
+                <div class="module-row">
+                    <span>${key}</span>
+                    <span class="${val ? 'status-ok' : 'status-bad'}">${val ? 'ON' : 'OFF'}</span>
+                </div>
+            `;
+        }
+        document.getElementById("toggles").innerHTML = html || "No toggles configured.";
+    }
+
+    // Intelligence
+    if (intelligence.success) {
+        const i = intelligence.data?.docs || {};
+        document.getElementById("intelligence").innerHTML = `
+            <div class="metric">
+                <span class="metric-label">Scanned Today</span>
+                <span class="metric-value">${i.scanned_today || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Total Scanned</span>
+                <span class="metric-value">${i.scanned_total || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Fraud Flags</span>
+                <span class="metric-value">${i.fraud_flags_today || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Income Models</span>
+                <span class="metric-value">${i.income_models_generated || 0}</span>
+            </div>
+        `;
+    }
+
+    // Scanner
+    if (scanner.success) {
+        const s = scanner.data;
+        document.getElementById("scanner").innerHTML = `
+            <div class="metric">
+                <span class="metric-label">Status</span>
+                <span class="${s.status === 'operational' ? 'status-ok' : 'status-bad'}">${s.status?.toUpperCase()}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Scans Today</span>
+                <span class="metric-value">${s.scans_today || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Total Scans</span>
+                <span class="metric-value">${s.scans_total || 0}</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Max File Size</span>
+                <span class="metric-value">${s.max_file_size || '50MB'}</span>
+            </div>
+        `;
+    }
+
+    document.getElementById("lastUpdate").textContent = new Date().toLocaleTimeString();
+}
+
+// Initial load
+addLog("Autonomy Panel initialized.");
+updatePanel();
+
+// Auto-refresh
+setInterval(updatePanel, 2000);
+</script>
+
+</body>
+</html>

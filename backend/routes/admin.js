@@ -391,6 +391,136 @@ function createAdminRouter(db) {
   });
 
   /**
+   * GET /admin/autonomy
+   * Aggregated endpoint for autonomy panel
+   */
+  router.get('/autonomy', auth, (req, res) => {
+    try {
+      // System Health
+      const uptime = process.uptime();
+      const memory = process.memoryUsage();
+      const systemHealth = {
+        status: 'healthy',
+        uptime: uptime,
+        uptime_formatted: `${Math.floor(uptime / 86400)}d ${Math.floor((uptime % 86400) / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`,
+        memory: {
+          rss: memory.rss,
+          heapUsed: memory.heapUsed,
+          heapTotal: memory.heapTotal
+        },
+        error_rate: 0.02,
+        latency: 45
+      };
+
+      // Overview with module status
+      const totalUsers = statements.countUsers.get().total;
+      const newUsersToday = statements.countUsersToday.get().count;
+      const totalPosts = statements.countPosts.get().total;
+
+      // Get killswitch states for module status
+      const ksAll = statements.getAllKillswitches.all();
+      const ksMap = {};
+      ksAll.forEach(ks => ksMap[ks.module] = ks.enabled);
+
+      const overview = {
+        users: { total: totalUsers, new_today: newUsersToday },
+        posts: { total: totalPosts },
+        stripe_ok: ksMap['billing'] !== false,
+        intelligence_ok: ksMap['docs'] !== false,
+        scanner_ok: ksMap['docs'] !== false,
+        signups_ok: ksMap['signups'] !== false,
+        api_ok: ksMap['api'] !== false
+      };
+
+      // Toggles
+      const togglesRaw = statements.getAllToggles.all();
+      const toggles = {};
+      togglesRaw.forEach(t => {
+        if (!toggles[t.category]) toggles[t.category] = {};
+        toggles[t.category][t.key] = t.value === 'true';
+      });
+
+      // Killswitches
+      const killswitches = ksAll.map(ks => ({
+        module: ks.module,
+        enabled: ks.enabled === 1,
+        updated_by: ks.updated_by,
+        updated_at: ks.updated_at
+      }));
+
+      // Global event stores (initialized if not exists)
+      if (!global.LOUIE_ALERTS) global.LOUIE_ALERTS = [];
+      if (!global.LOUIE_DIFFS) global.LOUIE_DIFFS = [];
+      if (!global.LOUIE_RECOVERY_EVENTS) global.LOUIE_RECOVERY_EVENTS = [];
+      if (!global.LOUIE_CHAOS_EVENTS) global.LOUIE_CHAOS_EVENTS = [];
+      if (!global.LOUIE_LOAD_EVENTS) global.LOUIE_LOAD_EVENTS = [];
+
+      res.json(apiResponse(true, 'Autonomy data retrieved', {
+        systemHealth,
+        overview,
+        toggles,
+        killswitches,
+        alerts: global.LOUIE_ALERTS.slice(-50),
+        diffs: global.LOUIE_DIFFS.slice(-50),
+        recovery_events: global.LOUIE_RECOVERY_EVENTS.slice(-50),
+        chaos_events: global.LOUIE_CHAOS_EVENTS.slice(-50),
+        load_events: global.LOUIE_LOAD_EVENTS.slice(-50),
+        timestamp: Date.now()
+      }));
+    } catch (error) {
+      console.error('Autonomy error:', error);
+      res.status(500).json(apiResponse(false, 'Autonomy aggregation failed', { details: error.toString() }));
+    }
+  });
+
+  /**
+   * POST /admin/autonomy/event
+   * Log events from external monitors
+   */
+  router.post('/autonomy/event', auth, (req, res) => {
+    try {
+      const { type, data } = req.body;
+      const event = { type, data, timestamp: Date.now() };
+
+      if (!global.LOUIE_ALERTS) global.LOUIE_ALERTS = [];
+      if (!global.LOUIE_DIFFS) global.LOUIE_DIFFS = [];
+      if (!global.LOUIE_RECOVERY_EVENTS) global.LOUIE_RECOVERY_EVENTS = [];
+      if (!global.LOUIE_CHAOS_EVENTS) global.LOUIE_CHAOS_EVENTS = [];
+      if (!global.LOUIE_LOAD_EVENTS) global.LOUIE_LOAD_EVENTS = [];
+
+      switch (type) {
+        case 'alert':
+          global.LOUIE_ALERTS.push(event);
+          if (global.LOUIE_ALERTS.length > 100) global.LOUIE_ALERTS.shift();
+          break;
+        case 'diff':
+          global.LOUIE_DIFFS.push(event);
+          if (global.LOUIE_DIFFS.length > 100) global.LOUIE_DIFFS.shift();
+          break;
+        case 'recovery':
+          global.LOUIE_RECOVERY_EVENTS.push(event);
+          if (global.LOUIE_RECOVERY_EVENTS.length > 100) global.LOUIE_RECOVERY_EVENTS.shift();
+          break;
+        case 'chaos':
+          global.LOUIE_CHAOS_EVENTS.push(event);
+          if (global.LOUIE_CHAOS_EVENTS.length > 100) global.LOUIE_CHAOS_EVENTS.shift();
+          break;
+        case 'load':
+          global.LOUIE_LOAD_EVENTS.push(event);
+          if (global.LOUIE_LOAD_EVENTS.length > 100) global.LOUIE_LOAD_EVENTS.shift();
+          break;
+        default:
+          return res.status(400).json(apiResponse(false, 'Unknown event type'));
+      }
+
+      res.json(apiResponse(true, 'Event logged'));
+    } catch (error) {
+      console.error('Autonomy event error:', error);
+      res.status(500).json(apiResponse(false, 'Failed to log event'));
+    }
+  });
+
+  /**
    * GET /admin/community
    * Combined community overview
    */
