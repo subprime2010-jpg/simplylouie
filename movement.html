@@ -1,213 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Our Movement – SimplyLouie</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="SimplyLouie is more than a product. It's a movement to make AI accessible to everyone, everywhere." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SimplyLouie is more than an app. It's a movement to make AI accessible to everyone, especially those who've been left behind.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <!-- Header -->
   <header class="header">
-    <div class="container header-inner">
+    <div class="container">
       <a href="index.html" class="brand">
-        <div class="logo">
-          <div class="logo-ear logo-ear--left"></div>
-          <div class="logo-ear logo-ear--right"></div>
-          <div class="logo-face"></div>
-          <div class="logo-snout"></div>
+        <div class="logo" aria-hidden="true">
+          <span class="logo-ear logo-ear--left"></span>
+          <span class="logo-ear logo-ear--right"></span>
+          <span class="logo-face"></span>
+          <span class="logo-snout"></span>
         </div>
         <span class="brand-name">SimplyLouie</span>
       </a>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main navigation">
         <a href="pricing.html" class="nav-link">Pricing</a>
-        <a href="movement.html" class="nav-link active">Our Movement</a>
-        <a href="onboarding.html" class="nav-cta">Start Free</a>
+        <a href="movement.html" class="nav-link nav-link--active">Our Movement</a>
+        <a href="onboarding.html" class="btn btn--nav">Start Free</a>
       </nav>
     </div>
   </header>
 
   <!-- Page Hero -->
-  <section class="page-hero">
-    <div class="container">
-      <span class="hero-eyebrow">More than a product</span>
-      <h1 class="page-hero-title">We believe AI should work for everyone.</h1>
-      <p class="page-hero-subtitle">
-        Not just people in rich countries. Not just people who speak perfect English. Not just people who grew up with computers. Everyone.
+  <section class="page-hero page-hero--tall">
+    <div class="container container--narrow">
+      <span class="badge">More than an app</span>
+      <h1>AI should help everyone. Not just the privileged few.</h1>
+      <p class="page-hero-lead">
+        The most powerful technology in human history shouldn't be locked behind $20/month paywalls and English-first interfaces. SimplyLouie exists to change that.
       </p>
     </div>
   </section>
 
-  <!-- Mission -->
-  <section class="section section--alt">
-    <div class="container">
-      <div class="mission-statement">
+  <!-- The Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <header class="section-header section-header--left">
+        <span class="section-eyebrow">The problem we see</span>
+        <h2>AI has a fairness problem</h2>
+      </header>
+
+      <div class="prose">
         <p>
-          Right now, the most powerful tools in the world are being built in a handful of places, for a handful of people. The rest of the world — the students, the small business owners, the workers, the dreamers — they're left behind.
+          Right now, the best AI tools cost $20 or more per month. They're designed for people with stable incomes in wealthy countries. They assume you have fast internet, the latest phone, and fluent English.
         </p>
         <p>
-          We started SimplyLouie because we believe that's wrong. The person selling fish in Lagos deserves the same help as the tech worker in San Francisco. The student in Jakarta deserves the same advantages as the one in London.
+          That leaves out <strong>billions of people</strong>.
         </p>
         <p>
-          <strong>This isn't charity. This is justice.</strong>
+          The student in Jakarta who could use AI to study but can't afford it. The small business owner in Lagos who could grow faster with AI help. The freelancer in Nairobi competing against people with better tools.
+        </p>
+        <p>
+          This isn't just unfair. It's dangerous. AI is becoming the most important tool in the world. If only wealthy people can use it, the gap between rich and poor will grow even wider.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Principles -->
-  <section class="section">
+  <!-- Our Beliefs -->
+  <section class="section section--alt">
     <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">What we stand for</p>
-        <h2 class="section-title">Our Principles</h2>
-        <p class="section-subtitle">
-          These aren't marketing slogans. They're promises we make to ourselves and to you.
-        </p>
-      </div>
+      <header class="section-header">
+        <span class="section-eyebrow">What we believe</span>
+        <h2>Our Principles</h2>
+      </header>
 
-      <div class="principles-grid">
-        <div class="principle-card">
-          <h3>Simplicity is respect</h3>
-          <p>When we make things simple, we're saying your time matters. We're saying you don't need to be a tech expert to deserve good tools. Complexity is often laziness. Simplicity takes effort — and we put in that effort for you.</p>
-        </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Price for local reality</h3>
+          <p>$2 might seem cheap to someone in San Francisco. But we know it's real money in Lagos, Cebu, and Nairobi. We price for the places we serve.</p>
+        </article>
 
-        <div class="principle-card">
-          <h3>Accessible pricing is non-negotiable</h3>
-          <p>We will never price SimplyLouie out of reach of the people who need it most. $2/month isn't a teaser rate or a loss leader. It's our commitment. If we can't make it work at that price, we'll find a way.</p>
-        </div>
+        <article class="card">
+          <h3>Simple beats clever</h3>
+          <p>We don't add features to seem impressive. We remove friction. Every interaction should feel like talking to a helpful friend — not wrestling with software.</p>
+        </article>
 
-        <div class="principle-card">
+        <article class="card">
           <h3>Meet people where they are</h3>
-          <p>If people use Telegram, we go to Telegram. If people pay with mobile money, we accept mobile money. If people have slow internet, we make it work on slow internet. We adapt to your life, not the other way around.</p>
-        </div>
+          <p>Telegram works on old phones, slow networks, and limited data. That's why we're there. Help should come to you.</p>
+        </article>
 
-        <div class="principle-card">
-          <h3>No tech talk, no gatekeeping</h3>
-          <p>We will never make you feel stupid for not knowing something. We will never use jargon to seem smart. Our job is to make you feel capable and confident, not confused and small.</p>
-        </div>
+        <article class="card">
+          <h3>Respect intelligence</h3>
+          <p>You don't need a degree to be smart. Our users are brilliant — they just need tools that help them do what they already know how to do, faster.</p>
+        </article>
 
-        <div class="principle-card">
-          <h3>Dignity in every interaction</h3>
-          <p>Whether you're a CEO or a student, whether you're asking about business strategy or how to write a WhatsApp message, you get the same care and respect. Everyone's problems matter.</p>
-        </div>
+        <article class="card">
+          <h3>No dark patterns</h3>
+          <p>No tricks to keep you subscribed. No confusing pricing. No guilt when you cancel. We earn your business every month by being genuinely helpful.</p>
+        </article>
 
-        <div class="principle-card">
-          <h3>We grow with you</h3>
-          <p>As our users' needs evolve, so will we. We're not building a static product — we're building a companion that gets better at helping you over time, shaped by what you actually need.</p>
+        <article class="card">
+          <h3>Human warmth</h3>
+          <p>Technology doesn't have to feel cold. Louie is calm, encouraging, and never judgmental. Like a patient friend who happens to know a lot.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Name -->
+  <section class="section">
+    <div class="container container--narrow">
+      <header class="section-header">
+        <span class="section-eyebrow">About the name</span>
+        <h2>Why "Louie"?</h2>
+      </header>
+
+      <div class="name-story">
+        <div class="name-story-image">
+          <div class="logo logo--large" aria-hidden="true">
+            <span class="logo-ear logo-ear--left"></span>
+            <span class="logo-ear logo-ear--right"></span>
+            <span class="logo-face"></span>
+            <span class="logo-snout"></span>
+          </div>
+        </div>
+        <div class="name-story-content">
+          <p>
+            Saint Bernard dogs are famous for one thing: finding people lost in the snow and helping them get home safe.
+          </p>
+          <p>
+            That's what we wanted SimplyLouie to feel like. Not a cold robot. Not a corporate tool. A warm, reliable companion who shows up when you're stuck and helps you find your way.
+          </p>
+          <p>
+            <strong>Louie is your Saint Bernard for daily life.</strong> Patient. Calm. Always there when you need help. Never judging you for asking.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Countries -->
+  <!-- Who We're For -->
   <section class="section section--alt">
     <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Starting where we're needed most</p>
-        <h2 class="section-title">Why These Countries?</h2>
-        <p class="section-subtitle">
-          We chose to launch in Nigeria, Philippines, Indonesia, Kenya, and Ghana because these are places where the need is great and the potential is greater.
-        </p>
+      <header class="section-header">
+        <span class="section-eyebrow">Who we serve</span>
+        <h2>Built for Real People</h2>
+        <p>These are the people we think about every day.</p>
+      </header>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3>Students</h3>
+          <p>Studying for exams, writing essays, trying to understand difficult concepts — often on a phone, often late at night.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Small Business Owners</h3>
+          <p>Running a shop, selling online, doing everything themselves — marketing, customer service, planning. Need help but can't afford consultants.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3>Freelancers</h3>
+          <p>Competing globally, writing proposals, dealing with clients in other countries. Every advantage matters. Every hour saved is money earned.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Parents & Caregivers</h3>
+          <p>Helping kids with homework, researching health questions, managing budgets. Wearing ten hats and needing a reliable helper.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Job Seekers</h3>
+          <p>Writing resumes, preparing for interviews, learning new skills. Trying to stand out without expensive career coaches.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
+          <h3>Anyone Who Writes</h3>
+          <p>Professional emails, formal letters, social media posts. Wanting to sound clear and confident, even when English isn't your first language.</p>
+        </article>
       </div>
+    </div>
+  </section>
 
-      <div class="stories-grid">
-        <div class="story-card">
-          <p class="story-quote">Nigeria has the largest economy in Africa and a booming tech scene, but most Nigerians still don't have access to the tools that could transform their lives and businesses.</p>
-          <div class="story-author">
-            <div class="story-avatar">🇳🇬</div>
-            <div>
-              <div class="story-name">Nigeria</div>
-              <div class="story-location">200+ million people</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="story-card">
-          <p class="story-quote">The Philippines sends workers all over the world, supporting families back home. They deserve tools that help them communicate professionally in English and manage their money wisely.</p>
-          <div class="story-author">
-            <div class="story-avatar">🇵🇭</div>
-            <div>
-              <div class="story-name">Philippines</div>
-              <div class="story-location">110+ million people</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="story-card">
-          <p class="story-quote">Indonesia is one of the fastest-growing digital economies in the world. But growth doesn't mean everyone benefits. We're here to make sure the small players get a fair shot.</p>
-          <div class="story-author">
-            <div class="story-avatar">🇮🇩</div>
-            <div>
-              <div class="story-name">Indonesia</div>
-              <div class="story-location">270+ million people</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="story-card">
-          <p class="story-quote">Kenya is the heart of East African innovation. M-Pesa changed how the world thinks about mobile payments. We believe the next big ideas will come from places like this — and we want to help.</p>
-          <div class="story-author">
-            <div class="story-avatar">🇰🇪</div>
-            <div>
-              <div class="story-name">Kenya</div>
-              <div class="story-location">50+ million people</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="people-message">
+  <!-- Our Promise -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="manifesto">
+        <h2>Our Promise</h2>
         <p>
-          These five countries are just the beginning. We're building SimplyLouie to eventually serve anyone, anywhere, who needs a little help getting through the day.
+          We will always prioritize access over profit. We will never forget who we're building for. We will keep Louie affordable, simple, and genuinely helpful — no matter how we grow.
         </p>
-        <p class="message-emphasis">
-          If you're in a country we haven't reached yet, let us know. We're listening.
+        <p class="manifesto-emphasis">
+          Because technology only matters if it reaches the people who need it most.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Join the Movement -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Be part of something bigger</p>
-        <h2 class="section-title">Join the Movement</h2>
-        <p class="section-subtitle">
-          When you use SimplyLouie, you're not just getting help — you're proving that there's a market for ethical, accessible AI. You're showing the world what's possible.
-        </p>
-      </div>
-
-      <div class="cta-section">
-        <h2 class="section-title">Ready to join us?</h2>
-        <p class="section-subtitle">
-          Start your free week today. Experience what AI should feel like — simple, warm, and on your side.
-        </p>
-        <a href="onboarding.html" class="btn btn--primary btn--large">Start Your Free Week</a>
-      </div>
+  <!-- Join CTA -->
+  <section class="section cta-section">
+    <div class="container container--narrow">
+      <h2>Be part of something different</h2>
+      <p>Join the thousands of people who are already using SimplyLouie to study smarter, work better, and navigate life with more confidence.</p>
+      <a href="onboarding.html" class="btn btn--inverse btn--lg">Start Free on Telegram</a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-inner">
+      <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">
-            <div class="logo">
-              <div class="logo-ear logo-ear--left"></div>
-              <div class="logo-ear logo-ear--right"></div>
-              <div class="logo-face"></div>
-              <div class="logo-snout"></div>
+          <a href="index.html" class="brand">
+            <div class="logo logo--light" aria-hidden="true">
+              <span class="logo-ear logo-ear--left"></span>
+              <span class="logo-ear logo-ear--right"></span>
+              <span class="logo-face"></span>
+              <span class="logo-snout"></span>
             </div>
             <span class="brand-name">SimplyLouie</span>
-          </div>
-          <p class="footer-tagline">Simple AI for everyone who just needs a little help.</p>
+          </a>
+          <p>Simple AI for everyone who just needs a little help. No tech talk, no confusion — just answers.</p>
         </div>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Product links">
           <h4>Product</h4>
           <ul>
             <li><a href="pricing.html">Pricing</a></li>
@@ -216,7 +253,7 @@
           </ul>
         </nav>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Company links">
           <h4>Company</h4>
           <ul>
             <li><a href="movement.html">Our Movement</a></li>
@@ -225,7 +262,7 @@
           </ul>
         </nav>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Countries">
           <h4>Countries</h4>
           <ul>
             <li><a href="#">Nigeria</a></li>
@@ -238,10 +275,11 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 SimplyLouie. Made with care for real people.</p>
-        <p class="footer-markets">Built for Nigeria, Philippines, Indonesia, Kenya, and Ghana.</p>
+        <p>&copy; 2026 SimplyLouie. Made with care for real people.</p>
+        <p>Built for Nigeria, Philippines, Indonesia, Kenya, and Ghana.</p>
       </div>
     </div>
   </footer>
+
 </body>
 </html>

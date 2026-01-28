@@ -1,258 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>SimplyLouie – Simple AI for Real Life</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="SimplyLouie is a calm, simple AI that helps you with work, school, business, and everyday life. Made for Nigeria, Philippines, Indonesia, Kenya, and Ghana." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SimplyLouie is a calm, simple AI that helps you with work, school, business, and everyday life. Made for Nigeria, Philippines, Indonesia, Kenya, and Ghana.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <!-- Header -->
   <header class="header">
-    <div class="container header-inner">
+    <div class="container">
       <a href="index.html" class="brand">
-        <div class="logo">
-          <div class="logo-ear logo-ear--left"></div>
-          <div class="logo-ear logo-ear--right"></div>
-          <div class="logo-face"></div>
-          <div class="logo-snout"></div>
+        <div class="logo" aria-hidden="true">
+          <span class="logo-ear logo-ear--left"></span>
+          <span class="logo-ear logo-ear--right"></span>
+          <span class="logo-face"></span>
+          <span class="logo-snout"></span>
         </div>
         <span class="brand-name">SimplyLouie</span>
       </a>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main navigation">
         <a href="pricing.html" class="nav-link">Pricing</a>
         <a href="movement.html" class="nav-link">Our Movement</a>
-        <a href="onboarding.html" class="nav-cta">Start Free</a>
+        <a href="onboarding.html" class="btn btn--nav">Start Free</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
   <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <span class="hero-eyebrow">Calm, simple, on your side</span>
-        <h1 class="hero-title">Simple AI that helps you get through the day.</h1>
-        <p class="hero-subtitle">
-          SimplyLouie is a calm, simple AI that helps you with work, school, business, and everyday life.
-          Made for real people in places where life moves fast and tools are often too complicated.
-        </p>
-        <p class="hero-markets">
-          Built especially for <strong>Nigeria, Philippines, Indonesia, Kenya, and Ghana</strong>.
-        </p>
-        <div class="hero-actions">
-          <a href="onboarding.html" class="btn btn--primary">Join on Telegram</a>
-          <a href="pricing.html" class="btn btn--secondary">See Pricing</a>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="badge">Calm, simple, on your side</span>
+          <h1>Simple AI that helps you get through the day.</h1>
+          <p class="hero-lead">
+            SimplyLouie is a calm, simple AI that helps you with work, school, business, and everyday life. Made for real people in places where life moves fast and tools are often too complicated.
+          </p>
+          <p class="hero-markets">
+            Built especially for <strong>Nigeria, Philippines, Indonesia, Kenya, and Ghana</strong>.
+          </p>
+          <div class="hero-actions">
+            <a href="onboarding.html" class="btn btn--primary btn--lg">Join on Telegram</a>
+            <a href="pricing.html" class="btn btn--ghost">See Pricing</a>
+          </div>
+          <p class="hero-note">
+            <strong>One week free.</strong> Then $2/month. No pressure, no tricks.
+          </p>
         </div>
-        <p class="hero-note">
-          <strong>One week free.</strong> Then $2/month. No pressure, no tricks.
-        </p>
-      </div>
 
-      <div class="hero-card">
-        <div class="hero-card-header">
-          <span class="hero-card-title">What Louie does for you</span>
-          <span class="hero-card-tag">Made for real people</span>
-        </div>
-        <ul class="hero-card-list">
-          <li>Helps you write messages, homework, and business posts without stress</li>
-          <li>Keeps things simple — no dashboards, no confusion, just clear answers</li>
-          <li>Works on your phone, through Telegram, wherever you already are</li>
-          <li>Stays calm when life feels heavy, so you don't have to carry it alone</li>
-        </ul>
-        <div class="hero-card-pills">
-          <span class="pill">Work</span>
-          <span class="pill">School</span>
-          <span class="pill">Small business</span>
-          <span class="pill">Everyday life</span>
-        </div>
+        <aside class="hero-card">
+          <header class="hero-card-header">
+            <h2>What Louie does for you</h2>
+            <span class="badge badge--small">Made for real people</span>
+          </header>
+          <ul class="hero-card-list">
+            <li>Helps you write messages, homework, and business posts without stress</li>
+            <li>Keeps things simple — no dashboards, no confusion, just clear answers</li>
+            <li>Works on your phone, through Telegram, wherever you already are</li>
+            <li>Stays calm when life feels heavy, so you don't have to carry it alone</li>
+          </ul>
+          <div class="pill-group">
+            <span class="pill">Work</span>
+            <span class="pill">School</span>
+            <span class="pill">Small business</span>
+            <span class="pill">Everyday life</span>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
 
   <!-- How SimplyLouie Helps -->
-  <section class="section section--alt">
+  <section class="section section--alt" id="how-it-helps">
     <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Your helper, not another app to learn</p>
-        <h2 class="section-title">How SimplyLouie Helps</h2>
-        <p class="section-subtitle">
-          You don't need to be good with technology. Just tell Louie what you need, and it handles the rest.
-        </p>
-      </div>
+      <header class="section-header">
+        <span class="section-eyebrow">Your helper, not another app to learn</span>
+        <h2>How SimplyLouie Helps</h2>
+        <p>You don't need to be good with technology. Just tell Louie what you need, and it handles the rest.</p>
+      </header>
 
-      <div class="helps-grid">
-        <div class="help-card">
-          <div class="help-icon">✍️</div>
+      <div class="card-grid">
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          </div>
           <h3>Write anything, stress-free</h3>
           <p>Messages to your boss, school essays, business posts, formal letters — Louie helps you say what you mean, clearly and confidently.</p>
-        </div>
+        </article>
 
-        <div class="help-card">
-          <div class="help-icon">💡</div>
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5"/></svg>
+          </div>
           <h3>Get answers that make sense</h3>
           <p>No confusing jargon. Ask Louie anything — about health, money, work, or life — and get plain, honest answers you can actually use.</p>
-        </div>
+        </article>
 
-        <div class="help-card">
-          <div class="help-icon">📱</div>
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+          </div>
           <h3>Works where you already are</h3>
           <p>No new apps to download. Just Telegram. Works on any phone, even with slow data. Help should meet you where you are.</p>
-        </div>
+        </article>
 
-        <div class="help-card">
-          <div class="help-icon">🤝</div>
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
           <h3>Someone in your corner</h3>
           <p>When you're stuck, overwhelmed, or just need someone to think with — Louie listens without judgment and helps you figure things out.</p>
-        </div>
+        </article>
 
-        <div class="help-card">
-          <div class="help-icon">🏪</div>
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
           <h3>Grow your small business</h3>
           <p>Write product descriptions, reply to customers, plan your week, draft proposals — all the small things that add up to big growth.</p>
-        </div>
+        </article>
 
-        <div class="help-card">
-          <div class="help-icon">📚</div>
+        <article class="card">
+          <div class="card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
           <h3>Study smarter, not harder</h3>
           <p>Break down difficult topics, prepare for exams, check your work — Louie explains things in a way that actually makes sense to you.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- Why $2 Matters -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Priced for real life</p>
-        <h2 class="section-title">Why $2 Matters</h2>
-        <p class="section-subtitle">
-          We know $2 is real money. That's why we made sure it's worth every bit.
-        </p>
-      </div>
+  <section class="section" id="pricing">
+    <div class="container container--narrow">
+      <header class="section-header">
+        <span class="section-eyebrow">Priced for real life</span>
+        <h2>Why $2 Matters</h2>
+        <p>We know $2 is real money. That's why we made sure it's worth every bit.</p>
+      </header>
 
-      <div class="pricing-wrapper">
-        <div class="price-display">
-          <div class="price-amount">$2</div>
-          <div class="price-period">per month</div>
+      <div class="pricing-card">
+        <div class="pricing-hero">
+          <div class="price">
+            <span class="price-currency">$</span>
+            <span class="price-amount">2</span>
+          </div>
+          <span class="price-period">per month</span>
           <p class="price-context">Less than a plate of rice. More help than you'd expect.</p>
         </div>
 
-        <div class="benefits-list">
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <p><strong>Unlimited help</strong> — Ask as many questions as you need. No daily limits, no counting messages.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <p><strong>One week free</strong> — Try everything first. If it's not for you, just walk away. No tricks.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <p><strong>Cancel anytime</strong> — Life changes. We get it. No contracts, no guilt, no questions asked.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <p><strong>Local payment options</strong> — Pay the way that works for you. Mobile money, bank transfer, card.</p>
-          </div>
-        </div>
+        <ul class="benefits">
+          <li>
+            <span class="benefit-check" aria-hidden="true"></span>
+            <div>
+              <strong>Unlimited help</strong>
+              <span>Ask as many questions as you need. No daily limits, no counting messages.</span>
+            </div>
+          </li>
+          <li>
+            <span class="benefit-check" aria-hidden="true"></span>
+            <div>
+              <strong>One week free</strong>
+              <span>Try everything first. If it's not for you, just walk away. No tricks.</span>
+            </div>
+          </li>
+          <li>
+            <span class="benefit-check" aria-hidden="true"></span>
+            <div>
+              <strong>Cancel anytime</strong>
+              <span>Life changes. We get it. No contracts, no guilt, no questions asked.</span>
+            </div>
+          </li>
+          <li>
+            <span class="benefit-check" aria-hidden="true"></span>
+            <div>
+              <strong>Local payment options</strong>
+              <span>Pay the way that works for you. Mobile money, bank transfer, card.</span>
+            </div>
+          </li>
+        </ul>
 
         <div class="pricing-cta">
-          <a href="onboarding.html" class="btn btn--primary">Start Your Free Week</a>
-          <p class="pricing-note">No payment needed to try. Just your Telegram account.</p>
+          <a href="onboarding.html" class="btn btn--primary btn--lg btn--full">Start Your Free Week</a>
+          <p>No payment needed to try. Just your Telegram account.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Made for Real People -->
-  <section class="section section--alt">
+  <section class="section section--alt" id="stories">
     <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">You're not alone in this</p>
-        <h2 class="section-title">Made for Real People</h2>
-        <p class="section-subtitle">
-          SimplyLouie was built for people like you — juggling work, family, dreams, and everything in between.
-        </p>
-      </div>
+      <header class="section-header">
+        <span class="section-eyebrow">You're not alone in this</span>
+        <h2>Made for Real People</h2>
+        <p>SimplyLouie was built for people like you — juggling work, family, dreams, and everything in between.</p>
+      </header>
 
       <div class="stories-grid">
-        <div class="story-card">
-          <p class="story-quote">I used to spend hours writing proposals for my tailoring business. Now I just tell Louie what I want to say, and it's done in minutes.</p>
-          <div class="story-author">
-            <div class="story-avatar">A</div>
-            <div>
-              <div class="story-name">Amina</div>
-              <div class="story-location">Lagos, Nigeria</div>
-            </div>
-          </div>
-        </div>
+        <blockquote class="story">
+          <p>I used to spend hours writing proposals for my tailoring business. Now I just tell Louie what I want to say, and it's done in minutes.</p>
+          <footer>
+            <span class="story-avatar">A</span>
+            <cite>
+              <strong>Amina</strong>
+              <span>Lagos, Nigeria</span>
+            </cite>
+          </footer>
+        </blockquote>
 
-        <div class="story-card">
-          <p class="story-quote">My English isn't perfect, but Louie helps me write professional emails for my freelance work. My clients think I'm a native speaker now.</p>
-          <div class="story-author">
-            <div class="story-avatar">R</div>
-            <div>
-              <div class="story-name">Rico</div>
-              <div class="story-location">Cebu, Philippines</div>
-            </div>
-          </div>
-        </div>
+        <blockquote class="story">
+          <p>My English isn't perfect, but Louie helps me write professional emails for my freelance work. My clients think I'm a native speaker now.</p>
+          <footer>
+            <span class="story-avatar">R</span>
+            <cite>
+              <strong>Rico</strong>
+              <span>Cebu, Philippines</span>
+            </cite>
+          </footer>
+        </blockquote>
 
-        <div class="story-card">
-          <p class="story-quote">When my father got sick, I had so many questions about his medication. Louie explained everything in simple Swahili. It gave me peace of mind.</p>
-          <div class="story-author">
-            <div class="story-avatar">G</div>
-            <div>
-              <div class="story-name">Grace</div>
-              <div class="story-location">Nairobi, Kenya</div>
-            </div>
-          </div>
-        </div>
+        <blockquote class="story">
+          <p>When my father got sick, I had so many questions about his medication. Louie explained everything in simple Swahili. It gave me peace of mind.</p>
+          <footer>
+            <span class="story-avatar">G</span>
+            <cite>
+              <strong>Grace</strong>
+              <span>Nairobi, Kenya</span>
+            </cite>
+          </footer>
+        </blockquote>
 
-        <div class="story-card">
-          <p class="story-quote">I'm a student working part-time. $2 is what I can afford. But Louie helps me with assignments, interview prep, everything. It's like having a smart friend.</p>
-          <div class="story-author">
-            <div class="story-avatar">D</div>
-            <div>
-              <div class="story-name">Dwi</div>
-              <div class="story-location">Jakarta, Indonesia</div>
-            </div>
-          </div>
-        </div>
+        <blockquote class="story">
+          <p>I'm a student working part-time. $2 is what I can afford. But Louie helps me with assignments, interview prep, everything. It's like having a smart friend.</p>
+          <footer>
+            <span class="story-avatar">D</span>
+            <cite>
+              <strong>Dwi</strong>
+              <span>Jakarta, Indonesia</span>
+            </cite>
+          </footer>
+        </blockquote>
       </div>
 
-      <div class="people-message">
+      <div class="manifesto">
         <p>
           We didn't build SimplyLouie for people who already have everything figured out. We built it for the student studying by phone light, the mom running a business from her kitchen, the worker sending money home and trying to make every cedi, peso, and naira count.
         </p>
-        <p class="message-emphasis">
+        <p class="manifesto-emphasis">
           You deserve tools that respect your time, your money, and your intelligence.
         </p>
       </div>
     </div>
   </section>
 
+  <!-- Final CTA -->
+  <section class="section cta-section">
+    <div class="container container--narrow">
+      <h2>Ready to try a calmer kind of help?</h2>
+      <p>Join thousands of people across Nigeria, Philippines, Indonesia, Kenya, and Ghana who are already using SimplyLouie to make life a little easier.</p>
+      <a href="onboarding.html" class="btn btn--inverse btn--lg">Start Free on Telegram</a>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-inner">
+      <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">
-            <div class="logo">
-              <div class="logo-ear logo-ear--left"></div>
-              <div class="logo-ear logo-ear--right"></div>
-              <div class="logo-face"></div>
-              <div class="logo-snout"></div>
+          <a href="index.html" class="brand">
+            <div class="logo logo--light" aria-hidden="true">
+              <span class="logo-ear logo-ear--left"></span>
+              <span class="logo-ear logo-ear--right"></span>
+              <span class="logo-face"></span>
+              <span class="logo-snout"></span>
             </div>
             <span class="brand-name">SimplyLouie</span>
-          </div>
-          <p class="footer-tagline">Simple AI for everyone who just needs a little help. No tech talk, no confusion — just answers.</p>
+          </a>
+          <p>Simple AI for everyone who just needs a little help. No tech talk, no confusion — just answers.</p>
         </div>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Product links">
           <h4>Product</h4>
           <ul>
             <li><a href="pricing.html">Pricing</a></li>
@@ -261,7 +296,7 @@
           </ul>
         </nav>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Company links">
           <h4>Company</h4>
           <ul>
             <li><a href="movement.html">Our Movement</a></li>
@@ -270,7 +305,7 @@
           </ul>
         </nav>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Countries">
           <h4>Countries</h4>
           <ul>
             <li><a href="#">Nigeria</a></li>
@@ -283,10 +318,11 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 SimplyLouie. Made with care for real people.</p>
-        <p class="footer-markets">Built for Nigeria, Philippines, Indonesia, Kenya, and Ghana.</p>
+        <p>&copy; 2026 SimplyLouie. Made with care for real people.</p>
+        <p>Built for Nigeria, Philippines, Indonesia, Kenya, and Ghana.</p>
       </div>
     </div>
   </footer>
+
 </body>
 </html>

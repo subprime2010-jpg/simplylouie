@@ -1,238 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Get Started – SimplyLouie</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Start using SimplyLouie in 3 easy steps. Open Telegram, find us, and say hello. That's it." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Start using SimplyLouie in 30 seconds. Just open Telegram, find Louie, and say hello. Free for 7 days.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <!-- Header -->
   <header class="header">
-    <div class="container header-inner">
+    <div class="container">
       <a href="index.html" class="brand">
-        <div class="logo">
-          <div class="logo-ear logo-ear--left"></div>
-          <div class="logo-ear logo-ear--right"></div>
-          <div class="logo-face"></div>
-          <div class="logo-snout"></div>
+        <div class="logo" aria-hidden="true">
+          <span class="logo-ear logo-ear--left"></span>
+          <span class="logo-ear logo-ear--right"></span>
+          <span class="logo-face"></span>
+          <span class="logo-snout"></span>
         </div>
         <span class="brand-name">SimplyLouie</span>
       </a>
-      <nav class="nav">
+      <nav class="nav" aria-label="Main navigation">
         <a href="pricing.html" class="nav-link">Pricing</a>
         <a href="movement.html" class="nav-link">Our Movement</a>
-        <a href="onboarding.html" class="nav-cta">Start Free</a>
+        <a href="onboarding.html" class="btn btn--nav">Start Free</a>
       </nav>
     </div>
   </header>
 
   <!-- Page Hero -->
   <section class="page-hero">
-    <div class="container">
-      <span class="hero-eyebrow">No apps to download</span>
-      <h1 class="page-hero-title">Start in 3 simple steps.</h1>
-      <p class="page-hero-subtitle">
-        If you can send a message, you can use SimplyLouie. That's the whole point — we meet you where you already are.
+    <div class="container container--narrow">
+      <span class="badge">Takes 30 seconds</span>
+      <h1>Let's get you started</h1>
+      <p class="page-hero-lead">
+        No app to download. No account to create. Just open Telegram and say hello to Louie.
       </p>
     </div>
   </section>
 
   <!-- Steps -->
-  <section class="section section--alt">
-    <div class="container">
-      <div class="steps-list">
-        <div class="step-item">
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="steps">
+        <div class="step">
           <div class="step-number">1</div>
           <div class="step-content">
             <h3>Open Telegram</h3>
-            <p>You probably already have it. If not, download it free from your app store. It works on any phone, even with slow data.</p>
+            <p>If you don't have Telegram yet, download it free from the App Store or Play Store. It works on any phone, even older ones.</p>
           </div>
         </div>
 
-        <div class="step-item">
+        <div class="step">
           <div class="step-number">2</div>
           <div class="step-content">
-            <h3>Search for @SimplyLouieBot</h3>
-            <p>Tap the search bar and type our name. You'll see a friendly Saint Bernard face — that's us!</p>
+            <h3>Find SimplyLouie</h3>
+            <p>Search for <strong>@SimplyLouieBot</strong> in Telegram, or tap the button below to go directly there.</p>
           </div>
         </div>
 
-        <div class="step-item">
+        <div class="step">
           <div class="step-number">3</div>
           <div class="step-content">
             <h3>Say hello</h3>
-            <p>Just send a message. Anything works: "Hi", "Hello", or jump right in with your first question. Louie will take it from there.</p>
+            <p>Send any message — "Hi", "Hello", or just ask your first question. Louie will greet you and you'll be ready to go.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Use Louie for 7 days free</h3>
+            <p>Ask anything. Get help with writing, studying, work, life. After 7 days, it's just $2/month to keep going.</p>
           </div>
         </div>
       </div>
 
-      <div style="text-align: center; margin-top: var(--space-xl);">
-        <a href="#" class="btn btn--telegram btn--large">Open SimplyLouie in Telegram</a>
-        <p class="pricing-note">Free for 7 days. No credit card needed.</p>
+      <div class="onboarding-cta">
+        <a href="https://t.me/SimplyLouieBot" class="btn btn--telegram btn--lg btn--full" target="_blank" rel="noopener">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          Open SimplyLouie on Telegram
+        </a>
+        <p class="onboarding-note">Opens in Telegram. Make sure you have it installed.</p>
       </div>
     </div>
   </section>
 
-  <!-- What to Expect -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Your first conversation</p>
-        <h2 class="section-title">What to Expect</h2>
-        <p class="section-subtitle">
-          Here's what happens when you start chatting with Louie for the first time.
-        </p>
-      </div>
-
-      <div class="helps-grid">
-        <div class="help-card">
-          <div class="help-icon">👋</div>
-          <h3>A warm welcome</h3>
-          <p>Louie will introduce itself and ask how it can help. No forms to fill, no accounts to create — just a friendly conversation.</p>
-        </div>
-
-        <div class="help-card">
-          <div class="help-icon">🎯</div>
-          <h3>Instant help</h3>
-          <p>Ask anything right away. Need help writing a message? Stuck on homework? Have a question about life? Just ask.</p>
-        </div>
-
-        <div class="help-card">
-          <div class="help-icon">⏰</div>
-          <h3>7 days free</h3>
-          <p>Your free trial starts automatically. Use Louie as much as you want for a full week. No limits, no catches.</p>
-        </div>
-
-        <div class="help-card">
-          <div class="help-icon">💳</div>
-          <h3>Simple payment (later)</h3>
-          <p>After your trial, we'll let you know how to subscribe — mobile money, bank transfer, or card. Pay the way that works for you.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tips for Getting Started -->
+  <!-- What to Ask -->
   <section class="section section--alt">
     <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Get the most out of Louie</p>
-        <h2 class="section-title">Tips for Your First Week</h2>
+      <header class="section-header">
+        <span class="section-eyebrow">Not sure where to start?</span>
+        <h2>Try asking Louie...</h2>
+      </header>
+
+      <div class="prompts-grid">
+        <div class="prompt-card">
+          <p class="prompt-text">"Help me write a professional email to my boss about taking time off"</p>
+          <span class="prompt-category">Work</span>
+        </div>
+
+        <div class="prompt-card">
+          <p class="prompt-text">"Explain photosynthesis like I'm 12 years old"</p>
+          <span class="prompt-category">School</span>
+        </div>
+
+        <div class="prompt-card">
+          <p class="prompt-text">"Write a product description for handmade earrings I'm selling"</p>
+          <span class="prompt-category">Business</span>
+        </div>
+
+        <div class="prompt-card">
+          <p class="prompt-text">"I'm feeling overwhelmed. Can you help me make a plan?"</p>
+          <span class="prompt-category">Life</span>
+        </div>
+
+        <div class="prompt-card">
+          <p class="prompt-text">"Help me prepare for a job interview at a bank"</p>
+          <span class="prompt-category">Career</span>
+        </div>
+
+        <div class="prompt-card">
+          <p class="prompt-text">"What are some side business ideas I could start with ₦20,000?"</p>
+          <span class="prompt-category">Ideas</span>
+        </div>
       </div>
 
-      <div class="stories-grid">
-        <div class="story-card">
-          <p class="story-quote">Don't be shy. There's no such thing as a stupid question. Louie is here to help, not to judge. Ask anything that's on your mind.</p>
-          <div class="story-author">
-            <div class="story-avatar">💬</div>
-            <div>
-              <div class="story-name">Ask freely</div>
-              <div class="story-location">No question is too simple</div>
-            </div>
-          </div>
-        </div>
+      <p class="prompts-note">
+        These are just examples. You can ask Louie anything — in English, or mix in your local language. Louie understands.
+      </p>
+    </div>
+  </section>
 
-        <div class="story-card">
-          <p class="story-quote">Be specific when you can. Instead of "help me write something", try "help me write a message to my landlord about the broken sink."</p>
-          <div class="story-author">
-            <div class="story-avatar">🎯</div>
-            <div>
-              <div class="story-name">Give details</div>
-              <div class="story-location">Better questions, better answers</div>
-            </div>
-          </div>
-        </div>
+  <!-- What You Get -->
+  <section class="section">
+    <div class="container container--narrow">
+      <header class="section-header">
+        <span class="section-eyebrow">What's included</span>
+        <h2>Your Free Trial</h2>
+      </header>
 
-        <div class="story-card">
-          <p class="story-quote">Ask for changes. If the first answer isn't quite right, tell Louie what to adjust. "Make it shorter" or "Make it more formal" works great.</p>
-          <div class="story-author">
-            <div class="story-avatar">🔄</div>
-            <div>
-              <div class="story-name">Iterate</div>
-              <div class="story-location">Louie learns what you need</div>
-            </div>
-          </div>
-        </div>
+      <ul class="trial-features">
+        <li>
+          <span class="trial-check" aria-hidden="true"></span>
+          <span><strong>7 full days</strong> of unlimited access</span>
+        </li>
+        <li>
+          <span class="trial-check" aria-hidden="true"></span>
+          <span><strong>No credit card</strong> required to start</span>
+        </li>
+        <li>
+          <span class="trial-check" aria-hidden="true"></span>
+          <span><strong>Everything unlocked</strong> — no features hidden</span>
+        </li>
+        <li>
+          <span class="trial-check" aria-hidden="true"></span>
+          <span><strong>No pressure</strong> — trial ends quietly if you don't continue</span>
+        </li>
+      </ul>
 
-        <div class="story-card">
-          <p class="story-quote">Use your language. Louie understands many languages and can switch between them. Write in whatever feels natural to you.</p>
-          <div class="story-author">
-            <div class="story-avatar">🌍</div>
-            <div>
-              <div class="story-name">Speak naturally</div>
-              <div class="story-location">Your language, your way</div>
-            </div>
-          </div>
-        </div>
+      <div class="trial-cta">
+        <a href="https://t.me/SimplyLouieBot" class="btn btn--primary btn--lg" target="_blank" rel="noopener">Start My Free Week</a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Common questions</p>
-        <h2 class="section-title">Before You Start</h2>
-      </div>
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <header class="section-header">
+        <h2>Still have questions?</h2>
+      </header>
 
       <div class="faq-list">
-        <div class="faq-item">
-          <h3 class="faq-question">Do I need to download anything?</h3>
-          <p class="faq-answer">Just Telegram, which you might already have. SimplyLouie lives inside Telegram — no separate app needed. This keeps things simple and saves space on your phone.</p>
-        </div>
+        <details class="faq-item">
+          <summary class="faq-question">Do I need to give my phone number?</summary>
+          <div class="faq-answer">
+            <p>Telegram requires a phone number to sign up, but SimplyLouie doesn't ask for it or store it. We only see your Telegram username.</p>
+          </div>
+        </details>
 
-        <div class="faq-item">
-          <h3 class="faq-question">Will it work on my phone?</h3>
-          <p class="faq-answer">If your phone can run Telegram, it can run SimplyLouie. We've tested it on all kinds of phones, including older models and basic smartphones. It even works well on slow internet connections.</p>
-        </div>
+        <details class="faq-item">
+          <summary class="faq-question">Will Louie understand my language?</summary>
+          <div class="faq-answer">
+            <p>Louie understands English well, plus Tagalog, Bahasa Indonesia, Swahili, and more. You can even mix languages — Louie will figure it out.</p>
+          </div>
+        </details>
 
-        <div class="faq-item">
-          <h3 class="faq-question">Is my information private?</h3>
-          <p class="faq-answer">Yes. Your conversations with Louie are private. We don't sell your data, and we don't share it with anyone. We use your messages only to help you and to make Louie better at helping everyone.</p>
-        </div>
+        <details class="faq-item">
+          <summary class="faq-question">Is my conversation private?</summary>
+          <div class="faq-answer">
+            <p>Yes. Your conversations are between you and Louie. We don't share or sell them to anyone.</p>
+          </div>
+        </details>
 
-        <div class="faq-item">
-          <h3 class="faq-question">What if I have trouble getting started?</h3>
-          <p class="faq-answer">Just ask Louie! You can also contact our support team — we're real people who actually read and respond to every message. We're here to help.</p>
-        </div>
+        <details class="faq-item">
+          <summary class="faq-question">What happens after 7 days?</summary>
+          <div class="faq-answer">
+            <p>Louie will gently ask if you'd like to continue for $2/month. If you say no, your access pauses — no hard feelings.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">What if I have slow internet?</summary>
+          <div class="faq-answer">
+            <p>Telegram is designed for slow connections. Louie responds with text, which uses very little data. It works even on 2G.</p>
+          </div>
+        </details>
       </div>
     </div>
   </section>
 
   <!-- Final CTA -->
-  <section class="section section--alt">
-    <div class="container">
-      <div class="cta-section">
-        <h2 class="section-title">Ready to meet Louie?</h2>
-        <p class="section-subtitle">
-          Open Telegram and start your free week. No payment required. Just say hello and let Louie help.
-        </p>
-        <a href="#" class="btn btn--primary btn--large">Open SimplyLouie in Telegram</a>
-      </div>
+  <section class="section cta-section">
+    <div class="container container--narrow">
+      <h2>Ready? Let's go.</h2>
+      <p>Your calm, helpful AI companion is waiting. Just tap the button and say hello.</p>
+      <a href="https://t.me/SimplyLouieBot" class="btn btn--inverse btn--lg" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Open Louie on Telegram
+      </a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-inner">
+      <div class="footer-grid">
         <div class="footer-brand">
-          <div class="footer-logo">
-            <div class="logo">
-              <div class="logo-ear logo-ear--left"></div>
-              <div class="logo-ear logo-ear--right"></div>
-              <div class="logo-face"></div>
-              <div class="logo-snout"></div>
+          <a href="index.html" class="brand">
+            <div class="logo logo--light" aria-hidden="true">
+              <span class="logo-ear logo-ear--left"></span>
+              <span class="logo-ear logo-ear--right"></span>
+              <span class="logo-face"></span>
+              <span class="logo-snout"></span>
             </div>
             <span class="brand-name">SimplyLouie</span>
-          </div>
-          <p class="footer-tagline">Simple AI for everyone who just needs a little help.</p>
+          </a>
+          <p>Simple AI for everyone who just needs a little help. No tech talk, no confusion — just answers.</p>
         </div>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Product links">
           <h4>Product</h4>
           <ul>
             <li><a href="pricing.html">Pricing</a></li>
@@ -241,7 +253,7 @@
           </ul>
         </nav>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Company links">
           <h4>Company</h4>
           <ul>
             <li><a href="movement.html">Our Movement</a></li>
@@ -250,7 +262,7 @@
           </ul>
         </nav>
 
-        <nav class="footer-nav">
+        <nav class="footer-nav" aria-label="Countries">
           <h4>Countries</h4>
           <ul>
             <li><a href="#">Nigeria</a></li>
@@ -263,10 +275,11 @@
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">© 2026 SimplyLouie. Made with care for real people.</p>
-        <p class="footer-markets">Built for Nigeria, Philippines, Indonesia, Kenya, and Ghana.</p>
+        <p>&copy; 2026 SimplyLouie. Made with care for real people.</p>
+        <p>Built for Nigeria, Philippines, Indonesia, Kenya, and Ghana.</p>
       </div>
     </div>
   </footer>
+
 </body>
 </html>
