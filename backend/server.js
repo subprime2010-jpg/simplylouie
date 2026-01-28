@@ -13,6 +13,9 @@ const Database = require('better-sqlite3');
 const { WebSocketServer } = require('ws');
 const http = require('http');
 
+// Admin Router
+const createAdminRouter = require('./routes/admin');
+
 // ============================================
 // CONFIGURATION
 // ============================================
@@ -99,6 +102,112 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_likes_post_id ON likes(post_id);
   CREATE INDEX IF NOT EXISTS idx_likes_user_id ON likes(user_id);
   CREATE INDEX IF NOT EXISTS idx_comments_post_id ON comments(post_id);
+
+  -- ==========================================
+  -- SUPER-ADMIN TABLES
+  -- ==========================================
+
+  -- Admins table (separate from regular users)
+  CREATE TABLE IF NOT EXISTS admins (
+    id TEXT PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    name TEXT NOT NULL,
+    role TEXT DEFAULT 'admin',
+    permissions TEXT DEFAULT '[]',
+    ip_whitelist TEXT,
+    two_factor_secret TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- Admin sessions
+  CREATE TABLE IF NOT EXISTS admin_sessions (
+    id TEXT PRIMARY KEY,
+    admin_id TEXT NOT NULL,
+    token TEXT NOT NULL,
+    ip_address TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (admin_id) REFERENCES admins(id) ON DELETE CASCADE
+  );
+
+  -- Feature toggles
+  CREATE TABLE IF NOT EXISTS feature_toggles (
+    id TEXT PRIMARY KEY,
+    key TEXT UNIQUE NOT NULL,
+    value TEXT NOT NULL,
+    category TEXT DEFAULT 'feature',
+    description TEXT,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- Killswitch states
+  CREATE TABLE IF NOT EXISTS killswitches (
+    id TEXT PRIMARY KEY,
+    module TEXT UNIQUE NOT NULL,
+    enabled INTEGER DEFAULT 1,
+    updated_by TEXT,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- Document scans
+  CREATE TABLE IF NOT EXISTS doc_scans (
+    id TEXT PRIMARY KEY,
+    filename TEXT,
+    file_type TEXT,
+    file_size INTEGER,
+    extracted_fields TEXT,
+    summary TEXT,
+    fraud_signals TEXT,
+    income_map TEXT,
+    employer_structure TEXT,
+    region TEXT,
+    risk_score REAL,
+    recommended_next_steps TEXT,
+    scanned_by TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- Intelligence events
+  CREATE TABLE IF NOT EXISTS intelligence_events (
+    id TEXT PRIMARY KEY,
+    event_type TEXT NOT NULL,
+    data TEXT,
+    source TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- System metrics log
+  CREATE TABLE IF NOT EXISTS system_metrics (
+    id TEXT PRIMARY KEY,
+    metric_type TEXT NOT NULL,
+    value REAL,
+    metadata TEXT,
+    recorded_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- Webhook logs
+  CREATE TABLE IF NOT EXISTS webhook_logs (
+    id TEXT PRIMARY KEY,
+    endpoint TEXT,
+    status TEXT,
+    response_code INTEGER,
+    payload TEXT,
+    error TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- Environment config
+  CREATE TABLE IF NOT EXISTS env_config (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- Admin indexes
+  CREATE INDEX IF NOT EXISTS idx_admin_sessions_token ON admin_sessions(token);
+  CREATE INDEX IF NOT EXISTS idx_doc_scans_created ON doc_scans(created_at DESC);
+  CREATE INDEX IF NOT EXISTS idx_intelligence_created ON intelligence_events(created_at DESC);
+  CREATE INDEX IF NOT EXISTS idx_webhook_logs_created ON webhook_logs(created_at DESC);
 `);
 
 // ============================================
@@ -811,6 +920,36 @@ app.post('/settings/theme', authMiddleware, (req, res) => {
     res.status(500).json(apiResponse(false, 'Failed to update theme'));
   }
 });
+
+// ============================================
+// SUPER-ADMIN ROUTES
+// ============================================
+
+// Mount admin router
+const adminRouter = createAdminRouter(db);
+app.use('/admin', adminRouter);
+
+// Create default founder account if none exists
+(async function initFounderAccount() {
+  try {
+    const existingFounder = db.prepare('SELECT * FROM admins WHERE role = ?').get('founder');
+    if (!existingFounder) {
+      const founderId = uuidv4();
+      const defaultEmail = process.env.ADMIN_EMAIL || 'founder@louiesystem.com';
+      const defaultPassword = process.env.ADMIN_PASSWORD || 'SimplyLouie2026!';
+      const passwordHash = await bcrypt.hash(defaultPassword, config.bcryptRounds);
+
+      db.prepare(`
+        INSERT INTO admins (id, email, password_hash, name, role, permissions)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `).run(founderId, defaultEmail, passwordHash, 'Founder', 'founder', '["all"]');
+
+      console.log('✓ Default founder account created:', defaultEmail);
+    }
+  } catch (error) {
+    // Table might not exist yet on first run, ignore
+  }
+})();
 
 // ============================================
 // HEALTH CHECK
