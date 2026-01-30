@@ -13,8 +13,14 @@ const Database = require('better-sqlite3');
 const { WebSocketServer } = require('ws');
 const http = require('http');
 
+const path = require('path');
+
 // Admin Router
 const createAdminRouter = require('./routes/admin');
+// Public API Router (Monetized)
+const createPublicApiRouter = require('./routes/publicApi');
+// Unified Auth Middleware (RapidAPI + direct API key)
+const createUnifiedAuthMiddleware = require('./src/services/auth/unifiedAuthMiddleware');
 
 // ============================================
 // CONFIGURATION
@@ -203,11 +209,49 @@ db.exec(`
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
 
+  -- API Keys table (also created in publicApi.js, duplicated here for early init)
+  CREATE TABLE IF NOT EXISTS api_keys (
+    id TEXT PRIMARY KEY,
+    key_hash TEXT UNIQUE NOT NULL,
+    key_prefix TEXT NOT NULL,
+    name TEXT NOT NULL,
+    owner_email TEXT NOT NULL,
+    tier TEXT DEFAULT 'free',
+    rate_limit INTEGER DEFAULT 100,
+    is_active INTEGER DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    last_used_at DATETIME
+  );
+
+  CREATE TABLE IF NOT EXISTS api_usage (
+    id TEXT PRIMARY KEY,
+    api_key_id TEXT NOT NULL,
+    endpoint TEXT NOT NULL,
+    method TEXT NOT NULL,
+    response_code INTEGER,
+    response_time INTEGER,
+    ip_address TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (api_key_id) REFERENCES api_keys(id) ON DELETE CASCADE
+  );
+
+  CREATE TABLE IF NOT EXISTS api_usage_daily (
+    id TEXT PRIMARY KEY,
+    api_key_id TEXT NOT NULL,
+    date TEXT NOT NULL,
+    call_count INTEGER DEFAULT 0,
+    FOREIGN KEY (api_key_id) REFERENCES api_keys(id) ON DELETE CASCADE,
+    UNIQUE(api_key_id, date)
+  );
+
   -- Admin indexes
   CREATE INDEX IF NOT EXISTS idx_admin_sessions_token ON admin_sessions(token);
   CREATE INDEX IF NOT EXISTS idx_doc_scans_created ON doc_scans(created_at DESC);
   CREATE INDEX IF NOT EXISTS idx_intelligence_created ON intelligence_events(created_at DESC);
   CREATE INDEX IF NOT EXISTS idx_webhook_logs_created ON webhook_logs(created_at DESC);
+  CREATE INDEX IF NOT EXISTS idx_api_usage_key ON api_usage(api_key_id);
+  CREATE INDEX IF NOT EXISTS idx_api_usage_created ON api_usage(created_at);
+  CREATE INDEX IF NOT EXISTS idx_api_daily_key_date ON api_usage_daily(api_key_id, date);
 `);
 
 // ============================================
@@ -928,6 +972,18 @@ app.post('/settings/theme', authMiddleware, (req, res) => {
 // Mount admin router
 const adminRouter = createAdminRouter(db);
 app.use('/admin', adminRouter);
+
+// Unified auth middleware (RapidAPI + direct API key)
+const unifiedAuth = createUnifiedAuthMiddleware(db);
+
+// Mount public API router (monetized endpoints) with unified auth
+const publicApiRouter = createPublicApiRouter(db, { unifiedAuth });
+app.use('/v1', publicApiRouter);
+
+// Serve OpenAPI spec (no auth required)
+app.get('/v1/openapi.json', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'openapi.json'));
+});
 
 // Create default founder account if none exists
 (async function initFounderAccount() {

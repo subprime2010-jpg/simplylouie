@@ -1,0 +1,1900 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "LOUIE AI API",
+    "description": "45+ AI-powered endpoints for text processing, code analysis, content generation, and business intelligence. Built by SimplyLouie.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "support@simplylouie.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://louie-api.p.rapidapi.com",
+      "description": "RapidAPI Production"
+    }
+  ],
+  "tags": [
+    { "name": "Text", "description": "Text processing and analysis endpoints" },
+    { "name": "Code", "description": "Code analysis, generation, and conversion endpoints" },
+    { "name": "Content", "description": "Content generation endpoints for blogs, emails, social media, and landing pages" },
+    { "name": "Business", "description": "Business intelligence and analysis endpoints" },
+    { "name": "Advanced", "description": "Advanced multi-step AI orchestration" },
+    { "name": "Data", "description": "Data lookup, prediction, and analysis endpoints" }
+  ],
+  "security": [
+    { "RapidAPIKey": [] }
+  ],
+  "paths": {
+    "/v1/ai/wrap": {
+      "post": {
+        "tags": ["Text"],
+        "summary": "Wrap / reformat text",
+        "description": "Wraps or reformats the provided text to a specified character width.",
+        "operationId": "wrapText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/WrapRequest" },
+              "example": {
+                "text": "This is a long paragraph of text that should be wrapped to a specific width for better readability in terminals or plain-text displays.",
+                "width": 80
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Text wrapped successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseString" },
+                "example": {
+                  "success": true,
+                  "message": "Text wrapped successfully",
+                  "data": {
+                    "result": "This is a long paragraph of text that should be wrapped to a specific width\nfor better readability in terminals or plain-text displays."
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/translate": {
+      "post": {
+        "tags": ["Text"],
+        "summary": "Translate text",
+        "description": "Translates text from a source language to a target language. If source_language is omitted, the language is auto-detected.",
+        "operationId": "translateText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TranslateRequest" },
+              "example": {
+                "text": "Hello, how are you?",
+                "target_language": "es",
+                "source_language": "en"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Text translated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseString" },
+                "example": {
+                  "success": true,
+                  "message": "Text translated successfully",
+                  "data": {
+                    "result": "Hola, \u00bfc\u00f3mo est\u00e1s?"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/sentiment": {
+      "post": {
+        "tags": ["Text"],
+        "summary": "Analyze sentiment",
+        "description": "Analyzes the sentiment of the provided text and returns a sentiment label with a confidence score.",
+        "operationId": "analyzeSentiment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SentimentRequest" },
+              "example": {
+                "text": "I absolutely love this product! It has changed my life for the better."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sentiment analyzed successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Sentiment analyzed successfully",
+                  "data": {
+                    "result": {
+                      "sentiment": "positive",
+                      "confidence": 0.95,
+                      "breakdown": {
+                        "positive": 0.95,
+                        "neutral": 0.04,
+                        "negative": 0.01
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/classify": {
+      "post": {
+        "tags": ["Text"],
+        "summary": "Classify text",
+        "description": "Classifies the provided text into one or more of the specified categories.",
+        "operationId": "classifyText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ClassifyRequest" },
+              "example": {
+                "text": "The stock market rallied today as tech companies reported strong earnings.",
+                "categories": ["politics", "sports", "technology", "finance", "health"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Text classified successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Text classified successfully",
+                  "data": {
+                    "result": {
+                      "category": "finance",
+                      "confidence": 0.88,
+                      "scores": {
+                        "finance": 0.88,
+                        "technology": 0.45,
+                        "politics": 0.05,
+                        "sports": 0.01,
+                        "health": 0.01
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/rewrite": {
+      "post": {
+        "tags": ["Text"],
+        "summary": "Rewrite text",
+        "description": "Rewrites the provided text in a specified tone or style.",
+        "operationId": "rewriteText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/RewriteRequest" },
+              "example": {
+                "text": "The meeting was unproductive and wasted everyone's time.",
+                "tone": "professional"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Text rewritten successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseString" },
+                "example": {
+                  "success": true,
+                  "message": "Text rewritten successfully",
+                  "data": {
+                    "result": "The meeting did not achieve its intended objectives, and there may be opportunities to improve future sessions for better time management."
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/tldr": {
+      "post": {
+        "tags": ["Text"],
+        "summary": "Summarize text (TL;DR)",
+        "description": "Generates a concise summary of the provided text, limited to a specified number of sentences.",
+        "operationId": "summarizeText",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/TldrRequest" },
+              "example": {
+                "text": "Artificial intelligence has been transforming industries across the globe. From healthcare to finance, AI applications are becoming increasingly sophisticated. Machine learning models can now predict disease outcomes, automate trading strategies, and even generate creative content. However, ethical concerns around bias, privacy, and job displacement remain significant challenges that need to be addressed.",
+                "max_sentences": 3
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Text summarized successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseString" },
+                "example": {
+                  "success": true,
+                  "message": "Text summarized successfully",
+                  "data": {
+                    "result": "AI is transforming industries globally with applications in healthcare, finance, and creative content. Despite progress, ethical concerns about bias, privacy, and job displacement persist."
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/spell-check": {
+      "post": {
+        "tags": ["Text"],
+        "summary": "Check spelling and grammar",
+        "description": "Checks the provided text for spelling and grammar errors and returns corrections.",
+        "operationId": "spellCheck",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SpellCheckRequest" },
+              "example": {
+                "text": "Their going to the store becuse they need supplys."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Spell check completed successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Spell check completed successfully",
+                  "data": {
+                    "result": {
+                      "corrected_text": "They're going to the store because they need supplies.",
+                      "corrections": [
+                        { "original": "Their", "correction": "They're", "type": "grammar" },
+                        { "original": "becuse", "correction": "because", "type": "spelling" },
+                        { "original": "supplys", "correction": "supplies", "type": "spelling" }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/code-review": {
+      "post": {
+        "tags": ["Code"],
+        "summary": "Review code for issues",
+        "description": "Reviews the provided code for bugs, performance issues, security vulnerabilities, and style improvements.",
+        "operationId": "codeReview",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CodeReviewRequest" },
+              "example": {
+                "code": "function fetchData(url) {\n  let data = fetch(url);\n  return data.json();\n}",
+                "language": "javascript"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Code reviewed successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Code reviewed successfully",
+                  "data": {
+                    "result": {
+                      "issues": [
+                        {
+                          "severity": "error",
+                          "line": 2,
+                          "message": "fetch() returns a Promise and must be awaited.",
+                          "suggestion": "Use async/await or .then() to handle the Promise."
+                        }
+                      ],
+                      "summary": "1 issue found: missing await on asynchronous fetch call.",
+                      "quality_score": 4
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/explain-code": {
+      "post": {
+        "tags": ["Code"],
+        "summary": "Explain code",
+        "description": "Provides a human-readable explanation of the provided code, describing what it does step by step.",
+        "operationId": "explainCode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ExplainCodeRequest" },
+              "example": {
+                "code": "const debounce = (fn, ms) => {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), ms);\n  };\n};",
+                "language": "javascript"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Code explained successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseString" },
+                "example": {
+                  "success": true,
+                  "message": "Code explained successfully",
+                  "data": {
+                    "result": "This code creates a debounce utility function. It takes a function (fn) and a delay in milliseconds (ms). It returns a new function that delays invoking fn until ms milliseconds have passed since the last time the returned function was called. Each new call resets the timer, ensuring fn is only executed once the calls have stopped for the specified duration."
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/generate-tests": {
+      "post": {
+        "tags": ["Code"],
+        "summary": "Generate unit tests",
+        "description": "Generates unit tests for the provided code. Optionally specify a testing framework.",
+        "operationId": "generateTests",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GenerateTestsRequest" },
+              "example": {
+                "code": "function add(a, b) { return a + b; }",
+                "language": "javascript",
+                "framework": "jest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tests generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseString" },
+                "example": {
+                  "success": true,
+                  "message": "Tests generated successfully",
+                  "data": {
+                    "result": "describe('add', () => {\n  test('adds two positive numbers', () => {\n    expect(add(1, 2)).toBe(3);\n  });\n  test('adds negative numbers', () => {\n    expect(add(-1, -2)).toBe(-3);\n  });\n  test('adds zero', () => {\n    expect(add(0, 5)).toBe(5);\n  });\n});"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/generate-sql": {
+      "post": {
+        "tags": ["Code"],
+        "summary": "Generate SQL from natural language",
+        "description": "Generates a SQL query from a natural language description. Optionally specify the SQL dialect.",
+        "operationId": "generateSql",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GenerateSqlRequest" },
+              "example": {
+                "prompt": "Get all users who signed up in the last 30 days and have made at least one purchase",
+                "dialect": "postgresql"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SQL generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseString" },
+                "example": {
+                  "success": true,
+                  "message": "SQL generated successfully",
+                  "data": {
+                    "result": "SELECT u.*\nFROM users u\nINNER JOIN purchases p ON u.id = p.user_id\nWHERE u.created_at >= NOW() - INTERVAL '30 days'\nGROUP BY u.id\nHAVING COUNT(p.id) >= 1;"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/generate-regex": {
+      "post": {
+        "tags": ["Code"],
+        "summary": "Generate regex from description",
+        "description": "Generates a regular expression from a plain-language description of the pattern to match.",
+        "operationId": "generateRegex",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GenerateRegexRequest" },
+              "example": {
+                "description": "Match a valid email address"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Regex generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Regex generated successfully",
+                  "data": {
+                    "result": {
+                      "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                      "explanation": "Matches strings starting with alphanumeric characters (including dots, underscores, percent signs, plus and hyphen), followed by @, a domain name, a dot, and a TLD of at least 2 characters.",
+                      "test_cases": [
+                        { "input": "user@example.com", "matches": true },
+                        { "input": "invalid-email", "matches": false }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/convert-code": {
+      "post": {
+        "tags": ["Code"],
+        "summary": "Convert code between languages",
+        "description": "Converts the provided code from one programming language to another.",
+        "operationId": "convertCode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ConvertCodeRequest" },
+              "example": {
+                "code": "const greet = (name) => `Hello, ${name}!`;",
+                "from_language": "javascript",
+                "to_language": "python"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Code converted successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseString" },
+                "example": {
+                  "success": true,
+                  "message": "Code converted successfully",
+                  "data": {
+                    "result": "def greet(name: str) -> str:\n    return f\"Hello, {name}!\""
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/generate-blog": {
+      "post": {
+        "tags": ["Content"],
+        "summary": "Generate blog post",
+        "description": "Generates a full blog post on the specified topic. Optionally specify tone and length.",
+        "operationId": "generateBlog",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GenerateBlogRequest" },
+              "example": {
+                "topic": "The future of remote work in 2026",
+                "tone": "informative",
+                "length": "medium"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blog post generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Blog post generated successfully",
+                  "data": {
+                    "result": {
+                      "title": "The Future of Remote Work in 2026: Trends Shaping the New Workplace",
+                      "body": "Remote work has evolved from a temporary solution into a permanent fixture of the modern workplace...",
+                      "meta_description": "Explore the key trends shaping remote work in 2026, from AI-powered collaboration to hybrid models.",
+                      "tags": ["remote work", "future of work", "2026 trends"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/generate-email": {
+      "post": {
+        "tags": ["Content"],
+        "summary": "Generate email",
+        "description": "Generates a professional email for the specified purpose. Optionally specify tone and recipient context.",
+        "operationId": "generateEmail",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GenerateEmailRequest" },
+              "example": {
+                "purpose": "Follow up after a job interview",
+                "tone": "professional",
+                "recipient": "hiring manager"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Email generated successfully",
+                  "data": {
+                    "result": {
+                      "subject": "Thank You for the Interview Opportunity",
+                      "body": "Dear Hiring Manager,\n\nThank you for taking the time to speak with me today. I truly enjoyed learning more about the role and your team...",
+                      "closing": "Best regards"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/generate-social": {
+      "post": {
+        "tags": ["Content"],
+        "summary": "Generate social media post",
+        "description": "Generates a social media post for the specified topic. Optionally specify the target platform.",
+        "operationId": "generateSocial",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GenerateSocialRequest" },
+              "example": {
+                "topic": "Launching a new AI-powered productivity app",
+                "platform": "twitter"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Social media post generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Social media post generated successfully",
+                  "data": {
+                    "result": {
+                      "post": "We just launched our AI-powered productivity app and it's a game changer. Automate your workflow, focus on what matters. Try it free today.",
+                      "hashtags": ["#AI", "#Productivity", "#Launch"],
+                      "character_count": 142
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/generate-landing": {
+      "post": {
+        "tags": ["Content"],
+        "summary": "Generate landing page copy",
+        "description": "Generates landing page copy for a product or service. Optionally specify the target audience.",
+        "operationId": "generateLanding",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GenerateLandingRequest" },
+              "example": {
+                "product": "AI-powered project management tool for remote teams",
+                "target_audience": "startup founders and engineering managers"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Landing page copy generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Landing page copy generated successfully",
+                  "data": {
+                    "result": {
+                      "headline": "Ship Faster with AI-Powered Project Management",
+                      "subheadline": "Built for remote teams that move fast and ship often.",
+                      "hero_text": "Stop juggling tools. Our AI understands your workflow and keeps your team aligned, automatically.",
+                      "features": [
+                        "AI-driven sprint planning",
+                        "Automatic standup summaries",
+                        "Smart task prioritization"
+                      ],
+                      "cta": "Start your free trial"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/swot-analysis": {
+      "post": {
+        "tags": ["Business"],
+        "summary": "SWOT analysis",
+        "description": "Generates a SWOT (Strengths, Weaknesses, Opportunities, Threats) analysis for the specified business.",
+        "operationId": "swotAnalysis",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/SwotAnalysisRequest" },
+              "example": {
+                "business": "A SaaS company providing AI-powered customer support chatbots",
+                "industry": "technology"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SWOT analysis generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "SWOT analysis generated successfully",
+                  "data": {
+                    "result": {
+                      "strengths": ["Scalable SaaS model", "AI differentiation", "Low marginal cost per customer"],
+                      "weaknesses": ["High competition", "Dependency on AI model providers", "Customer onboarding complexity"],
+                      "opportunities": ["Growing demand for automation", "Expansion into multilingual support", "Enterprise market"],
+                      "threats": ["Rapid technology changes", "Big tech entering the market", "Data privacy regulations"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/competitor-analysis": {
+      "post": {
+        "tags": ["Business"],
+        "summary": "Competitor analysis",
+        "description": "Generates a competitor analysis comparing the specified business against its competitors.",
+        "operationId": "competitorAnalysis",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CompetitorAnalysisRequest" },
+              "example": {
+                "business": "A new food delivery startup focused on healthy meals",
+                "competitors": ["UberEats", "DoorDash", "Grubhub"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Competitor analysis generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Competitor analysis generated successfully",
+                  "data": {
+                    "result": {
+                      "summary": "The healthy meal delivery niche is underserved by major platforms.",
+                      "competitors": [
+                        {
+                          "name": "UberEats",
+                          "strengths": ["Massive user base", "Strong logistics"],
+                          "weaknesses": ["No health-focused curation"]
+                        }
+                      ],
+                      "recommendations": ["Focus on health-conscious branding", "Partner with nutritionists"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/financial-projection": {
+      "post": {
+        "tags": ["Business"],
+        "summary": "Financial projection",
+        "description": "Generates financial projections for the specified business. Optionally provide current revenue and a projection timeframe.",
+        "operationId": "financialProjection",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FinancialProjectionRequest" },
+              "example": {
+                "business": "B2B SaaS platform with 500 customers",
+                "revenue": 120000,
+                "timeframe": "12 months"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Financial projection generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Financial projection generated successfully",
+                  "data": {
+                    "result": {
+                      "projected_revenue": 210000,
+                      "growth_rate": "75%",
+                      "timeframe": "12 months",
+                      "assumptions": [
+                        "15% monthly customer growth",
+                        "5% churn rate",
+                        "Average revenue per customer: $240/year"
+                      ],
+                      "breakdown": {
+                        "q1": 135000,
+                        "q2": 155000,
+                        "q3": 180000,
+                        "q4": 210000
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/generate-pitch": {
+      "post": {
+        "tags": ["Business"],
+        "summary": "Generate pitch deck",
+        "description": "Generates pitch deck content for the specified business. Optionally specify the target audience.",
+        "operationId": "generatePitch",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/GeneratePitchRequest" },
+              "example": {
+                "business": "An AI-powered legal document review platform",
+                "target_audience": "venture capital investors"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pitch deck generated successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Pitch deck generated successfully",
+                  "data": {
+                    "result": {
+                      "slides": [
+                        { "title": "Problem", "content": "Legal document review is slow, expensive, and error-prone." },
+                        { "title": "Solution", "content": "Our AI reviews documents 10x faster with 99% accuracy." },
+                        { "title": "Market", "content": "$30B legal tech market growing at 12% CAGR." },
+                        { "title": "Traction", "content": "50 law firms onboarded, $500K ARR." },
+                        { "title": "Ask", "content": "Raising $5M Series A to expand into enterprise." }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/ai/chain": {
+      "post": {
+        "tags": ["Advanced"],
+        "summary": "Multi-step AI orchestration",
+        "description": "Executes a chain of AI steps sequentially, where each step can build on the output of previous steps. Useful for complex, multi-stage workflows.",
+        "operationId": "chainSteps",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ChainRequest" },
+              "example": {
+                "steps": [
+                  { "action": "translate", "input": "Hello, how are you?" },
+                  { "action": "sentiment", "input": "Use the translated output from step 1" }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chain executed successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Chain executed successfully",
+                  "data": {
+                    "result": {
+                      "steps": [
+                        { "step": 1, "action": "translate", "output": "Hola, \u00bfc\u00f3mo est\u00e1s?" },
+                        { "step": 2, "action": "sentiment", "output": { "sentiment": "positive", "confidence": 0.82 } }
+                      ],
+                      "final_output": { "sentiment": "positive", "confidence": 0.82 }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/pricing": {
+      "get": {
+        "tags": ["Data"],
+        "summary": "Get pricing tiers",
+        "description": "Returns the available pricing tiers and their features. No authentication required.",
+        "operationId": "getPricing",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Pricing tiers retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Pricing tiers retrieved successfully",
+                  "data": {
+                    "result": {
+                      "tiers": [
+                        { "name": "Free", "price": 0, "requests_per_month": 100, "features": ["Text endpoints", "Basic code endpoints"] },
+                        { "name": "Pro", "price": 29, "requests_per_month": 5000, "features": ["All Free features", "Income prediction", "Fraud scan", "Content generation"] },
+                        { "name": "Enterprise", "price": 99, "requests_per_month": 50000, "features": ["All Pro features", "Document analysis", "Priority support", "Custom integrations"] }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/employer/lookup": {
+      "get": {
+        "tags": ["Data"],
+        "summary": "Employer lookup",
+        "description": "Looks up employer information by name. Requires authentication.",
+        "operationId": "employerLookup",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "description": "The employer name to search for",
+            "schema": {
+              "type": "string",
+              "example": "Google"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employer found",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Employer found",
+                  "data": {
+                    "result": {
+                      "name": "Google LLC",
+                      "industry": "Technology",
+                      "size": "10000+",
+                      "headquarters": "Mountain View, CA",
+                      "founded": 1998
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "404": {
+            "description": "Employer not found",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+                "example": {
+                  "success": false,
+                  "message": "Employer not found",
+                  "data": null
+                }
+              }
+            }
+          },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/region/data": {
+      "get": {
+        "tags": ["Data"],
+        "summary": "Regional data",
+        "description": "Returns regional data for the specified country. Requires authentication.",
+        "operationId": "getRegionData",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "description": "The country code or name to retrieve data for",
+            "schema": {
+              "type": "string",
+              "example": "US"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Regional data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Regional data retrieved successfully",
+                  "data": {
+                    "result": {
+                      "country": "United States",
+                      "code": "US",
+                      "regions": 50,
+                      "population": 331000000,
+                      "currency": "USD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/income/predict": {
+      "post": {
+        "tags": ["Data"],
+        "summary": "Income prediction",
+        "description": "Predicts income based on the provided data. Requires Pro+ tier and authentication.",
+        "operationId": "predictIncome",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/IncomePredictRequest" },
+              "example": {
+                "job_title": "Software Engineer",
+                "location": "San Francisco, CA",
+                "experience_years": 5,
+                "education": "Bachelor's"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Income predicted successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Income predicted successfully",
+                  "data": {
+                    "result": {
+                      "predicted_income": 165000,
+                      "range": { "low": 140000, "high": 195000 },
+                      "confidence": 0.85,
+                      "currency": "USD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/intelligence/scan": {
+      "post": {
+        "tags": ["Data"],
+        "summary": "Fraud scan",
+        "description": "Scans the provided data for potential fraud indicators. Requires Pro+ tier and authentication.",
+        "operationId": "fraudScan",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/FraudScanRequest" },
+              "example": {
+                "entity": "John Doe",
+                "email": "john.doe@example.com",
+                "phone": "+1-555-0123",
+                "context": "New account registration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Fraud scan completed",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Fraud scan completed",
+                  "data": {
+                    "result": {
+                      "risk_score": 0.15,
+                      "risk_level": "low",
+                      "flags": [],
+                      "recommendation": "Proceed with standard verification."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    },
+    "/v1/docs/analyze": {
+      "post": {
+        "tags": ["Data"],
+        "summary": "Document analysis",
+        "description": "Analyzes an uploaded document and extracts key information. Requires Enterprise tier and authentication.",
+        "operationId": "analyzeDocument",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/DocAnalyzeRequest" },
+              "example": {
+                "document_url": "https://example.com/document.pdf",
+                "analysis_type": "summary",
+                "language": "en"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document analyzed successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SuccessResponseObject" },
+                "example": {
+                  "success": true,
+                  "message": "Document analyzed successfully",
+                  "data": {
+                    "result": {
+                      "summary": "The document outlines a partnership agreement between two parties...",
+                      "key_entities": ["Company A", "Company B"],
+                      "page_count": 12,
+                      "language": "en",
+                      "topics": ["legal", "partnership", "agreement"]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/InternalError" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "RapidAPIKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-RapidAPI-Key",
+        "description": "RapidAPI key for authentication. Obtain your key from https://rapidapi.com"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request - missing or invalid parameters",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+            "example": {
+              "success": false,
+              "message": "Missing required field: text",
+              "data": null
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized - missing or invalid API key",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+            "example": {
+              "success": false,
+              "message": "Invalid or missing API key",
+              "data": null
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden - insufficient tier access",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+            "example": {
+              "success": false,
+              "message": "This endpoint requires a Pro+ subscription",
+              "data": null
+            }
+          }
+        }
+      },
+      "InternalError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" },
+            "example": {
+              "success": false,
+              "message": "An unexpected error occurred. Please try again later.",
+              "data": null
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "SuccessResponseString": {
+        "type": "object",
+        "required": ["success", "message", "data"],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Request completed successfully"
+          },
+          "data": {
+            "type": "object",
+            "required": ["result"],
+            "properties": {
+              "result": {
+                "type": "string",
+                "description": "The result of the AI operation as a string"
+              }
+            }
+          }
+        }
+      },
+      "SuccessResponseObject": {
+        "type": "object",
+        "required": ["success", "message", "data"],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Request completed successfully"
+          },
+          "data": {
+            "type": "object",
+            "required": ["result"],
+            "properties": {
+              "result": {
+                "type": "object",
+                "description": "The result of the AI operation as a structured object"
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": ["success", "message", "data"],
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "An error occurred"
+          },
+          "data": {
+            "type": "object",
+            "nullable": true,
+            "example": null
+          }
+        }
+      },
+      "WrapRequest": {
+        "type": "object",
+        "required": ["text", "width"],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to wrap/reformat",
+            "example": "This is a long paragraph of text that should be wrapped."
+          },
+          "width": {
+            "type": "integer",
+            "description": "The maximum character width per line",
+            "example": 80,
+            "default": 80
+          }
+        }
+      },
+      "TranslateRequest": {
+        "type": "object",
+        "required": ["text", "target_language"],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to translate",
+            "example": "Hello, how are you?"
+          },
+          "target_language": {
+            "type": "string",
+            "description": "The target language code (e.g., 'es', 'fr', 'de', 'ja')",
+            "example": "es"
+          },
+          "source_language": {
+            "type": "string",
+            "description": "The source language code. If omitted, the language is auto-detected.",
+            "example": "en"
+          }
+        }
+      },
+      "SentimentRequest": {
+        "type": "object",
+        "required": ["text"],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to analyze for sentiment",
+            "example": "I absolutely love this product!"
+          }
+        }
+      },
+      "ClassifyRequest": {
+        "type": "object",
+        "required": ["text", "categories"],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to classify",
+            "example": "The stock market rallied today."
+          },
+          "categories": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "The list of categories to classify the text into",
+            "example": ["politics", "sports", "technology", "finance", "health"]
+          }
+        }
+      },
+      "RewriteRequest": {
+        "type": "object",
+        "required": ["text", "tone"],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to rewrite",
+            "example": "The meeting was unproductive."
+          },
+          "tone": {
+            "type": "string",
+            "description": "The desired tone for the rewrite (e.g., 'professional', 'casual', 'formal', 'friendly')",
+            "example": "professional"
+          }
+        }
+      },
+      "TldrRequest": {
+        "type": "object",
+        "required": ["text"],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to summarize",
+            "example": "Artificial intelligence has been transforming industries across the globe..."
+          },
+          "max_sentences": {
+            "type": "integer",
+            "description": "Maximum number of sentences in the summary",
+            "example": 3,
+            "default": 3
+          }
+        }
+      },
+      "SpellCheckRequest": {
+        "type": "object",
+        "required": ["text"],
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to check for spelling and grammar errors",
+            "example": "Their going to the store becuse they need supplys."
+          }
+        }
+      },
+      "CodeReviewRequest": {
+        "type": "object",
+        "required": ["code", "language"],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The source code to review",
+            "example": "function fetchData(url) { let data = fetch(url); return data.json(); }"
+          },
+          "language": {
+            "type": "string",
+            "description": "The programming language of the code",
+            "example": "javascript"
+          }
+        }
+      },
+      "ExplainCodeRequest": {
+        "type": "object",
+        "required": ["code", "language"],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The source code to explain",
+            "example": "const debounce = (fn, ms) => { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); }; };"
+          },
+          "language": {
+            "type": "string",
+            "description": "The programming language of the code",
+            "example": "javascript"
+          }
+        }
+      },
+      "GenerateTestsRequest": {
+        "type": "object",
+        "required": ["code", "language"],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The source code to generate tests for",
+            "example": "function add(a, b) { return a + b; }"
+          },
+          "language": {
+            "type": "string",
+            "description": "The programming language of the code",
+            "example": "javascript"
+          },
+          "framework": {
+            "type": "string",
+            "description": "The testing framework to use (e.g., 'jest', 'mocha', 'pytest', 'junit')",
+            "example": "jest"
+          }
+        }
+      },
+      "GenerateSqlRequest": {
+        "type": "object",
+        "required": ["prompt"],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "A natural language description of the desired SQL query",
+            "example": "Get all users who signed up in the last 30 days"
+          },
+          "dialect": {
+            "type": "string",
+            "description": "The SQL dialect to use (e.g., 'postgresql', 'mysql', 'sqlite', 'mssql')",
+            "example": "postgresql"
+          }
+        }
+      },
+      "GenerateRegexRequest": {
+        "type": "object",
+        "required": ["description"],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "A plain-language description of the pattern to match",
+            "example": "Match a valid email address"
+          }
+        }
+      },
+      "ConvertCodeRequest": {
+        "type": "object",
+        "required": ["code", "from_language", "to_language"],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The source code to convert",
+            "example": "const greet = (name) => `Hello, ${name}!`;"
+          },
+          "from_language": {
+            "type": "string",
+            "description": "The source programming language",
+            "example": "javascript"
+          },
+          "to_language": {
+            "type": "string",
+            "description": "The target programming language",
+            "example": "python"
+          }
+        }
+      },
+      "GenerateBlogRequest": {
+        "type": "object",
+        "required": ["topic"],
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "The topic for the blog post",
+            "example": "The future of remote work in 2026"
+          },
+          "tone": {
+            "type": "string",
+            "description": "The desired tone (e.g., 'informative', 'casual', 'persuasive', 'humorous')",
+            "example": "informative"
+          },
+          "length": {
+            "type": "string",
+            "description": "The desired length of the post (e.g., 'short', 'medium', 'long')",
+            "example": "medium"
+          }
+        }
+      },
+      "GenerateEmailRequest": {
+        "type": "object",
+        "required": ["purpose"],
+        "properties": {
+          "purpose": {
+            "type": "string",
+            "description": "The purpose of the email",
+            "example": "Follow up after a job interview"
+          },
+          "tone": {
+            "type": "string",
+            "description": "The desired tone (e.g., 'professional', 'friendly', 'formal')",
+            "example": "professional"
+          },
+          "recipient": {
+            "type": "string",
+            "description": "The intended recipient context",
+            "example": "hiring manager"
+          }
+        }
+      },
+      "GenerateSocialRequest": {
+        "type": "object",
+        "required": ["topic"],
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "The topic for the social media post",
+            "example": "Launching a new AI-powered productivity app"
+          },
+          "platform": {
+            "type": "string",
+            "description": "The target social media platform (e.g., 'twitter', 'linkedin', 'instagram', 'facebook')",
+            "example": "twitter"
+          }
+        }
+      },
+      "GenerateLandingRequest": {
+        "type": "object",
+        "required": ["product"],
+        "properties": {
+          "product": {
+            "type": "string",
+            "description": "The product or service to generate landing page copy for",
+            "example": "AI-powered project management tool for remote teams"
+          },
+          "target_audience": {
+            "type": "string",
+            "description": "The intended target audience",
+            "example": "startup founders and engineering managers"
+          }
+        }
+      },
+      "SwotAnalysisRequest": {
+        "type": "object",
+        "required": ["business"],
+        "properties": {
+          "business": {
+            "type": "string",
+            "description": "A description of the business to analyze",
+            "example": "A SaaS company providing AI-powered customer support chatbots"
+          },
+          "industry": {
+            "type": "string",
+            "description": "The industry the business operates in",
+            "example": "technology"
+          }
+        }
+      },
+      "CompetitorAnalysisRequest": {
+        "type": "object",
+        "required": ["business", "competitors"],
+        "properties": {
+          "business": {
+            "type": "string",
+            "description": "A description of the business to analyze",
+            "example": "A new food delivery startup focused on healthy meals"
+          },
+          "competitors": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "A list of competitor names to compare against",
+            "example": ["UberEats", "DoorDash", "Grubhub"]
+          }
+        }
+      },
+      "FinancialProjectionRequest": {
+        "type": "object",
+        "required": ["business"],
+        "properties": {
+          "business": {
+            "type": "string",
+            "description": "A description of the business",
+            "example": "B2B SaaS platform with 500 customers"
+          },
+          "revenue": {
+            "type": "number",
+            "description": "Current annual revenue in USD",
+            "example": 120000
+          },
+          "timeframe": {
+            "type": "string",
+            "description": "The projection timeframe (e.g., '6 months', '12 months', '3 years')",
+            "example": "12 months"
+          }
+        }
+      },
+      "GeneratePitchRequest": {
+        "type": "object",
+        "required": ["business"],
+        "properties": {
+          "business": {
+            "type": "string",
+            "description": "A description of the business to generate a pitch for",
+            "example": "An AI-powered legal document review platform"
+          },
+          "target_audience": {
+            "type": "string",
+            "description": "The intended audience for the pitch",
+            "example": "venture capital investors"
+          }
+        }
+      },
+      "ChainRequest": {
+        "type": "object",
+        "required": ["steps"],
+        "properties": {
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChainStep"
+            },
+            "description": "An ordered list of AI steps to execute sequentially",
+            "minItems": 1
+          }
+        }
+      },
+      "ChainStep": {
+        "type": "object",
+        "required": ["action", "input"],
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "The AI action to perform (matches any available endpoint action, e.g., 'translate', 'sentiment', 'rewrite')",
+            "example": "translate"
+          },
+          "input": {
+            "type": "string",
+            "description": "The input for this step. Can reference previous step outputs.",
+            "example": "Hello, how are you?"
+          }
+        }
+      },
+      "IncomePredictRequest": {
+        "type": "object",
+        "required": ["job_title", "location"],
+        "properties": {
+          "job_title": {
+            "type": "string",
+            "description": "The job title to predict income for",
+            "example": "Software Engineer"
+          },
+          "location": {
+            "type": "string",
+            "description": "The geographic location",
+            "example": "San Francisco, CA"
+          },
+          "experience_years": {
+            "type": "integer",
+            "description": "Years of professional experience",
+            "example": 5
+          },
+          "education": {
+            "type": "string",
+            "description": "Highest education level (e.g., 'High School', 'Bachelor\\'s', 'Master\\'s', 'PhD')",
+            "example": "Bachelor's"
+          }
+        }
+      },
+      "FraudScanRequest": {
+        "type": "object",
+        "required": ["entity"],
+        "properties": {
+          "entity": {
+            "type": "string",
+            "description": "The name of the entity to scan",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "The email address associated with the entity",
+            "example": "john.doe@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The phone number associated with the entity",
+            "example": "+1-555-0123"
+          },
+          "context": {
+            "type": "string",
+            "description": "Additional context for the fraud scan",
+            "example": "New account registration"
+          }
+        }
+      },
+      "DocAnalyzeRequest": {
+        "type": "object",
+        "required": ["document_url", "analysis_type"],
+        "properties": {
+          "document_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the document to analyze",
+            "example": "https://example.com/document.pdf"
+          },
+          "analysis_type": {
+            "type": "string",
+            "description": "The type of analysis to perform (e.g., 'summary', 'extraction', 'classification')",
+            "example": "summary"
+          },
+          "language": {
+            "type": "string",
+            "description": "The language of the document",
+            "example": "en"
+          }
+        }
+      }
+    }
+  }
+}
