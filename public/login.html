@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In – SimplyLouie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3d261c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/simplylouie.css">
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="/" class="brand" style="justify-content:center">
+          <div class="logo" aria-hidden="true">
+            <span class="logo-ear logo-ear--left"></span>
+            <span class="logo-ear logo-ear--right"></span>
+            <span class="logo-face"></span>
+            <span class="logo-snout"></span>
+          </div>
+          <span class="brand-name">SimplyLouie</span>
+        </a>
+        <h1>Sign In</h1>
+        <p>Log in to your SimplyLouie world.</p>
+      </div>
+
+      <form id="login-form">
+        <div class="auth-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+
+        <div class="auth-field">
+          <label for="password">Password</label>
+          <input type="password" id="password" required>
+        </div>
+
+        <button type="submit" class="auth-btn">Sign In</button>
+      </form>
+
+      <div class="auth-links">
+        <p><a href="/forgot-password">Forgot password?</a></p>
+        <p style="margin-top:0.5rem">Don't have an account? <a href="/signup">Sign up</a></p>
+      </div>
+
+      <p id="login-status" style="margin-top:0.75rem;font-size:var(--font-size-sm);text-align:center"></p>
+    </div>
+  </main>
+
+  <script src="/js/login.js"></script>
+</body>
+</html>

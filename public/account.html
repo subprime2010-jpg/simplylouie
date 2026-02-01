@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Account — SimplyLouie</title>
+  <meta name="theme-color" content="#3d261c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/simplylouie.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="brand">
+        <div class="logo" aria-hidden="true">
+          <span class="logo-ear logo-ear--left"></span>
+          <span class="logo-ear logo-ear--right"></span>
+          <span class="logo-face"></span>
+          <span class="logo-snout"></span>
+        </div>
+        <span class="brand-name">SimplyLouie</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/dashboard" class="nav-link">Dashboard</a>
+        <a href="/tools" class="nav-link">Tools</a>
+        <a href="/account" class="nav-link nav-link--active">Account</a>
+        <a href="/api/auth/logout" class="btn btn--ghost">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container container--narrow">
+      <h1>Your Account</h1>
+      <p class="page-hero-lead">Manage your subscription, billing, and profile.</p>
+    </div>
+  </section>
+
+  <!-- Account Cards -->
+  <section class="account-container">
+
+    <div class="card">
+      <h3>Subscription</h3>
+      <p>Update your plan, payment method, or cancel anytime.</p>
+      <a href="/api/billing/portal" class="btn btn--primary" style="margin-top:var(--space-3)">Open Billing Portal</a>
+    </div>
+
+    <div class="card">
+      <h3>Profile</h3>
+      <p>Change your email or personal details.</p>
+      <a href="/profile" class="btn btn--primary" style="margin-top:var(--space-3)">Edit Profile</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;padding-top:0">
+        <p>&copy; 2026 SimplyLouie — People over profits.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

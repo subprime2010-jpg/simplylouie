@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join SimplyLouie — $2/month AI for Everyone</title>
+  <meta name="theme-color" content="#3d261c">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🐕</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/simplylouie.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="brand">
+        <div class="logo" aria-hidden="true">
+          <span class="logo-ear logo-ear--left"></span>
+          <span class="logo-ear logo-ear--right"></span>
+          <span class="logo-face"></span>
+          <span class="logo-snout"></span>
+        </div>
+        <span class="brand-name">SimplyLouie</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/login" class="nav-link">Sign In</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-page">
+    <div class="auth-card" style="max-width:28rem">
+      <div class="auth-header">
+        <h1>Join SimplyLouie</h1>
+        <p>$2/month. No catch. No upsells. Just Louie.</p>
+      </div>
+
+      <div id="error-msg" class="auth-error"></div>
+
+      <form id="signup-form">
+        <div class="auth-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required>
+        </div>
+
+        <!-- Plan Card -->
+        <div style="background:var(--cream-300);border:2px solid var(--brown-300);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-4);text-align:center">
+          <div style="font-weight:700;font-size:var(--font-size-lg);color:var(--brown-800)">SimplyLouie</div>
+          <div style="font-size:var(--font-size-2xl);font-weight:800;color:var(--brown-600);margin:var(--space-2) 0">$2<span style="font-size:var(--font-size-sm);font-weight:400;color:var(--color-text-muted)">/month</span></div>
+          <div style="font-size:var(--font-size-sm);color:var(--color-text-muted)">Unlimited AI chat, document scanning, daily boost. Cancel anytime.</div>
+        </div>
+
+        <button type="submit" class="auth-btn" id="signup-btn">Continue to Checkout &rarr;</button>
+      </form>
+
+      <div class="auth-links">
+        <p>Already a member? <a href="/login">Sign in</a></p>
+      </div>
+
+      <p style="margin-top:var(--space-4);text-align:center;font-size:var(--font-size-sm);color:var(--color-text-muted)">
+        Or try free on Telegram: <strong style="color:var(--color-text)">@LouieLifeBot</strong>
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;padding-top:0">
+        <p>&copy; 2026 SimplyLouie — People over profits, always.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Plan card selection UI
+    document.querySelectorAll('.plan-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+      });
+    });
+
+    // Pre-fill email from URL param
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('email')) {
+      document.getElementById('email').value = urlParams.get('email');
+    }
+
+    // Form submit
+    document.getElementById("signup-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("signup-btn");
+      const errorDiv = document.getElementById("error-msg");
+
+      btn.disabled = true;
+      btn.textContent = "Loading checkout...";
+      errorDiv.style.display = "none";
+
+      try {
+        const res = await fetch("/consumer/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: document.getElementById("email").value.trim(),
+            source: new URLSearchParams(window.location.search).get('src') || ''
+          })
+        });
+
+        const data = await res.json();
+
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          errorDiv.textContent = data.error || "Checkout failed. Please try again.";
+          errorDiv.style.display = "block";
+          btn.disabled = false;
+          btn.textContent = "Continue to Checkout \u2192";
+        }
+      } catch (err) {
+        errorDiv.textContent = "Connection error. Please try again.";
+        errorDiv.style.display = "block";
+        btn.disabled = false;
+        btn.textContent = "Continue to Checkout \u2192";
+      }
+    });
+
+    // Attribution tracking
+    (function() {
+      var src = new URLSearchParams(window.location.search).get('src');
+      if (src) {
+        fetch('/v1/system/track-visit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ source: src, path: window.location.pathname, userAgent: navigator.userAgent, country: null })
+        }).catch(function(){});
+      }
+    })();
+  </script>
+
+</body>
+</html>
